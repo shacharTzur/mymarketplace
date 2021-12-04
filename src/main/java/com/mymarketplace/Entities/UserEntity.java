@@ -2,7 +2,6 @@ package com.mymarketplace.Entities;
 
 import javax.persistence.*;
 import lombok.Data;
-import java.sql.Blob;
 
 @Entity
 @Data
@@ -18,16 +17,16 @@ public class UserEntity {
     @Column(unique  = true)
     private String username;
     @Column(name = "IMAGE", nullable = true)
-    private Blob image;
+    private String imagepath ;
 
 //getters setters
 
-    public Blob getImage() {
-        return image;
+    public String getImage() {
+        return imagepath;
     }
 
-    public void setImage(Blob image) {
-        this.image = image;
+    public void setImage(String imagePath) {
+        this.imagepath = imagepath;
     }
 
     public String getFirstName() {

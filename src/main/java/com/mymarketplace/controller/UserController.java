@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Blob;
 import java.util.List;
 
 
@@ -29,13 +28,14 @@ public class UserController {
         //    public String addNewUser(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String UserName) throws
 
     @PostMapping(path = "/add")
-    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) Blob image) throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath) throws
             Exception{
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
-        user.setImage(image);
+        user.setImage(imagePath);
+
         try{
             userRepository.save(user);
         }
