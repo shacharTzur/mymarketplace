@@ -3,13 +3,12 @@ package com.mymarketplace.controller;
 
 import com.mymarketplace.Entities.UserEntity;
 import com.mymarketplace.Repository.UserRepository;
-import org.apache.catalina.User;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Blob;
 import java.util.List;
 
 
@@ -30,12 +29,13 @@ public class UserController {
         //    public String addNewUser(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String UserName) throws
 
     @PostMapping(path = "/add")
-    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName) throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) Blob image) throws
             Exception{
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
+        user.setImage(image);
         try{
             userRepository.save(user);
         }
@@ -52,9 +52,16 @@ public class UserController {
            return userRepository.findAll();
     }
 
-//    GetMapping(path="/name")
-//    public ResponseEntity<List<UserEntity>> getUserByUserName (@RequestParam String userName){
-//        return new ResponseEntity<List<UserEntity>>(userRepository.findByUserName(userName), HttpStatus.OK);
-//    } @
+    @GetMapping(path="/name")
+    public ResponseEntity getUserByUserName (@RequestParam String userName){
+        ResponseEntity<List<UserEntity>> Entity = new ResponseEntity<List<UserEntity>>(userRepository.findByUsername(userName), HttpStatus.OK);
+        if (Entity.getBody().size()==0){
+            return new ResponseEntity("User Does Not Exist",HttpStatus.BAD_REQUEST); //if userName does not exist in db, return 404.
+        }
+        return Entity;
 
-}
+        }
+
+    }
+
+

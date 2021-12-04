@@ -30,6 +30,7 @@ const AuthForm = () => {
       url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDG0xzqnGfALCm8ViU4cob6IJdTLDXqY0A'
     } else {
       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDG0xzqnGfALCm8ViU4cob6IJdTLDXqY0A'
+
     }
     fetch(url, 
       {

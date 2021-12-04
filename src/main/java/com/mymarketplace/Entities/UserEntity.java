@@ -1,8 +1,11 @@
 package com.mymarketplace.Entities;
 
 import javax.persistence.*;
+import lombok.Data;
+import java.sql.Blob;
 
 @Entity
+@Data
 @Table(name = "users")
 public class UserEntity {
 
@@ -10,36 +13,45 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private String FirstName;
-    private String LastName;
+    private String firstname;
+    private String lastname;
     @Column(unique  = true)
-    private String UserName;
+    private String username;
+    @Column(name = "IMAGE", nullable = true)
+    private Blob image;
 
-//getter setters
+//getters setters
 
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
+    }
 
     public String getFirstName() {
-        return FirstName;
+        return firstname;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        firstname = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        lastname = lastName;
     }
 
     public String getUserName() {
-        return UserName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        username = userName;
     }
 }
 
