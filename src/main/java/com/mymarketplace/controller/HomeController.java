@@ -10,7 +10,7 @@ import javax.xml.ws.Response;
 public class HomeController {
     @RequestMapping( "/")
     public String homepage(){
-        return "index";
+        return "homepage";
     }
 
 }
