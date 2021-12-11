@@ -4,7 +4,7 @@ import ProfileBubble from "./ProfileBubble";
 function ItemForSell(props) {
     function profileButtonHandler(){
         console.log('Clicked')
-        fetch('http://localhost:8080/user/all')
+        fetch('http://localhost:8080/user/name?userName=stzur')
           .then(response => response.json())
           .then(data => console.log(data))
 

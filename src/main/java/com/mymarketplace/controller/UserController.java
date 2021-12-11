@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( path = "/user")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -28,6 +29,7 @@ public class UserController {
         //    public String addNewUser(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String UserName) throws
 
     @PostMapping(path = "/add")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath) throws
             Exception{
         UserEntity user = new UserEntity();
@@ -51,11 +53,13 @@ public class UserController {
     }
 
     @GetMapping(path="/all")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Iterable<UserEntity> allUsers (){
            return userRepository.findAll();
     }
 
     @GetMapping(path="/name")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getUserByUserName (@RequestParam String userName){
         ResponseEntity<UserEntity> Entity = new ResponseEntity<UserEntity>(userRepository.findByUsername(userName).get(0), HttpStatus.OK);
         if (Entity==null){
@@ -66,6 +70,7 @@ public class UserController {
         }
 
     @DeleteMapping(path="/name")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String deleteUserByUserName(@RequestParam String userName){
         UserEntity user_entity = userRepository.findByUsername(userName).get(0);
 
