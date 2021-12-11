@@ -57,14 +57,29 @@ public class UserController {
 
     @GetMapping(path="/name")
     public ResponseEntity getUserByUserName (@RequestParam String userName){
-        ResponseEntity<List<UserEntity>> Entity = new ResponseEntity<List<UserEntity>>(userRepository.findByUsername(userName), HttpStatus.OK);
-        if (Entity.getBody().size()==0){
+        ResponseEntity<UserEntity> Entity = new ResponseEntity<UserEntity>(userRepository.findByUsername(userName).get(0), HttpStatus.OK);
+        if (Entity==null){
             return new ResponseEntity("User Does Not Exist",HttpStatus.BAD_REQUEST); //if userName does not exist in db, return 404.
         }
         return Entity;
 
         }
 
+    @DeleteMapping(path="/name")
+    public String deleteUserByUserName(@RequestParam String userName){
+        UserEntity user_entity = userRepository.findByUsername(userName).get(0);
+
+        try{
+            userRepository.deleteById(user_entity.getId());
+        }
+        catch(Exception ex){
+            return "OOPS. something happened.."+ex.getMessage();
+        }
+
+        return "User for username: "+ userName +" deleted successfully";
+
+
+    }
     }
 
 
