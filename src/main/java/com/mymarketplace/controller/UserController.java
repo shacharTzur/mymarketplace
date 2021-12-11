@@ -36,11 +36,14 @@ public class UserController {
         user.setUserName(UserName);
         user.setImage(imagePath);
 
+        if(userRepository.findByUsername(UserName).size()!=0){
+            return "Username already exist! be a unique one :) ";
+        }
         try{
             userRepository.save(user);
         }
         catch (Exception Ex){
-            return "Try again, username already taken";
+            return "OOPS.. something happened :( "+Ex.getMessage();
         }
         String toReturn = "User Created, welcome "+firstName;
         return toReturn;
