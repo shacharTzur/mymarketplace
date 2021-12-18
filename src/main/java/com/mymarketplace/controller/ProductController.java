@@ -27,14 +27,14 @@ public class ProductController {
         try {
             //enum conversion
             ClothingCategory category = ClothingCategory.valueOf(product.getCategory());
-            Condition condition = Condition.valueOf(product.getCondition());
+            Condition condition = Condition.valueOf(product.getCondi());
             ClothingSizes size = ClothingSizes.valueOf(product.getSize());
             // if we passed it, it means the variables
             
             newProduct.setCategory(product.getCategory());
             newProduct.setBrand(product.getBrand());
             newProduct.setPrice(product.getPrice());
-            newProduct.setCondition(product.getCondition());
+            newProduct.setCondi(product.getCondi());
             newProduct.setOwner(product.getOwner());
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
