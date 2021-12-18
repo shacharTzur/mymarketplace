@@ -17,11 +17,13 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping(path="/all")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Iterable<ProductEntity> allProducts (){
         return productRepository.findAll();
     }
 
     @PostMapping(path = "/addNew")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addNewItem(@RequestBody ProductEntity product) throws Exception{
         ProductEntity newProduct = new ProductEntity();
         try {
@@ -53,6 +55,7 @@ public class ProductController {
     }
 
     @GetMapping(path="/name")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getProductByOwner (@RequestParam String owner){
         ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByOwner(owner), HttpStatus.OK);
         if (Entity.getBody().size()==0){
