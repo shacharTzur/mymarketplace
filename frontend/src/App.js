@@ -5,6 +5,7 @@ import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
+import IWantPage from './pages/IWantPage';
 import AuthContext from './store/auth-context';
 import Header from './components/Header/Header';
 
@@ -23,6 +24,9 @@ function App() {
         {authCtx.isLoggedIn && (
           <Route path='/profile' element = {<UserProfile />} />
         )}
+          {/*{authCtx.isLoggedIn && (*/}
+              <Route path='/i_want' element = {<IWantPage />} />
+          )}
         <Route path="*" element={<HomePage />} />
       </Routes>
     </Layout>
