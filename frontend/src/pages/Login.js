@@ -119,7 +119,7 @@ export default ({
         }
       }).then(data => {
           authCtx.login(data.userName); //put here data.username from shatz restAPI
-          history.push('/components/innerPages/BlogIndexPage');
+          history.push('components/landingPages/Homepage');
       })
       .catch((err) => {
         alert(err.message);
