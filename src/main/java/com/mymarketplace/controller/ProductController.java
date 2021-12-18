@@ -22,32 +22,24 @@ public class ProductController {
     }
 
     @PostMapping(path = "/addNew")
-    public ResponseEntity addNewItem(@RequestParam String givenCategory,
-                                     @RequestParam String brand,
-                                     @RequestParam long price,
-                                     @RequestParam String givenCondition,
-                                     @RequestParam String owner,//username
-                                     @RequestParam(required = false) String description,
-                                     @RequestParam String name,
-                                     @RequestParam String givenSize,
-                                     @RequestParam(required = false) String imagePath) throws
-            Exception{
-
-        ProductEntity product = new ProductEntity();
+    public ResponseEntity addNewItem(@RequestBody ProductEntity product) throws Exception{
+        ProductEntity newProduct = new ProductEntity();
         try {
             //enum conversion
-            ClothingCategory category = ClothingCategory.valueOf(givenCategory);
-            Condition condition = Condition.valueOf(givenCondition);
-            ClothingSizes size = ClothingSizes.valueOf(givenSize);
-            product.setCategory(givenCategory);
-            product.setBrand(brand);
-            product.setPrice(price);
-            product.setCondition(givenCondition);
-            product.setOwner(owner);
-            product.setDescription(description);
-            product.setSize(givenSize);
-            product.setName(name);
-            product.setImage(imagePath);
+            ClothingCategory category = ClothingCategory.valueOf(product.getCategory());
+            Condition condition = Condition.valueOf(product.getCondi());
+            ClothingSizes size = ClothingSizes.valueOf(product.getSize());
+            // if we passed it, it means the variables
+            
+            newProduct.setCategory(product.getCategory());
+            newProduct.setBrand(product.getBrand());
+            newProduct.setPrice(product.getPrice());
+            newProduct.setCondi(product.getCondi());
+            newProduct.setOwner(product.getOwner());
+            newProduct.setDescription(product.getDescription());
+            newProduct.setSize(product.getSize());
+            newProduct.setName(product.getName());
+            newProduct.setImage(product.getImage());
 
 
             productRepository.save(product);
