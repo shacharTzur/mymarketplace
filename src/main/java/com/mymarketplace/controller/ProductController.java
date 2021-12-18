@@ -64,4 +64,42 @@ public class ProductController {
         return Entity;
 
     }
+
+    @DeleteMapping(path="/deleteProduct")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String deleteUserByProductName(@RequestParam String productName){
+        ProductEntity product_entity = productRepository.findByName(productName).get(0);
+
+        try{
+            productRepository.deleteById(product_entity.getId());
+        }
+        catch(Exception ex){
+            return "OOPS. something happened.."+ex.getMessage();
+        }
+        String Owner = product_entity.getOwner();
+        return "The product: "+ productName +"by the user: "+ Owner+" was deleted successfully";
+
+    }
+
+    @GetMapping(path="/Iwant")
+    public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                                (@RequestParam(required = false) String givenCategory,
+                                 @RequestParam(required = false) String givenBrand,
+                                 @RequestParam(required = false) Long givenPrice,
+                                 @RequestParam(required = false) String givenCondi,
+                                 @RequestParam(required = false) String givenOwner,
+                                 @RequestParam(required = false) String givenSize,
+                                 @RequestParam(required = false) String givenColor)
+    {
+        String Category = (givenCategory != null) ? givenCategory : "%";
+        String Brand = (givenBrand != null) ? givenBrand : "%";
+        String Condi = (givenBrand != null) ? givenCondi : "%";
+        String Owner = (givenOwner != null) ? givenOwner : "%";
+        String Size = (givenSize != null) ? givenSize : "%";
+        String Color = (givenColor != null) ? givenColor : "%";
+        Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
+        return Entity;
+    }
 }
