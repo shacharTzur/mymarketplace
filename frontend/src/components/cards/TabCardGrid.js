@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -60,24 +60,23 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 
-const fetchAllItems = () => {
+const fetchAllItems = async () => {
     let url;
-    let res;
     url = 'http://localhost:8080/product/all'
-    res = fetch(url).then(res => res.json()).then(data => {
-        console.log(data)});
-        return res;
-
-};
-
+    const data = await fetch(url)
+        .then(response => response.json())
+        .then(json => console.log(json))
+    return data;
+}
 
 export default ({
+
                     products = fetchAllItems(),
                     heading = "MarketPlace Listings",
                     tabs = {
                         Clothes: [
                             {
-                                title: products[0]
+                                title: 'noa' + products[0]
                             },
                             {
                                 imageSrc:
