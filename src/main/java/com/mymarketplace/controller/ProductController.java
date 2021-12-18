@@ -63,21 +63,12 @@ public class ProductController {
 
     }
 
-    @GetMapping(path="/miniIwant2")
-    public ResponseEntity findByCategoryLikeAndBrandLike (@RequestParam(required = false) String givenCategory, @RequestParam(required = false) String givenBrand){
-        String Category = (givenCategory != null) ? givenCategory : "%";
-        String Brand = (givenBrand != null) ? givenBrand : "%";
-        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLike(Category, Brand ), HttpStatus.OK);
-        return Entity;
-    }
-
-
 
     @GetMapping(path="/Iwant")
-    public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLike
+    public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                                 (@RequestParam(required = false) String givenCategory,
                                  @RequestParam(required = false) String givenBrand,
-                                 //@RequestParam(required = false) Long givenPrice,
+                                 @RequestParam(required = false) Long givenPrice,
                                  @RequestParam(required = false) String givenCondi,
                                  @RequestParam(required = false) String givenOwner,
                                  @RequestParam(required = false) String givenSize,
@@ -87,14 +78,25 @@ public class ProductController {
         String Brand = (givenBrand != null) ? givenBrand : "%";
         String Condi = (givenBrand != null) ? givenCondi : "%";
         String Owner = (givenOwner != null) ? givenOwner : "%";
-        String Size = (givenOwner != null) ? givenSize : "%";
-        String Color = (givenOwner != null) ? givenColor : "%";
-        //Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
-//        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLike
-//                (Category, Brand, Condi, Owner, Size, Color), HttpStatus.OK);
-        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity("stam",HttpStatus.OK);
+        String Size = (givenSize != null) ? givenSize : "%";
+        String Color = (givenColor != null) ? givenColor : "%";
+        Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
         return Entity;
     }
+
+
+
+//    @GetMapping(path="/miniIwant2")
+//    public ResponseEntity findByCategoryLikeAndBrandLike (@RequestParam(required = false) String givenCategory, @RequestParam(required = false) String givenBrand){
+//        String Category = (givenCategory != null) ? givenCategory : "%";
+//        String Brand = (givenBrand != null) ? givenBrand : "%";
+//        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLike(Category, Brand ), HttpStatus.OK);
+//        return Entity;
+//    }
+
+
 
 
 }

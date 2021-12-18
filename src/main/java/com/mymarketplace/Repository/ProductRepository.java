@@ -14,29 +14,28 @@ public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
    List<ProductEntity> findByOwner(String Owner);
 
 
-//   @Query(value = "Select * From PRODUCTS WHERE Category Like :Category and Brand Like :Brand" +
-//                                          " and Condi Like :Condi " +
-//                                          " and Owner Like Owner and Size Like :Size and Color Like :Color  " ,
-//                                          nativeQuery = true) //and Price <= :Price
-//   List<ProductEntity> findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLike(
-//                                                @Param("Category") String Category,
-//                                                @Param("Brand") String Brand,
-//                                               // @Param("Price") Long Price,
-//                                                @Param("Condi") String Condi,
-//                                                @Param("Owner") String Owner,
-//                                                @Param("Size") String Size,
-//                                                @Param("Color") String Color);
+
+   @Query(value = "Select * From PRODUCTS WHERE Category Like :Category and Brand Like :Brand and Condi Like :Condi and Owner Like :Owner and Size Like :Size and Color Like :Color and Price <= :Price" , nativeQuery = true)
+   List<ProductEntity> findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                        (@Param("Category") String Category,
+                         @Param("Brand") String Brand,
+                         @Param("Condi") String Condi,
+                         @Param("Owner") String Owner,
+                         @Param("Size") String Size,
+                         @Param("Color") String Color,
+                         @Param("Price") Long Price);
 
 
+//
+//   @Query(value = "Select * From PRODUCTS WHERE Category LIKE :Category and (:Brand is not null and Brand LIKE :Brand or :Brand is null and brand like '%')" , nativeQuery = true)
+//   // NOT USING This
+//   List<ProductEntity> findByCategoryAndBrand(@Param("Category") String Category, @Param("Brand") String Brand );
+//
 
-   @Query(value = "Select * From PRODUCTS WHERE Category LIKE :Category and (:Brand is not null and Brand LIKE :Brand or :Brand is null and brand like '%')" , nativeQuery = true)
-   // NOT USING This
-   List<ProductEntity> findByCategoryAndBrand(@Param("Category") String Category, @Param("Brand") String Brand );
+// mini i want 2
+//   @Query(value = "Select * From PRODUCTS WHERE Category LIKE :Category and Brand LIKE :Brand" , nativeQuery = true)
+//   List<ProductEntity> findByCategoryLikeAndBrandLike(@Param("Category") String Category, @Param("Brand") String Brand );
 
-
-
-   @Query(value = "Select * From PRODUCTS WHERE Category LIKE :Category and Brand LIKE :Brand" , nativeQuery = true)
-   List<ProductEntity> findByCategoryLikeAndBrandLike(@Param("Category") String Category, @Param("Brand") String Brand );
 
 }
 
