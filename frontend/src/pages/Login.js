@@ -14,6 +14,8 @@ import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg
 import { useState, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import AuthContext from '../store/auth-context';
+
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
@@ -83,17 +85,45 @@ export default ({
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  const authCtx = useContext(AuthContext);
+
+  const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const switchAuthModeHandler = () => {
+    setIsLogin((prevState) => !prevState);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
+    
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     // add validation
+
+      setIsLoading(true);
       let url;
       url = 'http://localhost:8080/user/name?userName='+enteredEmail;
-      fetch(url).then(res => res.json()
-      ).then(data => {
-          console.log(data);
+      fetch(url).then(res => {
+        setIsLoading(false);
+        if (res.ok) {
+          return res.json()  
+        } else {
+          return res.json().then(data => {
+            let errorMessage = 'Authentication failed!';
+            if (data && data.error && data.error.message) {
+              errorMessage = data.error.message;
+            }
+            throw new Error(errorMessage);
+          });
+        }
+      }).then(data => {
+          authCtx.login(data.userName); //put here data.username from shatz restAPI
+          // console.log(data);
           history.push('/components/innerPages/BlogIndexPage');
+      })
+      .catch((err) => {
+        alert(err.message);
       });
       // history.push('/components/innerPages/BlogIndexPage');
     };

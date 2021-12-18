@@ -10,6 +10,9 @@ import logo from "../../images/ourImages/pink cart logo.jpg";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
+
 const Header = tw.header`
   flex justify-between items-center
   max-w-screen-xl mx-auto
@@ -70,6 +73,11 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
    * changing the defaultLinks variable below below.
    * If you manipulate links here, all the styling on the links is already done for you. If you pass links yourself though, you are responsible for styling the links or use the helper styled components that are defined here (NavLink)
    */
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+  const logoutHandler = (token) => {
+    authCtx.logout();
+  }
   const defaultLinks = [
     <NavLinks key={1}>
       <NavLink href="/#">Marketplace</NavLink>
@@ -78,7 +86,9 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       {/*<NavLink href="/#" tw="lg:ml-12!">*/}
       {/*  Login*/}
       {/*</NavLink>*/}
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/#">Sign Out</PrimaryLink>
+      {isLoggedIn && (
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/#" onClick={logoutHandler}>Sign Out</PrimaryLink>
+      )}
     </NavLinks>
   ];
 
