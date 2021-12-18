@@ -1,15 +1,11 @@
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import Modal from "react-modal";
 
-import './index.css';
-import App from './App';
-import { AuthContextProvider } from './store/auth-context';
+Modal.setAppElement("#root");
 
 ReactDOM.render(
-  <AuthContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    </AuthContextProvider>,
-    document.getElementById('root')
+  <App />,
+  document.getElementById("root")
 );
