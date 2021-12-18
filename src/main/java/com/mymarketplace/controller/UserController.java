@@ -63,7 +63,8 @@ public class UserController {
     public ResponseEntity getUserByUserName (@RequestParam String userName){
         ResponseEntity<UserEntity> Entity = new ResponseEntity<UserEntity>(userRepository.findByUsername(userName).get(0), HttpStatus.OK);
         if (Entity==null){
-            return new ResponseEntity("User Does Not Exist",HttpStatus.BAD_REQUEST); //if userName does not exist in db, return 404.
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error:user does not exist :(");
         }
         return Entity;
 
