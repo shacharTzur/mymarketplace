@@ -22,8 +22,8 @@ public class ProductEntity {
     @Column(name = "PRICE")
     private Long price;
 
-    @Column(name = "CONDITION")
-    private String condition;
+    @Column(name = "CONDI")
+    private String condi;
 
     @Column(name = "OWNER")
     private String owner;
@@ -36,6 +36,9 @@ public class ProductEntity {
 
     @Column(name = "SIZE")
     private String size;
+
+    @Column(name = "COLOR")
+    private String color;
 
     @Column(name = "IMAGE")
     private String imagepath;
@@ -57,14 +60,19 @@ public class ProductEntity {
     }
 
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+//    public void setCondition(String condition) {
+//        this.condi = condition;
+//    }
+//    public String getCondition() {
+//        return condi;
+//    }
+    public String getCondi() {
+        return condi;
     }
 
-    public String getCondition() {
-        return condition;
+    public void setCondi(String condi) {
+        this.condi = condi;
     }
-
 
     public void setPrice(Long price) {
         this.price = price;
@@ -109,6 +117,14 @@ public class ProductEntity {
 
     public String getSize() {
         return size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public void setSize(String size) {
