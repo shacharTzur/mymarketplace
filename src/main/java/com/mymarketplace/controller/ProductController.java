@@ -22,32 +22,25 @@ public class ProductController {
     }
 
     @PostMapping(path = "/addNew")
-    public ResponseEntity addNewItem(@RequestParam String givenCategory,
-                                     @RequestParam String brand,
-                                     @RequestParam long price,
-                                     @RequestParam String givenCondition,
-                                     @RequestParam String owner,//username
-                                     @RequestParam(required = false) String description,
-                                     @RequestParam String name,
-                                     @RequestParam String givenSize,
-                                     @RequestParam(required = false) String imagePath) throws
-            Exception{
-
-        ProductEntity product = new ProductEntity();
+    public ResponseEntity addNewItem(@RequestBody ProductEntity product) throws Exception{
+        ProductEntity newProduct = new ProductEntity();
         try {
             //enum conversion
-            ClothingCategory category = ClothingCategory.valueOf(givenCategory);
-            Condition condition = Condition.valueOf(givenCondition);
-            ClothingSizes size = ClothingSizes.valueOf(givenSize);
-            product.setCategory(givenCategory);
-            product.setBrand(brand);
-            product.setPrice(price);
-            product.setCondition(givenCondition);
-            product.setOwner(owner);
-            product.setDescription(description);
-            product.setSize(givenSize);
-            product.setName(name);
-            product.setImage(imagePath);
+            ClothingCategory category = ClothingCategory.valueOf(product.getCategory());
+            Condition condition = Condition.valueOf(product.getCondi());
+            ClothingSizes size = ClothingSizes.valueOf(product.getSize());
+            // if we passed it, it means the variables
+
+            newProduct.setCategory(product.getCategory());
+            newProduct.setBrand(product.getBrand());
+            newProduct.setPrice(product.getPrice());
+            newProduct.setCondi(product.getCondi());
+            newProduct.setOwner(product.getOwner());
+            newProduct.setDescription(product.getDescription());
+            newProduct.setSize(product.getSize());
+            newProduct.setColor(product.getColor());
+            newProduct.setName(product.getName());
+            newProduct.setImage(product.getImage());
 
 
             productRepository.save(product);
@@ -69,4 +62,39 @@ public class ProductController {
         return Entity;
 
     }
+
+    @GetMapping(path="/miniIwant2")
+    public ResponseEntity findByCategoryLikeAndBrandLike (@RequestParam(required = false) String givenCategory, @RequestParam(required = false) String givenBrand){
+        String Category = (givenCategory != null) ? givenCategory : "%";
+        String Brand = (givenBrand != null) ? givenBrand : "%";
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLike(Category, Brand ), HttpStatus.OK);
+        return Entity;
+    }
+
+
+
+    @GetMapping(path="/Iwant")
+    public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLike
+                                (@RequestParam(required = false) String givenCategory,
+                                 @RequestParam(required = false) String givenBrand,
+                                 //@RequestParam(required = false) Long givenPrice,
+                                 @RequestParam(required = false) String givenCondi,
+                                 @RequestParam(required = false) String givenOwner,
+                                 @RequestParam(required = false) String givenSize,
+                                 @RequestParam(required = false) String givenColor)
+    {
+        String Category = (givenCategory != null) ? givenCategory : "%";
+        String Brand = (givenBrand != null) ? givenBrand : "%";
+        String Condi = (givenBrand != null) ? givenCondi : "%";
+        String Owner = (givenOwner != null) ? givenOwner : "%";
+        String Size = (givenOwner != null) ? givenSize : "%";
+        String Color = (givenOwner != null) ? givenColor : "%";
+        //Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
+//        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLike
+//                (Category, Brand, Condi, Owner, Size, Color), HttpStatus.OK);
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity("stam",HttpStatus.OK);
+        return Entity;
+    }
+
+
 }
