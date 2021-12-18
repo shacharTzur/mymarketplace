@@ -25,19 +25,19 @@ const MainContent = tw.div`mt-12 flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-extrabold`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
 
-const SocialButtonsContainer = tw.div`flex flex-col items-center`;
-const SocialButton = styled.a`
-  ${tw`w-full max-w-xs font-semibold rounded-lg py-3 border text-gray-900 bg-gray-100 hocus:bg-gray-200 hocus:border-gray-400 flex items-center justify-center transition-all duration-300 focus:outline-none focus:shadow-outline text-sm mt-5 first:mt-0`}
-  .iconContainer {
-    ${tw`bg-white p-2 rounded-full`}
-  }
-  .icon {
-    ${tw`w-4`}
-  }
-  .text {
-    ${tw`ml-4`}
-  }
-`;
+// const SocialButtonsContainer = tw.div`flex flex-col items-center`;
+// const SocialButton = styled.a`
+//   ${tw`w-full max-w-xs font-semibold rounded-lg py-3 border text-gray-900 bg-gray-100 hocus:bg-gray-200 hocus:border-gray-400 flex items-center justify-center transition-all duration-300 focus:outline-none focus:shadow-outline text-sm mt-5 first:mt-0`}
+//   .iconContainer {
+//     ${tw`bg-white p-2 rounded-full`}
+//   }
+//   .icon {
+//     ${tw`w-4`}
+//   }
+//   .text {
+//     ${tw`ml-4`}
+//   }
+// `;
 
 const DividerTextContainer = tw.div`my-12 border-b text-center relative`;
 const DividerText = tw.div`leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform -translate-y-1/2 absolute inset-x-0 top-1/2 bg-transparent`;
@@ -63,18 +63,18 @@ export default ({
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
   headingText = "Sign In To Treact",
-  socialButtons = [
-    {
-      iconImageSrc: googleIconImageSrc,
-      text: "Sign In With Google",
-      url: "https://google.com"
-    },
-    {
-      iconImageSrc: twitterIconImageSrc,
-      text: "Sign In With Twitter",
-      url: "https://twitter.com"
-    }
-  ],
+  // socialButtons = [
+  //   {
+  //     iconImageSrc: googleIconImageSrc,
+  //     text: "Sign In With Google",
+  //     url: "https://google.com"
+  //   },
+  //   {
+  //     iconImageSrc: twitterIconImageSrc,
+  //     text: "Sign In With Twitter",
+  //     url: "https://twitter.com"
+  //   }
+  // ],
   submitButtonText = "Sign In",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
@@ -119,7 +119,6 @@ export default ({
         }
       }).then(data => {
           authCtx.login(data.userName); //put here data.username from shatz restAPI
-          // console.log(data);
           history.push('/components/innerPages/BlogIndexPage');
       })
       .catch((err) => {

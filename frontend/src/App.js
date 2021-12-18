@@ -107,17 +107,22 @@ import ThankYouPage from "ThankYouPage.js";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { useContext } from 'react';
+import AuthContext from './store/auth-context';
+
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
   // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
 
-
+  const authCtx = useContext(AuthContext);
   return (
     <Router>
       <Switch>
+      {authCtx.isLoggedIn && (
         <Route path="/components/:type/:subtype/:name">
           <ComponentRenderer />
         </Route>
+        )};
         <Route path="/components/:type/:name">
           <ComponentRenderer />
         </Route>
