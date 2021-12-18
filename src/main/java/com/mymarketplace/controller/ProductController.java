@@ -63,6 +63,21 @@ public class ProductController {
 
     }
 
+    @DeleteMapping(path="/deleteProduct")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String deleteUserByProductName(@RequestParam String productName){
+        ProductEntity product_entity = productRepository.findByName(productName).get(0);
+
+        try{
+            productRepository.deleteById(product_entity.getId());
+        }
+        catch(Exception ex){
+            return "OOPS. something happened.."+ex.getMessage();
+        }
+        String Owner = product_entity.getOwner();
+        return "The product: "+ productName +"by the user: "+ Owner+" was deleted successfully";
+
+    }
 
     @GetMapping(path="/Iwant")
     public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual

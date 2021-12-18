@@ -19,7 +19,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping(path = "/test")
-        public String printHello(){
+    public String printHello(){
             return "HELLO USER!";
         }
 
@@ -62,6 +62,24 @@ public class UserController {
 
         }
 
+
+    @DeleteMapping(path="/name")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String deleteUserByUserName(@RequestParam String userName){
+        UserEntity user_entity = userRepository.findByUsername(userName).get(0);
+
+        try{
+            userRepository.deleteById(user_entity.getId());
+        }
+        catch(Exception ex){
+            return "OOPS. something happened.."+ex.getMessage();
+        }
+
+        return "User for username: "+ userName +" deleted successfully";
+
+
     }
+
+}
 
 

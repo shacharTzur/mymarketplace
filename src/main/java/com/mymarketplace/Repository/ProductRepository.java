@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
    List<ProductEntity> findByOwner(String Owner);
 
-
+   List<ProductEntity> findByName(String Name);   // the name given to the product (NOT A PERSON)
 
    @Query(value = "Select * From PRODUCTS WHERE Category Like :Category and Brand Like :Brand and Condi Like :Condi and Owner Like :Owner and Size Like :Size and Color Like :Color and Price <= :Price" , nativeQuery = true)
    List<ProductEntity> findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
