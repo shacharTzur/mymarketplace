@@ -42,6 +42,7 @@ public class ProductController {
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
+            newProduct.setColor(product.getColor());
             newProduct.setImage(product.getImage());
 
 
