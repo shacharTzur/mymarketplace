@@ -93,7 +93,7 @@ public class ProductController {
     {
         String Category = (givenCategory != null) ? givenCategory : "%";
         String Brand = (givenBrand != null) ? givenBrand : "%";
-        String Condi = (givenBrand != null) ? givenCondi : "%";
+        String Condi = (givenCondi != null) ? givenCondi : "%";
         String Owner = (givenOwner != null) ? givenOwner : "%";
         String Size = (givenSize != null) ? givenSize : "%";
         String Color = (givenColor != null) ? givenColor : "%";
@@ -102,4 +102,14 @@ public class ProductController {
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
         return Entity;
     }
+
+    //    @GetMapping(path="/miniIwant2")
+//    public ResponseEntity findByCategoryLikeAndBrandLike (@RequestParam(required = false) String givenCategory, @RequestParam(required = false) String givenBrand){
+//        String Category = (givenCategory != null) ? givenCategory : "%";
+//        String Brand = (givenBrand != null) ? givenBrand : "%";
+//        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLike(Category, Brand ), HttpStatus.OK);
+//        return Entity;
+//    }
+
+
 }
