@@ -11,8 +11,7 @@ function Listing() {
             })
             .then(function (myJson) {
                 console.log(myJson);
-                setData(JSON.stringify(myJson))
-
+                setData(myJson)
             })
     }, [])
     return (
