@@ -1,7 +1,7 @@
 import React from "react";
 import tw from "twin.macro";
 import TabGrid from "components/cards/TabCardGrid.js";
-import {useState, useEffect} from 'react';
+import Header from "components/headers/light.js"
 
 import Listing from '../components/cards/CardCreator'
 
@@ -15,7 +15,7 @@ function HomePage() {
                 imageSrc: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
                 title: item.category,
                 content: item.description,
-                price: item.price,
+                price: 'price: ' + item.price + '$',
                 url: "#"
             })
         });
@@ -49,10 +49,11 @@ function HomePage() {
     };
 
     return <section>
+        <Header />
         <TabGrid
             tabs={tabs3}
             heading={<>
-                <HighlightedText>Listings</HighlightedText>
+                Check out today's <HighlightedText>Listings</HighlightedText>
             </>}
         />
     </section>
