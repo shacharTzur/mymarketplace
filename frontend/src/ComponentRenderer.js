@@ -10,6 +10,8 @@ import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 import ServiceLandingPage from "demos/ServiceLandingPage.js";
 import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
 
+import HomePage from "pages/HomePage.js";
+
 import EventLandingPageImageSrc from "images/demo/EventLandingPage.jpeg";
 import HotelTravelLandingPageImageSrc from "images/demo/HotelTravelLandingPage.jpeg";
 import AgencyLandingPageImageSrc from "images/demo/AgencyLandingPage.jpeg";
@@ -102,6 +104,11 @@ import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
 
 export const components = {
   landingPages: {
+    Homepage: {
+      component:HomePage,
+      imageSrc: RestaurantLandingPageImageSrc,
+      url: "/components/landingPages/Homepage"
+    },
     RestaurantLandingPage: {
       component: RestaurantLandingPage,
       imageSrc: RestaurantLandingPageImageSrc,
