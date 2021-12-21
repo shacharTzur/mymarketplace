@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -41,6 +42,7 @@ public class ProductController {
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
+            newProduct.setColor(product.getColor());
             newProduct.setImage(product.getImage());
 
 
@@ -101,6 +103,21 @@ public class ProductController {
         ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
         return Entity;
+    }
+
+    @GetMapping(path ="/amount")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public int getProductsAmount(){
+        Iterable<ProductEntity> allProducts = allProducts();
+        Iterator iterator = allProducts().iterator();
+        int amount = 0;
+        if( allProducts!=null){
+            while(iterator.hasNext()){
+                amount++;
+                iterator.next();
+            }
+        }
+        return amount;
     }
 
     //    @GetMapping(path="/miniIwant2")
