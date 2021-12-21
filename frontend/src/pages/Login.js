@@ -62,19 +62,7 @@ const IllustrationImage = styled.div`
 export default ({
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
-  headingText = "Sign In To Treact",
-  // socialButtons = [
-  //   {
-  //     iconImageSrc: googleIconImageSrc,
-  //     text: "Sign In With Google",
-  //     url: "https://google.com"
-  //   },
-  //   {
-  //     iconImageSrc: twitterIconImageSrc,
-  //     text: "Sign In With Twitter",
-  //     url: "https://twitter.com"
-  //   }
-  // ],
+  headingText = "Sign In To MyMarketPlace",
   submitButtonText = "Sign In",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",

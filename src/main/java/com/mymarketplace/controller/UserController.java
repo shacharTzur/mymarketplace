@@ -20,7 +20,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping(path = "/test")
-        public String printHello(){
+    public String printHello(){
             return "HELLO USER!";
         }
 
