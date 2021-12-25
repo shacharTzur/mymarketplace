@@ -88,6 +88,7 @@ public class ProductController {
     }
 
     @GetMapping(path="/Iwant")
+    @CrossOrigin(origins = "http://localhost:3000")
     public String findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                                 (@RequestParam String searcher,
                                  @RequestParam(required = false) String givenCategory,
@@ -170,8 +171,9 @@ public class ProductController {
                 possible_match.setOwner(match.getOwner());
                 possible_match.setProduct_id(match.getId());
                 possible_match.setMatches(given_param);
-
+                //if(!IWantRepository.existsByMtachesAndSearcher( given_param, searcher ) ){
                 IWantRepository.save(possible_match);
+                //}
             }
             catch (Exception Ex){
                 //return new ResponseEntity("something went wrong in saving iwant request", HttpStatus.BAD_REQUEST) ;
