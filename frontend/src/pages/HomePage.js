@@ -8,7 +8,6 @@ import Listing from '../components/cards/CardCreator'
 function HomePage() {
     const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`
     let data = Listing();
-
     const prepareTabsData = (data) => {
         const A = data.map((item) => {
             return ({
