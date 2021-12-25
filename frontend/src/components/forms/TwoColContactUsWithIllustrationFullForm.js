@@ -72,6 +72,7 @@ export default ({
     const priceInputRef = useRef();
 
     const [isLoading, setIsLoading] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
 
     const submitHandler = (event) => {
       event.preventDefault();
@@ -83,14 +84,15 @@ export default ({
       const enteredColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
       setIsLoading(true);
+
       let url = 'http://localhost:8080/product/Iwant?searcher='+userName;
       if (enteredCategory != 'true'){
         url = url+'&givenCategory='+enteredCategory
       }
-      if (enteredBrand != 'true'){
+      if (enteredBrand != ''){
         url = url+'&givenBrand='+enteredBrand
       }
-      if (enteredPrice != 'true'){
+      if (enteredPrice != ''){
         url = url+'&givenPrice='+enteredPrice
       }
       if (enteredCondition != 'true'){
@@ -99,14 +101,13 @@ export default ({
       if (enteredSize != 'true'){
         url = url+'&givenSize='+enteredSize
       }
-      if (enteredColor != 'true'){
-        url = url+'&givenSize='+enteredColor
+      if (enteredColor != ''){
+        url = url+'&givenColor='+enteredColor
       }
-      alert(url)
       fetch(url).then(res => {
         setIsLoading(false);
         if (res.ok) {
-          return res.json()  
+          return res.text()  
         } else {
           return res.json().then(data => {
             let errorMessage = '"I Want" request FAILED!!';
@@ -117,7 +118,11 @@ export default ({
           });
         }
       }).then(data => {
-          history.push('components/landingPages/Homepage');
+          // setShowModal(true);
+          alert(data)
+          // if (!showModal){
+            history.push('../landingPages/Homepage');
+          // }          
       })
       .catch((err) => {
         alert(err.message);
@@ -191,6 +196,8 @@ export default ({
           </TextContent>
         </TextColumn>
       </TwoColumn>
+      {/*{showModal ? <ModalWant/> : ''}*/}
+      {/*{showModal ? 'HAHAHAH' : ''}*/}
     </Container>
   );
 };
