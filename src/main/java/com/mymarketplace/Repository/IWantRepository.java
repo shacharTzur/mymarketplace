@@ -10,4 +10,8 @@ import java.util.List;
 public interface IWantRepository extends JpaRepository <IwantEntity, Long> {
 
     List<IwantEntity> findByOwner(String Owner);
+
+//    boolean existsIwantEntitiesBySearcherAndProduct_idAndMatches(String searcher, long product_id, int matches);
+    boolean existsByMtachesAndSearcher( int matches, String searcher);
+
 }
