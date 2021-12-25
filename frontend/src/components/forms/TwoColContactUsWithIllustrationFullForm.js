@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import CoupleShpping from "images/ourImages/couple shopping.png";
+import Peddler from "images/ourImages/aladdin peddler.png";
 import { Hint } from 'react-autocomplete-hint';
 import {useEffect, useRef, useState, useContext} from 'react';
 import AuthContext from '../../store/auth-context';
@@ -133,7 +133,7 @@ export default ({
     <Container>
       <TwoColumn>
         <ImageColumn>
-          <Image imageSrc={CoupleShpping} />
+          <Image imageSrc={Peddler} />
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
