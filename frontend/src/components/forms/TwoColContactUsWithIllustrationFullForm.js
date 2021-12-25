@@ -75,13 +75,13 @@ export default ({
 
     const submitHandler = (event) => {
       event.preventDefault();
-      const enteredTitle = categoryInputRef.current.value;
+      const enteredTitle = titleInputRef.current.value;
       const enteredCategory = categoryInputRef.current.value;
-      const enteredBrand = categoryInputRef.current.value;
-      const enteredCondition = categoryInputRef.current.value;
-      const enteredSize = categoryInputRef.current.value;
-      const enteredColor = categoryInputRef.current.value;
-      const enteredPrice = categoryInputRef.current.value;
+      const enteredBrand = brandInputRef.current.value;
+      const enteredCondition = conditionInputRef.current.value;
+      const enteredSize = sizeInputRef.current.value;
+      const enteredColor = colorInputRef.current.value;
+      const enteredPrice = priceInputRef.current.value;
       setIsLoading(true);
       let url = 'http://localhost:8080/product/Iwant?searcher='+userName;
       if (enteredCategory != 'true'){
@@ -117,7 +117,6 @@ export default ({
           });
         }
       }).then(data => {
-          alert(data)
           history.push('components/landingPages/Homepage');
       })
       .catch((err) => {
