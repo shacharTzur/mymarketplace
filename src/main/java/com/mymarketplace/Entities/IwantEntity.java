@@ -18,10 +18,22 @@ public class IwantEntity {
     private String searcher;
 
     @Column(name = "product_id")
-    private Long product_id;
+    private long product_id;
 
     @Column(name = "search_mathces")
     private int matches;
+
+
+    @Column(name = "Show_notification")
+    private int show_notification; // 1 is show 0 is don't
+
+    public int getShow_notification() {
+        return show_notification;
+    }
+
+    public void setShow_notification(int show) {
+        this.show_notification = show;
+    }
 
     public String getOwner() {
         return owner;

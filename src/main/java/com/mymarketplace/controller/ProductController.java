@@ -88,7 +88,6 @@ public class ProductController {
     }
 
     @GetMapping(path="/Iwant")
-    @CrossOrigin(origins = "http://localhost:3000")
     public String findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                                 (@RequestParam String searcher,
                                  @RequestParam(required = false) String givenCategory,
@@ -166,21 +165,24 @@ public class ProductController {
 
         for (ProductEntity match : search_res){
             try{
+                Long prod_ID = match.getId();
+                String prodOwner = match.getOwner();
                 IwantEntity possible_match = new IwantEntity();
                 possible_match.setSearcher(searcher);
                 possible_match.setOwner(match.getOwner());
                 possible_match.setProduct_id(match.getId());
                 possible_match.setMatches(given_param);
-                //if(!IWantRepository.existsByMtachesAndSearcher( given_param, searcher ) ){
-                IWantRepository.save(possible_match);
-                //}
+                possible_match.setShow_notification(1);
+                if(IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
+                    IWantRepository.save(possible_match);
+                }
             }
             catch (Exception Ex){
                 //return new ResponseEntity("something went wrong in saving iwant request", HttpStatus.BAD_REQUEST) ;
                 return "something went wrong in saving iwant request";
             }
         }
-        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size());
+        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size()) + "potential sellers";
         return returned_String;
         //return Entity;  ////// if i want to see whats returned i need to change the returned value
     }
