@@ -30,13 +30,14 @@ public class UserController {
 
     @PostMapping(path = "/add")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath) throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath , @RequestParam(required = false) String location) throws
             Exception{
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
         user.setImage(imagePath);
+        user.setLocation(location);
 
         if(userRepository.findByUsername(UserName).size()!=0){
             return "Username already exist! be a unique one :) ";
@@ -93,5 +94,3 @@ public class UserController {
 
     }
     }
-
-
