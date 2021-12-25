@@ -52,9 +52,7 @@ function HomePage() {
         <Header />
         <TabGrid
             tabs={tabs3}
-            heading={<>
-                Check out today's <HighlightedText>Listings</HighlightedText>
-            </>}
+            heading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
         />
     </section>
 
