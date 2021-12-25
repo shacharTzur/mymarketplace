@@ -10,8 +10,6 @@ import Brands from '../components/getters/Brands'
 
 
 function IWantPage() {
-	// let data = Brands();
-	// let data = [{'brand': 'fox'}, {brand: 'renuar'}];
 	return (<section>
 	<Header />
 		<FullForm userName="hi"/>
