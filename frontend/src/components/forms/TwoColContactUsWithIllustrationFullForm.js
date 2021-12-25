@@ -102,6 +102,7 @@ export default ({
       if (enteredColor != 'true'){
         url = url+'&givenSize='+enteredColor
       }
+      alert(url)
       fetch(url).then(res => {
         setIsLoading(false);
         if (res.ok) {
