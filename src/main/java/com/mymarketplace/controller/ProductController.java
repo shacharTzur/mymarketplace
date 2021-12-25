@@ -1,12 +1,14 @@
 package com.mymarketplace.controller;
 
 import com.mymarketplace.Entities.*;
+import com.mymarketplace.Repository.IWantRepository;
 import com.mymarketplace.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,6 +17,9 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private IWantRepository IWantRepository;
 
     @GetMapping(path="/all")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -83,8 +88,9 @@ public class ProductController {
     }
 
     @GetMapping(path="/Iwant")
-    public ResponseEntity findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
-                                (@RequestParam(required = false) String givenCategory,
+    public String findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                                (@RequestParam String searcher,
+                                 @RequestParam(required = false) String givenCategory,
                                  @RequestParam(required = false) String givenBrand,
                                  @RequestParam(required = false) Long givenPrice,
                                  @RequestParam(required = false) String givenCondi,
@@ -92,15 +98,89 @@ public class ProductController {
                                  @RequestParam(required = false) String givenSize,
                                  @RequestParam(required = false) String givenColor)
     {
-        String Category = (givenCategory != null) ? givenCategory : "%";
-        String Brand = (givenBrand != null) ? givenBrand : "%";
-        String Condi = (givenBrand != null) ? givenCondi : "%";
-        String Owner = (givenOwner != null) ? givenOwner : "%";
-        String Size = (givenSize != null) ? givenSize : "%";
-        String Color = (givenColor != null) ? givenColor : "%";
-        Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
+        int given_param = 0;
+
+        String Category;
+        if (givenCategory != null){
+            Category = givenCategory;
+            given_param++;
+        }
+        else{ Category = "%"; }
+
+        String Brand;
+        if (givenBrand != null){
+            Brand = givenBrand;
+            given_param++;
+        }
+        else{ Brand = "%"; }
+
+        String Condi;
+        if (givenCondi != null){
+            Condi = givenCondi;
+            given_param++;
+        }
+        else{ Condi = "%"; }
+
+        String Owner;
+        if (givenOwner != null){
+            Owner = givenOwner;
+            given_param++;
+        }
+        else{ Owner = "%"; }
+
+        String Size;
+        if (givenSize != null){
+            Size = givenSize;
+            given_param++;
+        }
+        else{ Size = "%"; }
+
+        String Color;
+        if (givenColor != null){
+            Color = givenColor;
+            given_param++;
+        }
+        else{ Color = "%"; }
+
+        long Price;
+        if (givenPrice != null){
+            Price = givenPrice;
+            given_param++;
+        }
+        else{ Price = 99999; } // should add a max price constant
+
+        //String Category = (givenCategory != null) ? givenCategory : "%";
+        //String Brand = (givenBrand != null) ? givenBrand : "%";
+        //String Condi = (givenCondi != null) ? givenCondi : "%";
+        //String Owner = (givenOwner != null) ? givenOwner : "%";
+        //String Size = (givenSize != null) ? givenSize : "%";
+        //String Color = (givenColor != null) ? givenColor : "%";
+        //Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
+
         ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
-        return Entity;
+
+        ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+            (Category, Brand, Condi, Owner, Size, Color, Price));
+
+        for (ProductEntity match : search_res){
+            try{
+                IwantEntity possible_match = new IwantEntity();
+                possible_match.setSearcher(searcher);
+                possible_match.setOwner(match.getOwner());
+                possible_match.setProduct_id(match.getId());
+                possible_match.setMatches(given_param);
+
+                IWantRepository.save(possible_match);
+            }
+            catch (Exception Ex){
+                //return new ResponseEntity("something went wrong in saving iwant request", HttpStatus.BAD_REQUEST) ;
+                return "something went wrong in saving iwant request";
+            }
+        }
+        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size());
+        return returned_String;
+        //return Entity;  ////// if i want to see whats returned i need to change the returned value
     }
+
 }
