@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import Peddler from "images/ourImages/aladdin peddler.png";
+import ArabStore from "images/ourImages/arab store.jpg";
 import { Hint } from 'react-autocomplete-hint';
 import {useEffect, useRef, useState, useContext} from 'react';
 import AuthContext from '../../store/auth-context';
@@ -48,20 +48,10 @@ export default ({
   submitButtonText = "Send",
   formAction = "#",
   formMethod = "get",
-  textOnLeft = true,
+  textOnLeft = false,
   userName = "",
 }) => {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
-
-  // let brandData = Brands();
-  // let brandData = [{'brand': 'fox'}, {brand: 'renuar'}];
-  // const [hintData, setHintData] = useState([])
-  // const [text, setText] = useState('')
-
-  // const getBrandData = async() => {
-  //   let brandData = ['fox', 'renuar'];
-  //   setHintData(brandData)
-  // }
     const history = useHistory();
     const titleInputRef = useRef();
     const categoryInputRef = useRef();
@@ -70,8 +60,13 @@ export default ({
     const sizeInputRef = useRef();
     const colorInputRef = useRef();
     const priceInputRef = useRef();
+    const descriptionInputRef = useRef();
+    const imagePathInputRef = useRef();
+
 
     const [isLoading, setIsLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
     // const [showModal, setShowModal] = useState(false);
 
     const submitHandler = (event) => {
@@ -83,9 +78,11 @@ export default ({
       const enteredSize = sizeInputRef.current.value;
       const enteredColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
+      const enteredDescription = descriptionInputRef.current.value;
+      const enteredImagePath = imagePathInputRef.current.value;
       setIsLoading(true);
 
-      let url = 'http://localhost:8080/product/Iwant?searcher='+userName;
+      let url = 'http://localhost:8080/product/addNew';
       if (enteredCategory != 'true'){
         url = url+'&givenCategory='+enteredCategory
       }
@@ -104,7 +101,22 @@ export default ({
       if (enteredColor != ''){
         url = url+'&givenColor='+enteredColor
       }
-      fetch(url).then(res => {
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify ({
+          category: enteredCategory,
+          brand: enteredBrand,
+          price: enteredPrice,
+          condi: enteredCondition,
+          owner: userName,
+          description: enteredDescription,
+          name: enteredTitle,
+          size: enteredSize,
+          color: enteredColor,
+          imagepath: enteredImagePath
+        }),
+        headers:{'Content-Type': 'application.json'},
+      }).then(res => {
         setIsLoading(false);
         if (res.ok) {
           return res.text()  
@@ -118,22 +130,19 @@ export default ({
           });
         }
       }).then(data => {
-          // setShowModal(true);
           alert(data)
-          // if (!showModal){
-            history.push('../landingPages/Homepage');
-          // }          
+            history.push('../landingPages/Homepage');    
       })
       .catch((err) => {
         alert(err.message);
       });
     };
-
+// category, brand, price, condition, owner, discription, size, name, color, image
   return (
     <Container>
       <TwoColumn>
         <ImageColumn>
-          <Image imageSrc={Peddler} />
+          <Image imageSrc={ArabStore}/>
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
@@ -141,7 +150,8 @@ export default ({
             <Heading>{heading}</Heading>
             {description && <Description>{description}</Description>}
             <Form onSubmit={submitHandler}>
-              <Input type="text" name="title" placeholder="Search title" ref={titleInputRef} />
+              <Input type="text" name="title" placeholder="Product name" ref={titleInputRef} />
+              <Input type="text" name="brand" placeholder="Brand Name" ref={brandInputRef} />
 
               <Select name="category" ref={categoryInputRef}>
                 <option disabled selected value> -- Item Category -- </option>
@@ -155,8 +165,6 @@ export default ({
                 <option value="blouse">Blouse</option>
                 <option value="skirt">Skirt</option>
               </Select>
-
-              <Input type="text" name="brand" placeholder="Brand Name" ref={brandInputRef} />
 
               <Select name="condition" ref={conditionInputRef}>
                 <option disabled selected value> -- Item Condition -- </option>
@@ -178,26 +186,15 @@ export default ({
                 <option value="xxl">XXL</option>
               </Select>
 
-              <Input type="text" name="color" placeholder="Preferred color" ref={colorInputRef}/>
-              <Input type="text" name="price" placeholder="Price around" ref={priceInputRef} />
-
-
-              {/*             {<code>{`[${hintData.toString()}]`}</code>}}
-             <Hint options={hintData} allowTabFill>
-              <input className='input-with-hint'
-                name="brand"
-                placeholder="enter brand"
-                value={text}
-                onChange={e => setText(e.target.value)} 
-              />
-              </Hint}>*/}
+              <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
+              <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
+              <Textarea placeholder="Short description" ref={descriptionInputRef}/>
+              <Input type="file" name="image" value={selectedFile} onChange={(e) => setName(e.target.value)}/>
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>
         </TextColumn>
       </TwoColumn>
-      {/*{showModal ? <ModalWant/> : ''}*/}
-      {/*{showModal ? 'HAHAHAH' : ''}*/}
     </Container>
   );
 };
