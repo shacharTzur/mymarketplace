@@ -183,7 +183,7 @@ public class ProductController {
                 return "something went wrong in saving iwant request";
             }
         }
-        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size()) + "potential sellers";
+        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size()+ " sellers");
         return returned_String;
         //return Entity;  ////// if i want to see whats returned i need to change the returned value
     }
