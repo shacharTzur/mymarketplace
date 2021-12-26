@@ -12,6 +12,7 @@ import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
 
 import HomePage from "pages/HomePage.js";
 import IWantPage from "pages/IWantPage.js";
+import AddItemPage from "pages/AddItem.js";
 
 import EventLandingPageImageSrc from "images/demo/EventLandingPage.jpeg";
 import HotelTravelLandingPageImageSrc from "images/demo/HotelTravelLandingPage.jpeg";
@@ -153,6 +154,12 @@ export const components = {
       imageSrc: LoginPageImageSrc,
       // scrollAnimationDisabled: true,
       url: "/components/innerPages/IWantPage",
+    },
+     AddItemPage: {
+      component: AddItemPage,
+      imageSrc: LoginPageImageSrc,
+      // scrollAnimationDisabled: true,
+      url: "/components/innerPages/AddItem",
     },
     LoginPage: {
       component: LoginPage,
