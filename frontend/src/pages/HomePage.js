@@ -11,7 +11,7 @@ function HomePage() {
     const prepareTabsData = (data) => {
         const A = data.map((item) => {
             return ({
-                imageSrc: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+                imageSrc: "http://localhost:3000/uploads/"+item.image,
                 title: item.category,
                 content: item.description,
                 price: 'price: ' + item.price + '$',

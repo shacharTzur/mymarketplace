@@ -43,7 +43,7 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 export default ({
   subheading = "Contact Us",
-  heading = <>What do <span tw="text-primary-500">you want</span><wbr/> today?</>,
+  heading = <>What do <span tw="text-primary-500">you want to SELL</span><wbr/> today?</>,
   description = "Tell us what you want to find today! relevant sellers will be notified and contact you ASAP!",
   submitButtonText = "Send",
   formAction = "#",
@@ -61,7 +61,7 @@ export default ({
     const colorInputRef = useRef();
     const priceInputRef = useRef();
     const descriptionInputRef = useRef();
-    const imagePathInputRef = useRef();
+    // const imagePathInputRef = useRef();
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -79,28 +79,28 @@ export default ({
       const enteredColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
       const enteredDescription = descriptionInputRef.current.value;
-      const enteredImagePath = imagePathInputRef.current.value;
+      // const enteredImagePath = imagePathInputRef.current.value;
       setIsLoading(true);
 
       let url = 'http://localhost:8080/product/addNew';
-      if (enteredCategory != 'true'){
-        url = url+'&givenCategory='+enteredCategory
-      }
-      if (enteredBrand != ''){
-        url = url+'&givenBrand='+enteredBrand
-      }
-      if (enteredPrice != ''){
-        url = url+'&givenPrice='+enteredPrice
-      }
-      if (enteredCondition != 'true'){
-        url = url+'&givenCondi='+enteredCondition
-      }
-      if (enteredSize != 'true'){
-        url = url+'&givenSize='+enteredSize
-      }
-      if (enteredColor != ''){
-        url = url+'&givenColor='+enteredColor
-      }
+      // if (enteredCategory != 'true'){
+      //   url = url+'&givenCategory='+enteredCategory
+      // }
+      // if (enteredBrand != ''){
+      //   url = url+'&givenBrand='+enteredBrand
+      // }
+      // if (enteredPrice != ''){
+      //   url = url+'&givenPrice='+enteredPrice
+      // }
+      // if (enteredCondition != 'true'){
+      //   url = url+'&givenCondi='+enteredCondition
+      // }
+      // if (enteredSize != 'true'){
+      //   url = url+'&givenSize='+enteredSize
+      // }
+      // if (enteredColor != ''){
+      //   url = url+'&givenColor='+enteredColor
+      // }
       fetch(url, {
         method: 'POST',
         body: JSON.stringify ({
@@ -113,9 +113,9 @@ export default ({
           name: enteredTitle,
           size: enteredSize,
           color: enteredColor,
-          imagepath: enteredImagePath
+          imagepath: "test"
         }),
-        headers:{'Content-Type': 'application.json'},
+        headers:{'Content-Type': 'application/json'},
       }).then(res => {
         setIsLoading(false);
         if (res.ok) {
@@ -155,41 +155,41 @@ export default ({
 
               <Select name="category" ref={categoryInputRef}>
                 <option disabled selected value> -- Item Category -- </option>
-                <option value="shirt">Shirt</option>
-                <option value="jacket">Jacket</option>
-                <option value="sweatshirt">Sweatshirt</option>
-                <option value="pants">Pants</option>
-                <option value="shorts">Shorts</option>
-                <option value="suits">Suits</option>
-                <option value="dress">Dress</option>
-                <option value="blouse">Blouse</option>
-                <option value="skirt">Skirt</option>
+                <option value="SHIRT">Shirt</option>
+                <option value="JACKET">Jacket</option>
+                <option value="SWEATSHIRT">Sweatshirt</option>
+                <option value="PANTS">Pants</option>
+                <option value="SHORTS">Shorts</option>
+                <option value="SUITS">Suits</option>
+                <option value="DRESS">Dress</option>
+                <option value="BLOUSE">Blouse</option>
+                <option value="SKIRT">Skirt</option>
               </Select>
 
               <Select name="condition" ref={conditionInputRef}>
                 <option disabled selected value> -- Item Condition -- </option>
-                <option value="new">New</option>
-                <option value="excellent">Used - Excellent shape</option>
-                <option value="good">Used - Good</option>
-                <option value="fair">Used - Fair</option>
-                <option value="very_used">Very Used</option>
+                <option value="NEW">New</option>
+                <option value="EXCELLENT">Used - Excellent shape</option>
+                <option value="GOOD">Used - Good</option>
+                <option value="FAIR">Used - Fair</option>
+                <option value="VERY_USED">Very Used</option>
               </Select>
 
               <Select name="size" ref={sizeInputRef}>
                 <option disabled selected value> -- item size -- </option>
-                <option value="xxs">XXS</option>
-                <option value="xs">XS</option>
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-                <option value="xxl">XXL</option>
+                <option value="XXS">XXS</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
               </Select>
 
               <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
-              <Input type="file" name="image" value={selectedFile} onChange={(e) => setName(e.target.value)}/>
+              <Input type="file" name="image" value={selectedFile} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>
