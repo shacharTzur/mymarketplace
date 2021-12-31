@@ -1,7 +1,7 @@
 package com.mymarketplace.Entities;
 
-import javax.persistence.*;
-import lombok.Data;
+        import javax.persistence.*;
+        import lombok.Data;
 
 @Entity
 @Data
