@@ -9,7 +9,7 @@ import SaaSProductLandingPage from "demos/SaaSProductLandingPage.js";
 import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 import ServiceLandingPage from "demos/ServiceLandingPage.js";
 import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
-
+import ProfilePage from "pages/ProfilePage.js"
 import HomePage from "pages/HomePage.js";
 import IWantPage from "pages/IWantPage.js";
 import AddItemPage from "pages/AddItem.js";
@@ -202,7 +202,13 @@ export const components = {
       component: PrivacyPolicyPage,
       url: `/components/innerPages/PrivacyPolicyPage`,
       imageSrc: PrivacyPolicyPageImageSrc,
-    }
+    },
+    ProfilePage: {
+      component: ProfilePage,
+      url: "http://localhost:3000/innerPages/ProfilePage",
+      imageSrc: ServiceLandingPageImageSrc
+
+    },
   },
 
   blocks: {
