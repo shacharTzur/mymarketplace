@@ -18,8 +18,6 @@ public class UserEntity {
     private String username;
     @Column(name = "IMAGE", nullable = true)
     private String imagepath ;
-    @Column(name = "LOCATION",nullable = true)
-    private String location;
 
 //getters setters
 
@@ -57,11 +55,4 @@ public class UserEntity {
 
     public Long getId() { return id; }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 }

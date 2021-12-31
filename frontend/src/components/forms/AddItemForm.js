@@ -60,6 +60,7 @@ export default ({
     const sizeInputRef = useRef();
     const colorInputRef = useRef();
     const priceInputRef = useRef();
+    const locationInputRef = useRef();
     const descriptionInputRef = useRef();
     // const imagePathInputRef = useRef();
 
@@ -78,6 +79,7 @@ export default ({
       const enteredSize = sizeInputRef.current.value;
       const enteredColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
+      const enteredLocation = locationInputRef.current.value;
       const enteredDescription = descriptionInputRef.current.value;
       // const enteredImagePath = imagePathInputRef.current.value;
 
@@ -100,6 +102,7 @@ export default ({
           description: enteredDescription,
           name: enteredTitle,
           size: enteredSize,
+          location: enteredLocation,
           color: enteredColor,
           imagepath: selectedFile.name,
         }),
@@ -110,7 +113,7 @@ export default ({
           return res.text()  
         } else {
           return res.json().then(data => {
-            let errorMessage = '"I Want" request FAILED!!';
+            let errorMessage = '"Upload new item" request FAILED!!';
             if (data && data.error && data.error.message) {
               errorMessage = data.error.message;
             }
@@ -191,6 +194,7 @@ export default ({
 
               <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
+              <Input type="text" name="location" placeholder="City where to pickup from" ref={locationInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
               <Input type="file" name="files" onChange={(event) => setSelectedFile(event.target.files[0])} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
