@@ -83,7 +83,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink href="/#">Marketplace</NavLink>
       <NavLink href="/components/innerPages/AddItemPage">Sell Item</NavLink>
       <NavLink href="/components/innerPages/IWantPage">I Want</NavLink>
-      <NavLink href="/#">Profile</NavLink>
+      <NavLink href="/innerPages/profilePage">Profile</NavLink>
       {/*<NavLink href="/#" tw="lg:ml-12!">*/}
       {/*  Login*/}
       {/*</NavLink>*/}
