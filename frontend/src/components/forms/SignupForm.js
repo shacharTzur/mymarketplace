@@ -75,14 +75,20 @@ export default ({
       console.log(fd);
       let url1 = 'http://localhost:8080/user/add';
       let url2 = 'http://localhost:8080/upload';
+
+      url1 = url1+"?firstName="+enteredFirstName;
+      url1 = url1+"&lastName"+enteredLastName;
+      url1 = url1+"&UserName="+enteredUserName;
+      url1 = url1+"&imagePath"+selectedFile.name;
+
       let promise1 = fetch(url1, {
         method: 'POST',
-        body: JSON.stringify ({
-          firstname: enteredFirstName,
-          lastname: enteredLastName,
-          username: enteredUserName,
-          imagepath: selectedFile.name
-        }),
+        // body: JSON.stringify ({
+        //   firstname: enteredFirstName,
+        //   lastname: enteredLastName,
+        //   username: enteredUserName,
+        //   imagepath: selectedFile.name
+        // }),
         headers:{'Content-Type': 'application/json'},
       }).then(res => {
         setIsLoading(false);
