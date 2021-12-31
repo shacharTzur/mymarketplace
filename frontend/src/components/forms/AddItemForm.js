@@ -62,7 +62,7 @@ export default ({
     const priceInputRef = useRef();
     const locationInputRef = useRef();
     const descriptionInputRef = useRef();
-    const imagePathInputRef = useRef();
+    // const imagePathInputRef = useRef();
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -81,9 +81,14 @@ export default ({
       const enteredPrice = priceInputRef.current.value;
       const enteredLocation = locationInputRef.current.value;
       const enteredDescription = descriptionInputRef.current.value;
-      const enteredImagePath = imagePathInputRef.current.value;
-      setIsLoading(true);
+      // const enteredImagePath = imagePathInputRef.current.value;
 
+      const fd = new FormData();
+      fd.append('files', selectedFile);
+
+      setIsLoading(true);
+      console.log(selectedFile);
+      console.log(fd);
       let url1 = 'http://localhost:8080/product/addNew';
       let url2 = 'http://localhost:8080/upload';
       let promise1 = fetch(url1, {
@@ -99,7 +104,7 @@ export default ({
           size: enteredSize,
           location: enteredLocation,
           color: enteredColor,
-          imagepath: enteredImagePath,
+          imagepath: selectedFile.name,
         }),
         headers:{'Content-Type': 'application/json'},
       }).then(res => {
@@ -125,7 +130,8 @@ export default ({
 
       let promise2 = fetch(url2, {
         method: 'POST',
-        body:selectedFile ,
+        body:fd,
+        // body:selectedFile,
         // headers:{'Content-Type': 'multipart/form-data'},
       }).then(function (res) {
         if (res.ok) {
@@ -190,7 +196,7 @@ export default ({
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
               <Input type="text" name="location" placeholder="City where to pickup from" ref={locationInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
-              <Input type="file" name="image" value={selectedFile} ref={imagePathInputRef}  />
+              <Input type="file" name="files" onChange={(event) => setSelectedFile(event.target.files[0])} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>

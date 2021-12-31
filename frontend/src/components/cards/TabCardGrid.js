@@ -59,7 +59,7 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 export default ({
-  heading = "Checkout the Menu",
+  heading,
   tabs
 }) => {
   /*
@@ -76,7 +76,6 @@ export default ({
         <HeaderRow>
           <Header>{heading}</Header>
         </HeaderRow>
-
         {tabsKeys.map((tabKey, index) => (
           <TabContent
             key={index}
@@ -100,13 +99,6 @@ export default ({
               <CardContainer key={index}>
                 <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageSrc}>
-                    {/*<CardRatingContainer>*/}
-                    {/*  <CardRating>*/}
-                    {/*    <StarIcon />*/}
-                    {/*    {card.rating}*/}
-                    {/*  </CardRating>*/}
-                    {/*  <CardReview>({card.reviews})</CardReview>*/}
-                    {/*</CardRatingContainer>*/}
                     <CardHoverOverlay
                       variants={{
                         hover: {
@@ -124,8 +116,9 @@ export default ({
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
-                    <CardTitle>{card.title}</CardTitle>
-                    <CardContent>{card.content}</CardContent>
+                    <CardTitle>{card.category}</CardTitle>
+                    <CardContent>{card.brand}</CardContent>
+                    <CardContent>{card.description}</CardContent>
                     <CardPrice>{card.price}</CardPrice>
                   </CardText>
                 </Card>
