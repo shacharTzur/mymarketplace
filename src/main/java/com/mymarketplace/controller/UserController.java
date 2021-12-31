@@ -1,14 +1,14 @@
 package com.mymarketplace.controller;
 
 
-        import com.mymarketplace.Entities.UserEntity;
-        import com.mymarketplace.Repository.UserRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.*;
+import com.mymarketplace.Entities.UserEntity;
+import com.mymarketplace.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 
 
 @RestController
@@ -21,9 +21,12 @@ public class UserController {
 
     @GetMapping(path = "/test")
     public String printHello(){
-        return "HELLO USER!";
-    }
+            return "HELLO USER!";
+        }
 
+        //OtherOption for send this request by pathVraiable
+        //@PostMapping(path = "/add/{firstName}/{lastName}/{UserName}")
+        //    public String addNewUser(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String UserName) throws
 
     @PostMapping(path = "/add")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -53,7 +56,7 @@ public class UserController {
     @GetMapping(path="/all")
     @CrossOrigin(origins = "http://localhost:3000")
     public Iterable<UserEntity> allUsers (){
-        return userRepository.findAll();
+           return userRepository.findAll();
     }
 
     @GetMapping(path="/name")
@@ -72,7 +75,7 @@ public class UserController {
                     .body("Error:user does not exist :(");
         }
 
-    }
+        }
 
     @DeleteMapping(path="/name")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -90,4 +93,4 @@ public class UserController {
 
 
     }
-}
+    }
