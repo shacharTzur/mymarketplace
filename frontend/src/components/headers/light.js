@@ -80,6 +80,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   }
   const defaultLinks = [
     <NavLinks key={1}>
+
       <NavLink href="/#">Marketplace</NavLink>
       <NavLink href="/components/innerPages/AddItemPage">Sell Item</NavLink>
       <NavLink href="/components/innerPages/IWantPage">I Want</NavLink>
