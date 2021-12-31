@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -33,6 +35,10 @@ public class UserController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
+        Path p = Paths.get(imagePath);
+        String fileName = p.getFileName().toString();
+        user.setImage(fileName);
+        user.setImage(fileName);
         user.setImage(imagePath);
 
 
