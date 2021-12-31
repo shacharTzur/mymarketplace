@@ -77,9 +77,9 @@ export default ({
       let url2 = 'http://localhost:8080/upload';
 
       url1 = url1+"?firstName="+enteredFirstName;
-      url1 = url1+"&lastName"+enteredLastName;
+      url1 = url1+"&lastName="+enteredLastName;
       url1 = url1+"&UserName="+enteredUserName;
-      url1 = url1+"&imagePath"+selectedFile.name;
+      url1 = url1+"&ImagePath="+selectedFile.name;
 
       let promise1 = fetch(url1, {
         method: 'POST',
@@ -96,7 +96,7 @@ export default ({
           return res.text()  
         } else {
           return res.json().then(data => {
-            let errorMessage = '"I Want" request FAILED!!';
+            let errorMessage = 'SignUp request FAILED!!';
             if (data && data.error && data.error.message) {
               errorMessage = data.error.message;
             }
