@@ -167,6 +167,12 @@ export const components = {
       scrollAnimationDisabled: true,
       url: "/components/innerPages/LoginPage",
     },
+    ProfilePage: {
+      component: ProfilePage,
+      url: "http://localhost:3000/innerPages/ProfilePage",
+      imageSrc: ServiceLandingPageImageSrc
+
+    },
     SignupPage: {
       component: SignupPage,
       url: `/components/innerPages/SignupPage`,
@@ -202,12 +208,6 @@ export const components = {
       component: PrivacyPolicyPage,
       url: `/components/innerPages/PrivacyPolicyPage`,
       imageSrc: PrivacyPolicyPageImageSrc,
-    },
-    ProfilePage: {
-      component: ProfilePage,
-      url: "http://localhost:3000/innerPages/ProfilePage",
-      imageSrc: ServiceLandingPageImageSrc
-
     },
   },
 
