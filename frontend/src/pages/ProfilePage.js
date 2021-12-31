@@ -5,6 +5,7 @@ import GetProfileData from "../components/faqs/ProfileCreator";
 import AuthContext from '../store/auth-context';
 import GetUserProducts from "../components/faqs/ProductsCreator";
 import TabCardGrid from "../components/cards/TabCardGrid";
+
 function ProfilePage() {
     const authCtx = useContext(AuthContext)
     // let data = GetProfileData(authCtx.token);
