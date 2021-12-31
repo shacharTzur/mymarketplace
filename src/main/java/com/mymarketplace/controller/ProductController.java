@@ -49,6 +49,7 @@ public class ProductController {
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
             newProduct.setColor(product.getColor());
+            newProduct.setLocation(product.getLocation());
             Path p = Paths.get(product.getImage());
             String fileName = p.getFileName().toString();
             product.setImage(fileName);
