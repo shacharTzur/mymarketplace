@@ -37,6 +37,9 @@ public class ProductEntity {
     @Column(name = "SIZE")
     private String size;
 
+    @Column(name= "LOCATION")
+    private String location;
+
     @Column(name = "COLOR")
     private String color;
 
@@ -138,4 +141,8 @@ public class ProductEntity {
     public void setSize(String size) {
         this.size = size;
     }
+
+    public String getLocation() { return location; }
+
+    public void setLocation(String location) { this.location = location; }
 }

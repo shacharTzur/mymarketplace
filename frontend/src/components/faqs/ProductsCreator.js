@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-function Listing() {
+function GetUserProducts(userName){
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/product/all')
+        fetch('http://localhost:8080/product/name?owner='+userName)
             .then(function (response) {
                 console.log(response)
                 return response.json();
@@ -18,4 +18,4 @@ function Listing() {
     );
 }
 
-export default Listing;
+export default GetUserProducts;
