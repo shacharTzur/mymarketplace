@@ -47,12 +47,11 @@ export default ({
                 }) => {
     // const dataKeys = Object.keys(data);
 
-    const [activeQuestionIndex1, setActiveQuestionIndex1] = useState(null);
-    const [activeQuestionIndex2, setActiveQuestionIndex2] = useState(null);
+    const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
 
     const toggleQuestion = questionIndex => {
-        if (activeQuestionIndex1 === questionIndex) setActiveQuestionIndex1(null);
-        else setActiveQuestionIndex1(questionIndex);
+        if (activeQuestionIndex === questionIndex) setActiveQuestionIndex(null);
+        else setActiveQuestionIndex(questionIndex);
     };
 
     return (<Container>
@@ -77,7 +76,7 @@ export default ({
                                         <Question>
                                             <QuestionText>Personal Information</QuestionText>
                                             <QuestionToggleIcon>
-                                                {activeQuestionIndex1 === index ? <MinusIcon/> : <PlusIcon/>}
+                                                {activeQuestionIndex === index ? <MinusIcon/> : <PlusIcon/>}
                                             </QuestionToggleIcon>
                                         </Question>
                                         <Answer
@@ -86,7 +85,7 @@ export default ({
                                                 collapsed: {opacity: 0, height: 0, marginTop: "0px"}
                                             }}
                                             initial="collapsed"
-                                            animate={activeQuestionIndex1 === index ? "open" : "collapsed"}
+                                            animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                             transition={{duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98]}}
                                         >
 
@@ -107,7 +106,7 @@ export default ({
                                     <Question>
                                         <QuestionText>My Products</QuestionText>
                                         <QuestionToggleIcon>
-                                            {activeQuestionIndex2 === index ? <MinusIcon/> : <PlusIcon/>}
+                                            {activeQuestionIndex === index ? <MinusIcon/> : <PlusIcon/>}
                                         </QuestionToggleIcon>
                                     </Question>
                                     <Answer
@@ -116,12 +115,11 @@ export default ({
                                             collapsed: {opacity: 0, height: 0, marginTop: "0px"}
                                         }}
                                         initial="collapsed"
-                                        animate={activeQuestionIndex2 === index ? "open" : "collapsed"}
+                                        animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                         transition={{duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98]}}
                                     >
                                     <TabGrid
                                         tabs={products}
-                                        heading={''}
                                     />
                                     </Answer>
                                 </FAQ>))}

@@ -17,6 +17,7 @@ function HomePage() {
                 description: item.description,
                 brand: item.brand,
                 price: 'price: ' + item.price + '$',
+                owner: item.owner,
                 url: "#"
             })
         });
