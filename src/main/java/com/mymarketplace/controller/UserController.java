@@ -29,17 +29,17 @@ public class UserController {
 
     @PostMapping(path = "/add")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath  ) throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String ImagePath  ) throws
             Exception{
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
-        Path p = Paths.get(imagePath);
-        String fileName = p.getFileName().toString();
-        user.setImage(fileName);
-        user.setImage(fileName);
-        user.setImage(imagePath);
+//        Path p = Paths.get(imagePath);
+//        String fileName = p.getFileName().toString();
+//        user.setImage(fileName);
+//        user.setImage(fileName);
+        user.setImage(ImagePath);
 
 
         if(userRepository.findByUsername(UserName).size()!=0){
