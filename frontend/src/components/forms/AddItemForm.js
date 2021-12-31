@@ -80,8 +80,13 @@ export default ({
       const enteredPrice = priceInputRef.current.value;
       const enteredDescription = descriptionInputRef.current.value;
       // const enteredImagePath = imagePathInputRef.current.value;
+
+      const fd = new FormData();
+      fd.append('files', selectedFile);
+
       setIsLoading(true);
       console.log(selectedFile);
+      console.log(fd);
       let url1 = 'http://localhost:8080/product/addNew';
       let url2 = 'http://localhost:8080/upload';
       let promise1 = fetch(url1, {
@@ -96,7 +101,7 @@ export default ({
           name: enteredTitle,
           size: enteredSize,
           color: enteredColor,
-          // imagepath: enteredImagePath,
+          imagepath: selectedFile.name,
         }),
         headers:{'Content-Type': 'application/json'},
       }).then(res => {
@@ -122,7 +127,8 @@ export default ({
 
       let promise2 = fetch(url2, {
         method: 'POST',
-        body:selectedFile ,
+        body:fd,
+        // body:selectedFile,
         // headers:{'Content-Type': 'multipart/form-data'},
       }).then(function (res) {
         if (res.ok) {
@@ -186,7 +192,7 @@ export default ({
               <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
-              <Input type="file" name="image" onChange={(event) => setSelectedFile(event.target.files[0])} />
+              <Input type="file" name="files" onChange={(event) => setSelectedFile(event.target.files[0])} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>
