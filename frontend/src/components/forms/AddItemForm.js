@@ -61,7 +61,7 @@ export default ({
     const colorInputRef = useRef();
     const priceInputRef = useRef();
     const descriptionInputRef = useRef();
-    // const imagePathInputRef = useRef();
+    const imagePathInputRef = useRef();
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -79,29 +79,12 @@ export default ({
       const enteredColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
       const enteredDescription = descriptionInputRef.current.value;
-      // const enteredImagePath = imagePathInputRef.current.value;
+      const enteredImagePath = imagePathInputRef.current.value;
       setIsLoading(true);
 
-      let url = 'http://localhost:8080/product/addNew';
-      // if (enteredCategory != 'true'){
-      //   url = url+'&givenCategory='+enteredCategory
-      // }
-      // if (enteredBrand != ''){
-      //   url = url+'&givenBrand='+enteredBrand
-      // }
-      // if (enteredPrice != ''){
-      //   url = url+'&givenPrice='+enteredPrice
-      // }
-      // if (enteredCondition != 'true'){
-      //   url = url+'&givenCondi='+enteredCondition
-      // }
-      // if (enteredSize != 'true'){
-      //   url = url+'&givenSize='+enteredSize
-      // }
-      // if (enteredColor != ''){
-      //   url = url+'&givenColor='+enteredColor
-      // }
-      fetch(url, {
+      let url1 = 'http://localhost:8080/product/addNew';
+      let url2 = 'http://localhost:8080/upload';
+      let promise1 = fetch(url1, {
         method: 'POST',
         body: JSON.stringify ({
           category: enteredCategory,
@@ -113,7 +96,7 @@ export default ({
           name: enteredTitle,
           size: enteredSize,
           color: enteredColor,
-          imagepath: "test"
+          imagepath: enteredImagePath,
         }),
         headers:{'Content-Type': 'application/json'},
       }).then(res => {
@@ -136,6 +119,20 @@ export default ({
       .catch((err) => {
         alert(err.message);
       });
+
+      let promise2 = fetch(url2, {
+        method: 'POST',
+        body:selectedFile ,
+        // headers:{'Content-Type': 'multipart/form-data'},
+      }).then(function (res) {
+        if (res.ok) {
+          alert("Perfect! ");
+        } else {
+          alert("Oops! ");
+        }
+      });
+
+      Promise.all([promise2,promise1]);
     };
 // category, brand, price, condition, owner, discription, size, name, color, image
   return (
@@ -189,7 +186,7 @@ export default ({
               <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
-              <Input type="file" name="image" value={selectedFile} />
+              <Input type="file" name="image" value={selectedFile} ref={imagePathInputRef}  />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>

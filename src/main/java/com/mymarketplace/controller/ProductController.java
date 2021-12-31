@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,10 @@ public class ProductController {
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
             newProduct.setColor(product.getColor());
-            newProduct.setImage(product.getImage());
+            Path p = Paths.get(product.getImage());
+            String fileName = p.getFileName().toString();
+            product.setImage(fileName);
+            newProduct.setImage(fileName);
 
 
             productRepository.save(product);
