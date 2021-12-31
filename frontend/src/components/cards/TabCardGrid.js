@@ -118,7 +118,6 @@ export default ({
                   <CardText>
                     <CardTitle>{card.category}</CardTitle>
                     <CardContent>{card.brand}</CardContent>
-                    <CardContent>{card.description}</CardContent>
                     <CardPrice>{card.price}</CardPrice>
                   </CardText>
                 </Card>

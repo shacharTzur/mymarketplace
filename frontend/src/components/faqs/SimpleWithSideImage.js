@@ -57,7 +57,7 @@ export default ({
                 <Column tw='hidden lg:block w-2/12 h-1/6'>
                         <Image imageSrc={imageSrc} tw="rounded-full"/>
                     </Column>
-                    <Column tw='hidden sm:block w-8/12 flex-shrink h-1/6'>
+                    <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
                         <FAQContent>
                             <FAQSContainer>
                                 {data.map((dataKey, index) => (<FAQ
