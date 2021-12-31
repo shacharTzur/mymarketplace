@@ -9,8 +9,8 @@ import TabCardGrid from "../components/cards/TabCardGrid";
 function ProfilePage() {
     const authCtx = useContext(AuthContext)
     // let data = GetProfileData(authCtx.token);
-    let data = GetProfileData('nbena');
-    let userProducts = GetUserProducts('nbena');
+    let data = GetProfileData(authCtx.token);
+    let userProducts = GetUserProducts(authCtx.token);
 
     const prepareData = (data) => {
         const A = data.map((item) => {
@@ -28,7 +28,7 @@ function ProfilePage() {
     const prepareProducts = (data) => {
         const B = data.map((item) => {
             return ({
-                imageSrc: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+                imageSrc: "http://localhost:3000/uploads/"+item.image,
                 category: item.category,
                 description: item.description,
                 brand: item.brand,
