@@ -1,17 +1,16 @@
 package com.mymarketplace.controller;
 
 
-        import com.mymarketplace.Entities.UserEntity;
-        import com.mymarketplace.Repository.UserRepository;
-        import org.apache.catalina.User;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.*;
+import com.mymarketplace.Entities.UserEntity;
+import com.mymarketplace.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-        import java.nio.file.Path;
-        import java.nio.file.Paths;
-        import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 
 @RestController
@@ -30,18 +29,20 @@ public class UserController {
 
     @PostMapping(path = "/add")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String addNewUser(@RequestBody UserEntity userGiven)throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath  ) throws
             Exception{
         UserEntity user = new UserEntity();
-        user.setFirstName(userGiven.getFirstName());
-        user.setLastName(userGiven.getLastName());
-        user.setUserName(userGiven.getUserName());
-        Path p = Paths.get(userGiven.getImage());
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUserName(UserName);
+        Path p = Paths.get(imagePath);
         String fileName = p.getFileName().toString();
-        userGiven.setImage(fileName);
         user.setImage(fileName);
+        user.setImage(fileName);
+        user.setImage(imagePath);
 
-        if(userRepository.findByUsername(userGiven.getUserName()).size()!=0){
+
+        if(userRepository.findByUsername(UserName).size()!=0){
             return "Username already exist! be a unique one :) ";
         }
         try{
@@ -50,7 +51,7 @@ public class UserController {
         catch (Exception Ex){
             return "OOPS.. something happened :( "+Ex.getMessage();
         }
-        String toReturn = "User Created, welcome "+userGiven.getFirstName();
+        String toReturn = "User Created, welcome "+firstName;
         return toReturn;
 
     }
@@ -95,5 +96,4 @@ public class UserController {
 
 
     }
-
 }
