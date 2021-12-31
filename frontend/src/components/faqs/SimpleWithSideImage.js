@@ -41,7 +41,6 @@ const Answer = motion(tw.dd`pointer-events-none text-sm sm:text-base leading-rel
 export default ({
                     data,
                     products,
-                    imageSrc,
                 }) => {
 
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
@@ -55,7 +54,7 @@ export default ({
             <Content>
                 <TwoColumn>
                 <Column tw='hidden lg:block w-2/12 h-1/6'>
-                        <Image imageSrc={imageSrc} tw="rounded-full"/>
+                        <Image imageSrc={data[0].imageSrc} tw="rounded-full"/>
                     </Column>
                     <Column tw='hidden sm:block w-8/12 flex-shrink h-1/6'>
                         <FAQContent>
