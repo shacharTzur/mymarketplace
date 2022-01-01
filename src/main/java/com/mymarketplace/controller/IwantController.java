@@ -42,7 +42,7 @@ public class IwantController {
             String username = match.getOwner();
             UserEntity username_to_return = userRepository.findByUsername(username).get(0);
             Entity.add(username_to_return);
-        }
+        }///// heres the new version
 
         return new ResponseEntity<Object>(Entity, HttpStatus.OK);
     }
