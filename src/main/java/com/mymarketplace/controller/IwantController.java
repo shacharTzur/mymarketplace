@@ -2,12 +2,16 @@ package com.mymarketplace.controller;
 
 import com.mymarketplace.Entities.IwantEntity;
 import com.mymarketplace.Entities.ProductEntity;
+import com.mymarketplace.Entities.UserEntity;
 import com.mymarketplace.Repository.IWantRepository;
+import com.mymarketplace.Repository.ProductRepository;
+import com.mymarketplace.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,6 +20,9 @@ public class IwantController {
 
     @Autowired
     private com.mymarketplace.Repository.IWantRepository IWantRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping(path="/owner")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -28,8 +35,16 @@ public class IwantController {
     @GetMapping(path="/prod_id")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getIwantsByID (@RequestParam long prod_id){
-        ResponseEntity<List<IwantEntity>> Entity = new ResponseEntity<List<IwantEntity>>(IWantRepository.findByProduct_id(prod_id), HttpStatus.OK);
-        return Entity;
+        ArrayList<IwantEntity> iMatches_by_Prod_id = new ArrayList<IwantEntity>(IWantRepository.findByProduct_id(prod_id));
+        List<UserEntity> Entity = new ArrayList<>();
+
+        for (IwantEntity match : iMatches_by_Prod_id){
+            String username = match.getOwner();
+            UserEntity username_to_return = userRepository.findByUsername(username).get(0);
+            Entity.add(username_to_return);
+        }///// heres the new version
+
+        return new ResponseEntity<Object>(Entity, HttpStatus.OK);
     }
 
 
