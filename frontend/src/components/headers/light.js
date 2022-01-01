@@ -80,15 +80,23 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   }
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/components/landingPages/Homepage">Marketplace</NavLink>
-      <NavLink href="/components/innerPages/AddItemPage">Sell Item</NavLink>
-      <NavLink href="/components/innerPages/IWantPage">I Want</NavLink>
-      <NavLink href="/components/innerPages/ProfilePage">Profile</NavLink>
-      {/*<NavLink href="/#" tw="lg:ml-12!">*/}
-      {/*  Login*/}
-      {/*</NavLink>*/}
+      {isLoggedIn && (
+        <NavLink href="/components/landingPages/Homepage">Marketplace</NavLink>
+        )}
+      {isLoggedIn && (
+        <NavLink href="/components/innerPages/AddItemPage">Sell Item</NavLink>
+        )}
+      {isLoggedIn && (
+        <NavLink href="/components/innerPages/IWantPage">I Want</NavLink>
+        )}
+      {isLoggedIn && (
+        <NavLink href="/components/innerPages/ProfilePage">Profile</NavLink>
+        )}
       {isLoggedIn && (
           <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/#" onClick={logoutHandler}>Sign Out</PrimaryLink>
+      )}
+      {!isLoggedIn && (
+          <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}href="/#">Login</PrimaryLink>
       )}
     </NavLinks>
   ];

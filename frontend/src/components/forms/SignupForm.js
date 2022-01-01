@@ -105,7 +105,6 @@ export default ({
         }
       }).then(data => {
           alert(data)
-            history.push('/#');    
       })
       .catch((err) => {
         alert(err.message);
@@ -114,17 +113,17 @@ export default ({
       let promise2 = fetch(url2, {
         method: 'POST',
         body:fd,
-        // body:selectedFile,
-        // headers:{'Content-Type': 'multipart/form-data'},
       }).then(function (res) {
         if (res.ok) {
-          alert("Perfect! ");
+          alert("Image uploaded! ");
         } else {
-          alert("Oops! ");
+          alert("Image uploading failed! ");
         }
       });
 
-      Promise.all([promise2,promise1]);
+      Promise.all([promise2,promise1]).then( (values) => {
+        history.push('../../');
+      });
     };
 // category, brand, price, condition, owner, discription, size, name, color, image
   return (
@@ -143,7 +142,7 @@ export default ({
               <Input type="text" name="lastname" placeholder="Last Name" ref={lastNameInputRef} />
 
               <Input type="text" name="username" placeholder="User Name" ref={userNameInputRef}/>
-              <Input type="file" name="files" onChange={(event) => setSelectedFile(event.target.files[0])} />
+              <Input type="file" name="files" accept="image/*" onChange={(event) => setSelectedFile(event.target.files[0])} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>
