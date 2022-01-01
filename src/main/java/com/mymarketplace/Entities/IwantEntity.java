@@ -1,7 +1,10 @@
 package com.mymarketplace.Entities;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import javax.persistence.*;
+
 
 @Entity
 @Data
