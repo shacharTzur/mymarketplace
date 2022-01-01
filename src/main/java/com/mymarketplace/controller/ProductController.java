@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping( path = "/product")
@@ -28,6 +29,20 @@ public class ProductController {
     public Iterable<ProductEntity> allProducts (){
         return productRepository.findAll();
     }
+
+
+    @GetMapping(path="/allForYou")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Iterable<ProductEntity> allProductsForUser (@RequestParam String username){
+        return productRepository.findByOwnerNotLike(username);
+    }
+
+    @GetMapping(path="/product_id")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ProductEntity aProducts (@RequestParam Long id){
+        return productRepository.findByid(id);
+    }
+
 
     @PostMapping(path = "/addNew")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -80,7 +95,8 @@ public class ProductController {
 
     @DeleteMapping(path="/deleteProduct")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String deleteUserByProductName(@RequestParam String productName){
+    public String deleteUserByProductName(@RequestBody Map<String,String> givenProductName){ ////////////////////
+        String productName = givenProductName.get("productName");
         ProductEntity product_entity = productRepository.findByName(productName).get(0);
 
         try{
@@ -183,11 +199,6 @@ public class ProductController {
                 possible_match.setShow_notification(1);
                 if(IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
-
-                    // here I'll update in the products table there's been a match (Noa's request)
-                    match.setNotification(1);
-                    productRepository.save(match);
-
                 }
             }
             catch (Exception Ex){

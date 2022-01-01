@@ -11,7 +11,11 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
+   ProductEntity findByid(Long id);
+
    List<ProductEntity> findByOwner(String Owner);
+
+   List<ProductEntity>findByOwnerNotLike(String Owner);
 
    List<ProductEntity> findByName(String Name);   // the name given to the product (NOT A PERSON)
 
