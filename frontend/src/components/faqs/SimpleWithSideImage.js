@@ -22,8 +22,8 @@ const Heading = tw(SectionHeading)`md:text-left`;
 const Description = tw.p`max-w-xl text-center mx-auto lg:mx-0 lg:text-left lg:max-w-none leading-relaxed text-sm sm:text-base lg:text-lg font-medium mt-4 text-secondary-100`;
 
 const FAQSContainer = tw.dl`mt-0`;
-const FAQ = tw.div`cursor-pointer mt-8 select-none border lg:border-0 px-8 py-0 lg:p-0 rounded-lg lg:rounded-none`;
-const Question = tw.dt`flex items-center`;
+const FAQ = tw.div`mt-8 select-none border lg:border-0 px-8 py-0 lg:p-0 rounded-lg lg:rounded-none`;
+const Question = tw.dt`cursor-pointer flex items-center`;
 const QuestionText = tw.span`text-sm sm:text-xl font-semibold`;
 const QuestionToggleIcon = styled.span`
   ${tw`ml-2 bg-primary-300 text-gray-100 p-1 rounded-full group-hover:bg-primary-400 group-hover:text-gray-200 transition duration-300`}
@@ -31,7 +31,7 @@ const QuestionToggleIcon = styled.span`
     ${tw`w-4 h-3`}
   }
 `;
-const Answer = motion(tw.dd`pointer-events-none text-sm sm:text-base leading-relaxed`);
+const Answer = motion(tw.dd` text-sm sm:text-base leading-relaxed`);
 
 
 export default ({
@@ -57,9 +57,6 @@ export default ({
                             <FAQSContainer>
                                 {data.map((dataKey, index) => (<FAQ
                                         key={index}
-                                        onClick={() => {
-                                            toggleQuestion(index);
-                                        }}
                                         className="group"
                                     >
                                         <Heading>
@@ -74,12 +71,11 @@ export default ({
                             <FAQSContainer>
                                 {data.map((dataKey, index) => (<FAQ
                                     key={index}
-                                    onClick={() => {
-                                        toggleQuestion(index);
-                                    }}
                                     className="group"
                                 >
-                                    <Question>
+                                    <Question onClick={() => {
+                                        toggleQuestion(index);
+                                    }}>
                                         <QuestionText>My Products</QuestionText>
                                         <QuestionToggleIcon>
                                             {activeQuestionIndex === index ? <MinusIcon/> : <PlusIcon/>}
