@@ -10,6 +10,7 @@ import {ReactComponent as MinusIcon} from "feather-icons/dist/icons/minus.svg";
 import TabGrid from "components/cards/TabCardGrid.js";
 import NotificationBadge from 'react-notification-badge';
 import {Effect} from 'react-notification-badge';
+import TabCardGridForUsers from "../cards/TabCardGridForUsers";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 
 const Container = tw.div`relative`;
@@ -55,7 +56,7 @@ export default ({
             <Content>
                 <TwoColumn>
                     <Column tw='hidden lg:block w-2/12 h-1/6'>
-                        <Image imageSrc={item[0].imageSrc} tw="rounded-full"/>
+                        <Image imageSrc={item[0].imageSrc}/>
                     </Column>
                     <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
                         <FAQContent>
@@ -80,15 +81,15 @@ export default ({
                                 ))}
                             </FAQSContainer>
                             <FAQSContainer>
-                                {/*{data.map((dataKey, index) => (<FAQ*/}
-                                {/*    key={index}*/}
-                                {/*    onClick={() => {*/}
-                                {/*        toggleQuestion(index);*/}
-                                {/*    }}*/}
-                                {/*    className="group"*/}
+                                {item.map((dataKey, index) => (<FAQ
+                                    key={index}
+                                    onClick={() => {
+                                        toggleQuestion(index);
+                                    }}
+                                    className="group"
                                 >
                                     <Question>
-                                        <QuestionText>My Products</QuestionText>
+                                        <QuestionText>Who Want</QuestionText>
                                         <QuestionToggleIcon>
                                             {activeQuestionIndex === index ? <MinusIcon/> : <PlusIcon/>}
                                         </QuestionToggleIcon>
@@ -101,11 +102,11 @@ export default ({
                                         initial="collapsed"
                                         animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                     >
-                                        <TabGrid
+                                        <TabCardGridForUsers
                                             tabs={users}
                                         />
                                     </Answer>
-                                {/*</FAQ>))}*/}
+                                </FAQ>))}
                             </FAQSContainer>
                         </FAQContent>
                     </Column>

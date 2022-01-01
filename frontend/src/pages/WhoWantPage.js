@@ -1,18 +1,17 @@
 import React, {useContext} from "react";
 import Header from "../components/headers/light";
-import SimpleWithSideImage from "../components/faqs/SimpleWithSideImage";
-import GetProfileData from "../components/faqs/ProfileCreator";
+import GetItemData from "../components/faqs/ItemDataCreator";
+import GetWhoWantUsers from "../components/faqs/WhoWantCreator";
 import AuthContext from '../store/auth-context';
-import GetUserProducts from "../components/faqs/ProductsCreator";
-import TabCardGrid from "../components/cards/TabCardGrid";
 import WhoWant from "../components/faqs/WhoWant";
 
-function WhoWantPage(item_id) {
+function WhoWantPage(itemId) {
+    itemId = 1
     const authCtx = useContext(AuthContext)
-    let itemData = GetItemData(item_id);
-    let whoWantUsers = GetWhoWantUsers(authCtx.token);
+    let data = GetItemData(itemId);
+    let whoWantUsers = GetWhoWantUsers(itemId);
 
-    const GetItemData = (itemData) => {
+    const itemData = (itemData) => {
         const A = itemData.map((item) => {
             return ({
                 name: item.name,
@@ -28,9 +27,9 @@ function WhoWantPage(item_id) {
         });
         return A;
     }
-    const itemData1 = GetItemData(itemData)
+    const data1 = itemData(data)
 
-    const GetWhoWantUsers = (data) => {
+    const WhoWantUsers = (data) => {
         const B = data.map((item) => {
             return ({
                 imageSrc: "http://localhost:3000/uploads/"+item.image,
@@ -42,14 +41,14 @@ function WhoWantPage(item_id) {
         });
         return B;
     }
-    const whoWantUsers1 = GetWhoWantUsers(whoWantUsers)
+    const whoWantUsers1 = WhoWantUsers(whoWantUsers)
     const  whoWantUsers3= {
         Clothings: whoWantUsers1
     }
     return <section>
         <Header/>
         <WhoWant
-            item={itemData1}
+            item={data1}
             users={whoWantUsers3}
         />
     </section>

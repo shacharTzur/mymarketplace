@@ -8,9 +8,8 @@ import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Head
 import {ReactComponent as PlusIcon} from "feather-icons/dist/icons/plus.svg";
 import {ReactComponent as MinusIcon} from "feather-icons/dist/icons/minus.svg";
 import TabGrid from "components/cards/TabCardGrid.js";
-import NotificationBadge from 'react-notification-badge';
-import {Effect} from 'react-notification-badge';
-const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
+import TabCardGridForProfile from "./TabCardGridForProfile";
+
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
@@ -54,7 +53,7 @@ export default ({
     return (<Container>
             <Content>
                 <TwoColumn>
-                <Column tw='hidden lg:block w-2/12 h-1/6'>
+                    <Column tw='hidden lg:block w-2/12 h-1/6'>
                         <Image imageSrc={data[0].imageSrc} tw="rounded-full"/>
                     </Column>
                     <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
@@ -98,7 +97,7 @@ export default ({
                                         initial="collapsed"
                                         animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                     >
-                                        <TabGrid
+                                        <TabCardGridForProfile
                                             tabs={products}
                                         />
                                     </Answer>

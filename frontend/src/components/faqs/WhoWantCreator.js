@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-function GetItemData(itemId) {
+function GetWhoWantUsers(itemId) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/product/product_id?id='+itemId)
+        fetch('http://localhost:8080/Iwant/prod_id?prod_id='+itemId)
             .then(function (response) {
                 console.log(response)
                 return response.json();
@@ -14,8 +14,8 @@ function GetItemData(itemId) {
             })
     }, [])
     return (
-        [data]
+        data
     );
 }
 
-export default GetItemData;
+export default GetWhoWantUsers;
