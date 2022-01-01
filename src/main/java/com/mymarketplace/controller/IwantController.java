@@ -24,6 +24,25 @@ public class IwantController {
         return Entity;
     }
 
+
+    @PutMapping(path="/notificationToggle")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String turnNotificationOnOff(@RequestParam String searcher,
+                                      @RequestParam String owner,
+                                      @RequestParam Long prod_ID){
+        try {
+            IwantEntity Iwant_record = IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, owner, prod_ID).get(0);
+            int oposite_notification = (Iwant_record.getShow_notification() == 1) ? 0 : 1;
+            Iwant_record.setShow_notification(oposite_notification);
+            IWantRepository.save(Iwant_record);
+            return "mark read/unread";
+        }
+        catch (Exception Ex){
+            return "something went wrong in show notification toggle ";
+        }
+
+
+    }
     ////////// add a button to change show notification to 0 so it wont pop.
     ////blalvlasllsdgnasug   just so it pushes 26.12
 
