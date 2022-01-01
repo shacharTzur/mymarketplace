@@ -55,26 +55,28 @@ export default ({
             <Content>
                 <TwoColumn>
                     <Column tw='hidden lg:block w-2/12 h-1/6'>
-                        {/*<Image imageSrc={data[0].imageSrc} tw="rounded-full"/>*/}
+                        <Image imageSrc={item[0].imageSrc} tw="rounded-full"/>
                     </Column>
                     <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
                         <FAQContent>
                             <FAQSContainer>
-                                {/*{data.map((dataKey, index) => (<FAQ*/}
-                                {/*        key={index}*/}
-                                {/*        onClick={() => {*/}
-                                {/*            toggleQuestion(index);*/}
-                                {/*        }}*/}
-                                {/*        className="group"*/}
+                                {item.map((dataKey, index) => (<FAQ
+                                        key={index}
+                                        onClick={() => {
+                                            toggleQuestion(index);
+                                        }}
+                                        className="group"
                                     >
                                         <Heading>
-                                            <h4>hello</h4>
-                                            {/*{data[0].userName}*/}
+                                            <h4>
+                                            {item[0].name}
+                                            </h4>
                                         </Heading>
-                                        <QuestionText>Personal Information</QuestionText>
-                                        {/*<h4>{"First Name: " + dataKey.firstName}</h4>*/}
-                                        {/*<h4>{"Last Name: " + dataKey.lastName}</h4>*/}
-                                    {/*</FAQ>*/}
+                                        <QuestionText>Item Information</QuestionText>
+                                        <h4>{"Category: " + dataKey.category}</h4>
+                                        <h4>{"Brand: " + dataKey.brand}</h4>
+                                        <h4>{"Price: " + dataKey.price}</h4>
+                                    </FAQ>
                                 ))}
                             </FAQSContainer>
                             <FAQSContainer>

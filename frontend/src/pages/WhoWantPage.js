@@ -7,9 +7,9 @@ import GetUserProducts from "../components/faqs/ProductsCreator";
 import TabCardGrid from "../components/cards/TabCardGrid";
 import WhoWant from "../components/faqs/WhoWant";
 
-function WhoWantPage(item) {
+function WhoWantPage(item_id) {
     const authCtx = useContext(AuthContext)
-    let itemData = GetItemData(item);
+    let itemData = GetItemData(item_id);
     let whoWantUsers = GetWhoWantUsers(authCtx.token);
 
     const GetItemData = (itemData) => {
@@ -43,14 +43,14 @@ function WhoWantPage(item) {
         return B;
     }
     const whoWantUsers1 = GetWhoWantUsers(whoWantUsers)
-    const products3 = {
-        Clothings: products1
+    const  whoWantUsers3= {
+        Clothings: whoWantUsers1
     }
     return <section>
         <Header/>
         <WhoWant
             item={itemData1}
-            users={whoWantUsers1}
+            users={whoWantUsers3}
         />
     </section>
 

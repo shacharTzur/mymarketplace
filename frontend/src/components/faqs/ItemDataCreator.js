@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-function GetProfileData(userName) {
+function GetItemData(itemId) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/user/name?userName='+userName)
+        fetch('http://localhost:8080/product/product_id?id='+itemId)
             .then(function (response) {
                 console.log(response)
                 return response.json();
