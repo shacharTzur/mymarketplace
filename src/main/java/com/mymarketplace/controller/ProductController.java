@@ -197,8 +197,12 @@ public class ProductController {
                 possible_match.setProduct_id(match.getId());
                 possible_match.setMatches(given_param);
                 possible_match.setShow_notification(1);
-                if(IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
+                if(searcher != prodOwner && IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
+
+                    // here I'll update in the products table there's been a match (Noa's request)
+                    match.setNotification(1);
+                    productRepository.save(match);
                 }
             }
             catch (Exception Ex){
