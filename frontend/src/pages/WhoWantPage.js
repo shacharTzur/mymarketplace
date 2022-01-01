@@ -5,9 +5,10 @@ import GetWhoWantUsers from "../components/faqs/WhoWantCreator";
 import AuthContext from '../store/auth-context';
 import WhoWant from "../components/faqs/WhoWant";
 
-function WhoWantPage(itemId) {
-    itemId = 1
-    const authCtx = useContext(AuthContext)
+
+function WhoWantPage() {
+    let param = window.location.href;
+    let itemId = param.charAt(param.length-1);
     let data = GetItemData(itemId);
     let whoWantUsers = GetWhoWantUsers(itemId);
 

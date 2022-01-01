@@ -35,7 +35,7 @@ function ProfilePage() {
                 brand: item.brand,
                 price: 'price: ' + item.price + '$',
                 notification: item.notification,
-                url: "#"
+                id: item.id
             })
         });
         return B;

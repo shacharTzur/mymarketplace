@@ -39,7 +39,7 @@ public class IwantController {
         List<UserEntity> Entity = new ArrayList<>();
 
         for (IwantEntity match : iMatches_by_Prod_id){
-            String username = match.getOwner();
+            String username = match.getSearcher();
             UserEntity username_to_return = userRepository.findByUsername(username).get(0);
             Entity.add(username_to_return);
         }///// heres the new version

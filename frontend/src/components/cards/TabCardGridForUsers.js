@@ -121,11 +121,9 @@ export default ({
                                             <CardButton>Buy Now</CardButton>
                                         </CardHoverOverlay>
                                         {isNotification ? <CardRatingContainer>
-                                                {/*<button onclick={}>*/}
                                                 <CardRating>
                                                     <NotificationIcon/>
                                                 </CardRating>
-                                                {/*</button>*/}
                                             </CardRatingContainer>
                                             : null
                                         }

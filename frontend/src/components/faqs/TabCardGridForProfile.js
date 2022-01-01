@@ -9,6 +9,7 @@ import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
+import { useHistory } from 'react-router-dom'
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -63,7 +64,11 @@ export default ({
                 }) => {
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
-    let isNotification = false
+    const history = useHistory();
+    let isNotification = false;
+    const notificationButtonHandler = (id) => {
+        history.push('/components/innerPages/WhoWantPage#'+id, {some: id});
+    }
     return (
         <Container>
             <ContentWithPaddingXl>
@@ -100,7 +105,7 @@ export default ({
                                         {isNotification ?
                                             <CardRatingContainer>
                                                 <CardRating>
-                                                    <button>
+                                                    <button onClick={() => notificationButtonHandler(card.id)}>
                                                     <NotificationIcon/>
                                                     </button>
                                                 </CardRating>
