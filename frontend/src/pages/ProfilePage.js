@@ -19,8 +19,8 @@ function ProfilePage() {
                 firstName: item.firstName,
                 lastName: item.lastName,
                 userName: item.userName,
-                notification: item.notification
-                // location: item.location
+                notification: item.notification,
+                location: item.location
             })
         });
         return A;
@@ -34,6 +34,7 @@ function ProfilePage() {
                 description: item.description,
                 brand: item.brand,
                 price: 'price: ' + item.price + '$',
+                notification: item.notification,
                 url: "#"
             })
         });

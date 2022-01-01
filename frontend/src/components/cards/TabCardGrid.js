@@ -9,8 +9,6 @@ import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
-import NotificationBadge from "react-notification-badge/lib/components/NotificationBadge";
-import {container} from "tailwindcss/jit/corePlugins";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -33,11 +31,11 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
 const CardRating = styled.div`
-  ${tw`mr-1 text-sm font-bold flex items-end`}
+  ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
-    ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
+    ${tw`w-5 h-4 fill-current text-orange-400 mr-0`}
   }
 `;
 
@@ -100,7 +98,9 @@ export default ({
                         >
                             {tabs[tabKey].map((card, index) => (
                                 <CardContainer key={index}>
-                                    {isNotification=card.notification}
+                                    {card.notification === 1 ? isNotification=true: isNotification=false} {
+                                    }
+
                                     <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                           animate="rest">
                                         <CardImageContainer imageSrc={card.imageSrc}>

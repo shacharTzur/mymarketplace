@@ -19,7 +19,7 @@ function HomePage() {
                 title: item.category,
                 content: item.description,
                 price: item.price + '$',
-                // notification: {item.notification ? true
+                notification: false
             })
         });
         return A;
@@ -41,5 +41,4 @@ function HomePage() {
     </section>
 
 }
-
 export default HomePage;
