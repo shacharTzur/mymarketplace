@@ -46,6 +46,17 @@ public class ProductEntity {
     @Column(name = "IMAGE")
     private String imagepath;
 
+    @Column(name = "notification")
+    private int notification; // 1 means there was at least one Iwant match on this product. 0 means no matches
+
+    public int getNotification() {
+        return notification;
+    }
+
+    public void setNotification(int notification) {
+        this.notification = notification;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }

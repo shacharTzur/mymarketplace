@@ -27,6 +27,8 @@ public class IwantEntity {
     @Column(name = "Show_notification")
     private int show_notification; // 1 is show 0 is don't
 
+
+
     public int getShow_notification() {
         return show_notification;
     }

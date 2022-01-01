@@ -49,6 +49,7 @@ public class ProductController {
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
             newProduct.setColor(product.getColor());
+            newProduct.setNotification(0);  // added column for Iwant notifications for front
             Path p = Paths.get(product.getImage());
             String fileName = p.getFileName().toString();
             product.setImage(fileName);
@@ -88,7 +89,7 @@ public class ProductController {
             return "OOPS. something happened.."+ex.getMessage();
         }
         String Owner = product_entity.getOwner();
-        return "The product: "+ productName +"by the user: "+ Owner+" was deleted successfully";
+        return "The product: "+ productName +" by the user: "+ Owner+" was deleted successfully";
 
     }
 
@@ -181,6 +182,11 @@ public class ProductController {
                 possible_match.setShow_notification(1);
                 if(IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
+
+                    // here I'll update in the products table there's been a match (Noa's request)
+                    match.setNotification(1);
+                    productRepository.save(match);
+
                 }
             }
             catch (Exception Ex){
