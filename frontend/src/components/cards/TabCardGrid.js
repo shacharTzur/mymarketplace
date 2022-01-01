@@ -6,13 +6,11 @@ import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
 import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
-import {ReactComponent as NotificationIcon} from "images/notification-icon.png";
+import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import NotificationBadge from "react-notification-badge/lib/components/NotificationBadge";
 import {container} from "tailwindcss/jit/corePlugins";
-import Effect from "react-notification-badge/lib/components/Effect";
-import notificationIcon from "images/notification-icon.png"
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -74,76 +72,76 @@ export default ({
      */
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
-
+    let isNotification = false
     return (
-        <div style={container}>
-            <NotificationBadge count={1}/>
-        </div>,
-        <Container>
-            <ContentWithPaddingXl>
-                <HeaderRow>
-                    <Header>{heading}</Header>
-                </HeaderRow>
-                {tabsKeys.map((tabKey, index) => (
-                    <TabContent
-                        key={index}
-                        variants={{
-                            current: {
-                                opacity: 1,
-                                scale: 1,
-                                display: "flex",
-                            },
-                            hidden: {
-                                opacity: 0,
-                                scale: 0.8,
-                                display: "none",
-                            }
-                        }}
-                        transition={{duration: 0.4}}
-                        initial={activeTab === tabKey ? "current" : "hidden"}
-                        animate={activeTab === tabKey ? "current" : "hidden"}
-                    >
-                        {tabs[tabKey].map((card, index) => (
-                            <CardContainer key={index}>
-                                <Card className="group" href={card.url} initial="rest" whileHover="hover"
-                                      animate="rest">
-                                    <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardHoverOverlay
-                                            variants={{
-                                                hover: {
-                                                    opacity: 1,
-                                                    height: "auto"
-                                                },
-                                                rest: {
-                                                    opacity: 0,
-                                                    height: 0
-                                                }
-                                            }}
-                                            transition={{duration: 0.3}}
-                                        >
-                                            <CardButton>Buy Now</CardButton>
-                                        </CardHoverOverlay>
-                                        <CardRatingContainer>
-                                            <CardRating>
-                                            {/*    <NotificationIcon/>*/}
-                                            {/*    <img src={notificationIcon}/>*/}
-                                            </CardRating>
-                                        </CardRatingContainer>
-                                    </CardImageContainer>
-                                    <CardText>
-                                        <CardTitle>{card.category}</CardTitle>
-                                        <CardContent>{card.brand}</CardContent>
-                                        <CardPrice>{card.price}</CardPrice>
-                                    </CardText>
-                                </Card>
-                            </CardContainer>
-                        ))}
-                    </TabContent>
-                ))}
-            </ContentWithPaddingXl>
-            <DecoratorBlob1/>
-            <DecoratorBlob2/>
-        </Container>
+            <Container>
+                <ContentWithPaddingXl>
+                    <HeaderRow>
+                        <Header>{heading}</Header>
+                    </HeaderRow>
+                    {tabsKeys.map((tabKey, index) => (
+                        <TabContent
+                            key={index}
+                            variants={{
+                                current: {
+                                    opacity: 1,
+                                    scale: 1,
+                                    display: "flex",
+                                },
+                                hidden: {
+                                    opacity: 0,
+                                    scale: 0.8,
+                                    display: "none",
+                                }
+                            }}
+                            transition={{duration: 0.4}}
+                            initial={activeTab === tabKey ? "current" : "hidden"}
+                            animate={activeTab === tabKey ? "current" : "hidden"}
+                        >
+                            {tabs[tabKey].map((card, index) => (
+                                <CardContainer key={index}>
+                                    {isNotification=card.notification}
+                                    <Card className="group" href={card.url} initial="rest" whileHover="hover"
+                                          animate="rest">
+                                        <CardImageContainer imageSrc={card.imageSrc}>
+                                            <CardHoverOverlay
+                                                variants={{
+                                                    hover: {
+                                                        opacity: 1,
+                                                        height: "auto"
+                                                    },
+                                                    rest: {
+                                                        opacity: 0,
+                                                        height: 0
+                                                    }
+                                                }}
+                                                transition={{duration: 0.3}}
+                                            >
+                                                <CardButton>Buy Now</CardButton>
+                                            </CardHoverOverlay>
+                                            {isNotification ? <CardRatingContainer>
+                                                    <CardRating>
+                                                        <NotificationIcon/>
+                                                    </CardRating>
+                                                </CardRatingContainer>
+                                                : null
+                                            }
+
+                                        </CardImageContainer>
+                                        <CardText>
+                                            <CardTitle>{card.category}</CardTitle>
+                                            <CardContent>{card.brand}</CardContent>
+                                            <CardPrice>{card.price}</CardPrice>
+                                        </CardText>
+                                    </Card>
+                                </CardContainer>
+                            ))}
+                        </TabContent>
+                    ))}
+                </ContentWithPaddingXl>
+                <DecoratorBlob1/>
+                <DecoratorBlob2/>
+            </Container>
     )
         ;
 };

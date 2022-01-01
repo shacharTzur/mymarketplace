@@ -18,7 +18,8 @@ function HomePage() {
                 imageSrc: "http://localhost:3000/uploads/" + item.image,
                 title: item.category,
                 content: item.description,
-                price: item.price + '$'
+                price: item.price + '$',
+                // notification: {item.notification ? true
             })
         });
         return A;

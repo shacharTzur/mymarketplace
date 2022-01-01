@@ -19,6 +19,7 @@ function ProfilePage() {
                 firstName: item.firstName,
                 lastName: item.lastName,
                 userName: item.userName,
+                notification: item.notification
                 // location: item.location
             })
         });
