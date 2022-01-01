@@ -25,6 +25,15 @@ public class IwantController {
     }
 
 
+    @GetMapping(path="/prod_id")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getIwantsByID (@RequestParam long prod_id){
+        ResponseEntity<List<IwantEntity>> Entity = new ResponseEntity<List<IwantEntity>>(IWantRepository.findByProduct_id(prod_id), HttpStatus.OK);
+        return Entity;
+    }
+
+
+
     @PutMapping(path="/notificationToggle")
     @CrossOrigin(origins = "http://localhost:3000")
     public String turnNotificationOnOff(@RequestParam String searcher,

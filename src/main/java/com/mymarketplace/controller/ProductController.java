@@ -39,7 +39,7 @@ public class ProductController {
 
     @GetMapping(path="/product_id")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ProductEntity allProducts (@RequestParam Long id){
+    public ProductEntity aProducts (@RequestParam Long id){
         return productRepository.findByid(id);
     }
 
