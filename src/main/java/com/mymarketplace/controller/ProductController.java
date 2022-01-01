@@ -50,6 +50,7 @@ public class ProductController {
             newProduct.setName(product.getName());
             newProduct.setColor(product.getColor());
             newProduct.setNotification(0);  // added column for Iwant notifications for front
+            newProduct.setLocation(product.getLocation());
             Path p = Paths.get(product.getImage());
             String fileName = p.getFileName().toString();
             product.setImage(fileName);

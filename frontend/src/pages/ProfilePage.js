@@ -15,7 +15,7 @@ function ProfilePage() {
     const prepareData = (data) => {
         const A = data.map((item) => {
             return ({
-                imageSrc: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+                imageSrc: "http://localhost:3000/uploads/"+item.image,
                 firstName: item.firstName,
                 lastName: item.lastName,
                 userName: item.userName,
@@ -47,7 +47,6 @@ function ProfilePage() {
         <SimpleWithSideImage
             data={data1}
             products={products3}
-            imageSrc={"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"}
         />
     </section>
 
