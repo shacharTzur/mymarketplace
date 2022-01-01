@@ -66,7 +66,7 @@ export default ({
   submitButtonText = "Sign In",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
-  signupUrl = "#",
+  signupUrl = "/components/innerPages/SignupPage",
 
 }) => {
   const history = useHistory();
