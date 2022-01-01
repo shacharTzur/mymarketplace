@@ -12,7 +12,8 @@ public interface IWantRepository extends JpaRepository <IwantEntity, Long> {
 
     List<IwantEntity> findByOwner(String Owner);
 
-    List<IwantEntity> findByProduct_id(long Product_id);
+    @Query(value = "Select * From iwants_matches WHERE product_id like :product_id" , nativeQuery = true)
+    List<IwantEntity> findByProduct_id(long product_id);
 
 
     @Query(value = "Select * From iwants_matches WHERE searcher Like :searcher and owner like :owner and product_id like :product_id" , nativeQuery = true)
