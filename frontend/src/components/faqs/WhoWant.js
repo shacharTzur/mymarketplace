@@ -40,8 +40,8 @@ const Answer = motion(tw.dd`pointer-events-none text-sm sm:text-base leading-rel
 
 
 export default ({
-                    data,
-                    products,
+                    item,
+                    users,
                 }) => {
 
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
@@ -54,35 +54,36 @@ export default ({
     return (<Container>
             <Content>
                 <TwoColumn>
-                <Column tw='hidden lg:block w-2/12 h-1/6'>
-                        <Image imageSrc={data[0].imageSrc} tw="rounded-full"/>
+                    <Column tw='hidden lg:block w-2/12 h-1/6'>
+                        {/*<Image imageSrc={data[0].imageSrc} tw="rounded-full"/>*/}
                     </Column>
                     <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
                         <FAQContent>
                             <FAQSContainer>
-                                {data.map((dataKey, index) => (<FAQ
-                                        key={index}
-                                        onClick={() => {
-                                            toggleQuestion(index);
-                                        }}
-                                        className="group"
+                                {/*{data.map((dataKey, index) => (<FAQ*/}
+                                {/*        key={index}*/}
+                                {/*        onClick={() => {*/}
+                                {/*            toggleQuestion(index);*/}
+                                {/*        }}*/}
+                                {/*        className="group"*/}
                                     >
                                         <Heading>
-                                            {data[0].userName}
+                                            <h4>hello</h4>
+                                            {/*{data[0].userName}*/}
                                         </Heading>
                                         <QuestionText>Personal Information</QuestionText>
-                                        <h4>{"First Name: " + dataKey.firstName}</h4>
-                                        <h4>{"Last Name: " + dataKey.lastName}</h4>
-                                    </FAQ>
+                                        {/*<h4>{"First Name: " + dataKey.firstName}</h4>*/}
+                                        {/*<h4>{"Last Name: " + dataKey.lastName}</h4>*/}
+                                    {/*</FAQ>*/}
                                 ))}
                             </FAQSContainer>
                             <FAQSContainer>
-                                {data.map((dataKey, index) => (<FAQ
-                                    key={index}
-                                    onClick={() => {
-                                        toggleQuestion(index);
-                                    }}
-                                    className="group"
+                                {/*{data.map((dataKey, index) => (<FAQ*/}
+                                {/*    key={index}*/}
+                                {/*    onClick={() => {*/}
+                                {/*        toggleQuestion(index);*/}
+                                {/*    }}*/}
+                                {/*    className="group"*/}
                                 >
                                     <Question>
                                         <QuestionText>My Products</QuestionText>
@@ -99,10 +100,10 @@ export default ({
                                         animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                     >
                                         <TabGrid
-                                            tabs={products}
+                                            tabs={users}
                                         />
                                     </Answer>
-                                </FAQ>))}
+                                {/*</FAQ>))}*/}
                             </FAQSContainer>
                         </FAQContent>
                     </Column>

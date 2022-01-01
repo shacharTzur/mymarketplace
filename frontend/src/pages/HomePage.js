@@ -11,13 +11,15 @@ function HomePage() {
     const prepareTabsData = (data) => {
         const A = data.map((item) => {
             return ({
-              category: item.category,
+                name: item.name,
+                category: item.category,
                 description: item.description,
                 brand: item.brand,
-                imageSrc: "http://localhost:3000/uploads/"+item.image,
+                imageSrc: "http://localhost:3000/uploads/" + item.image,
                 title: item.category,
                 content: item.description,
-                price: item.price + '$'
+                price: item.price + '$',
+                notification: false
             })
         });
         return A;
@@ -31,7 +33,7 @@ function HomePage() {
     console.log(tabs3);
 
     return <section>
-        <Header />
+        <Header/>
         <TabGrid
             tabs={tabs3}
             heading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
@@ -39,5 +41,4 @@ function HomePage() {
     </section>
 
 }
-
 export default HomePage;

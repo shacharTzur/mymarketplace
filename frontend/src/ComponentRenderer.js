@@ -13,6 +13,7 @@ import ProfilePage from "pages/ProfilePage.js"
 import HomePage from "pages/HomePage.js";
 import IWantPage from "pages/IWantPage.js";
 import AddItemPage from "pages/AddItem.js";
+import WhoWantPage from "pages/WhoWantPage";
 
 import EventLandingPageImageSrc from "images/demo/EventLandingPage.jpeg";
 import HotelTravelLandingPageImageSrc from "images/demo/HotelTravelLandingPage.jpeg";
@@ -171,11 +172,16 @@ export const components = {
       component: ProfilePage,
       url: "http://localhost:3000/innerPages/ProfilePage",
       imageSrc: ServiceLandingPageImageSrc
-
     },
     SignupPage: {
       component: SignupPage,
       url: `/components/innerPages/SignupPage`,
+      imageSrc: SignupPageImageSrc,
+      scrollAnimationDisabled: true,
+    },
+    WhoWantPage: {
+      component: WhoWantPage,
+      url: `/components/innerPages/WhoWantPage`,
       imageSrc: SignupPageImageSrc,
       scrollAnimationDisabled: true,
     },
