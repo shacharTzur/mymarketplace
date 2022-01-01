@@ -8,7 +8,8 @@ import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Head
 import {ReactComponent as PlusIcon} from "feather-icons/dist/icons/plus.svg";
 import {ReactComponent as MinusIcon} from "feather-icons/dist/icons/minus.svg";
 import TabGrid from "components/cards/TabCardGrid.js";
-
+import NotificationBadge from 'react-notification-badge';
+import {Effect} from 'react-notification-badge';
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 
 const Container = tw.div`relative`;
