@@ -197,7 +197,7 @@ public class ProductController {
                 possible_match.setProduct_id(match.getId());
                 possible_match.setMatches(given_param);
                 possible_match.setShow_notification(1);
-                if(searcher != prodOwner && IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
+                if( !searcher.equals(prodOwner) && IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
 
                     // here I'll update in the products table there's been a match (Noa's request)
