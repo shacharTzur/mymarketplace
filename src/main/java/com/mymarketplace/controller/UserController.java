@@ -1,14 +1,16 @@
 package com.mymarketplace.controller;
 
 
-        import com.mymarketplace.Entities.UserEntity;
-        import com.mymarketplace.Repository.UserRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.*;
+import com.mymarketplace.Entities.UserEntity;
+import com.mymarketplace.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 
 @RestController
@@ -27,14 +29,18 @@ public class UserController {
 
     @PostMapping(path = "/add")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String imagePath , @RequestParam(required = false) String location) throws
+    public String addNewUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String UserName,@RequestParam(required = false) String ImagePath  ) throws
             Exception{
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(UserName);
-        user.setImage(imagePath);
-        user.setLocation(location);
+//        Path p = Paths.get(imagePath);
+//        String fileName = p.getFileName().toString();
+//        user.setImage(fileName);
+//        user.setImage(fileName);
+        user.setImage(ImagePath);
+
 
         if(userRepository.findByUsername(UserName).size()!=0){
             return "Username already exist! be a unique one :) ";
@@ -90,5 +96,4 @@ public class UserController {
 
 
     }
-
 }

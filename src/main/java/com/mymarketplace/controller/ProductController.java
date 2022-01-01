@@ -50,6 +50,7 @@ public class ProductController {
             newProduct.setName(product.getName());
             newProduct.setColor(product.getColor());
             newProduct.setNotification(0);  // added column for Iwant notifications for front
+            newProduct.setLocation(product.getLocation());
             Path p = Paths.get(product.getImage());
             String fileName = p.getFileName().toString();
             product.setImage(fileName);
@@ -182,11 +183,6 @@ public class ProductController {
                 possible_match.setShow_notification(1);
                 if(IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
-
-                    // here I'll update in the products table there's been a match (Noa's request)
-                    match.setNotification(1);
-                    productRepository.save(match);
-
                 }
             }
             catch (Exception Ex){
