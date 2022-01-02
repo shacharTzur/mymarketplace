@@ -17,7 +17,6 @@ export const ReceiverContextProvider = (props) => {
         setUserName: userNameHandler
     };
 
-    
     return (
         <ReceiverContext.Provider value={contextValue}>
             {props.children}

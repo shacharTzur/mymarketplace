@@ -12,7 +12,6 @@ import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.s
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {useHistory} from "react-router-dom";
 import { useContext } from 'react'
-import AuthContext from '../../store/auth-context';
 import ReceiverContext from '../../store/receiver-context';
 import ProductContext from '../../store/product-context';
 
@@ -68,11 +67,13 @@ export default ({
                     productId
                 }) => {
     const history = useHistory();
-
-    const authCtx = useContext(AuthContext);
+    const productCtx = useContext(ProductContext);
     const recCtx = useContext(ReceiverContext);
+    productCtx.setProductId(productId);
+
     const chatButtonHandler = (userName) => {
         recCtx.setUserName(userName)
+
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);

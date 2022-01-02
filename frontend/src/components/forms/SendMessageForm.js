@@ -42,12 +42,10 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId=3,
+  productId,
   friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
-    const recCtx = useContext(ReceiverContext);
-    const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 

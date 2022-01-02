@@ -9,16 +9,18 @@ import ReceiverContext from '../store/receiver-context';
 import GetUserData from "../helpers/GetUserData";
 import GetAllMessages from "../helpers/GetAllMessages";
 import Chat from "../components/faqs/Chat";
+import ProductContext from "../store/product-context";
 
 function ChatPage() {
-    let productId = 1
     const authCtx = useContext(AuthContext);
     const recCtx = useContext(ReceiverContext);
+    const productCtx = useContext(ProductContext);
+    let productId = productCtx.id;
     let userName = authCtx.token;
     let friendUserName = recCtx.userName;
     let userData = GetUserData(userName);
     let friendData = GetUserData(friendUserName)
-    let allMessages = GetAllMessages(userName, friendUserName, 3);
+    let allMessages = GetAllMessages(userName, friendUserName, productId);
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
             return ({
@@ -53,6 +55,7 @@ function ChatPage() {
                 messages={allMessages1}
                 friendUserName={friendData1[0].userName}
                 userUserName={userData1[0].userName}
+                productId={productId}
             />
         </section>
 
