@@ -27,7 +27,7 @@ public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
                          @Param("Owner") String Owner,
                          @Param("Size") String Size,
                          @Param("Color") String Color,
-                         @Param("Price") Long Price);
+                         @Param("Price") Double Price);
 
 
 //
