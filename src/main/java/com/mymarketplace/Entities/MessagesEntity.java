@@ -26,19 +26,19 @@ public class MessagesEntity {
     private String date;
 
     @Column(name = "FROM_IMAGE",nullable = true)
-    private String from_image;
+    private String fromImage;
 
     @Column(name = "TO_IMAGE",nullable = true)
-    private String to_image;
+    private String toImage;
 
     @Column(name = "PRODUCT_IMAGE", nullable = true)
-    private String product_image;
+    private String productImage;
 
     @Column(name="PRODUCT_NAME", nullable = true)
-    private String product_name;
+    private String productName;
 
     @Column(name = "PRODUCT_ID")
-    private Long product_id;
+    private Long productId;
 
     @Column(name ="UNREAD",nullable = true)
     private boolean unread;
@@ -80,35 +80,35 @@ public class MessagesEntity {
     }
 
     public String getFrom_image() {
-        return from_image;
+        return fromImage;
     }
 
     public void setFrom_image(String from_image) {
-        this.from_image = from_image;
+        this.fromImage = from_image;
     }
 
     public String getTo_image() {
-        return to_image;
+        return toImage;
     }
 
     public void setTo_image(String to_image) {
-        this.to_image = to_image;
+        this.toImage = to_image;
     }
 
     public String getProduct_image() {
-        return product_image;
+        return productImage;
     }
 
     public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+        this.productImage = product_image;
     }
 
     public String getProduct_name() {
-        return product_name;
+        return productName;
     }
 
     public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+        this.productName = product_name;
     }
 
     public boolean isUnread() {
@@ -120,10 +120,10 @@ public class MessagesEntity {
     }
 
     public Long getProduct_id() {
-        return product_id;
+        return productId;
     }
 
     public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+        this.productId = product_id;
     }
 }

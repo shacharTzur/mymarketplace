@@ -12,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 @RestController
 @RequestMapping( path = "/messages")
@@ -34,11 +36,12 @@ public class MessagesController {
     public String sendMsg(@RequestBody MessagesEntity msg){
         try{
             MessagesEntity newMsg = new MessagesEntity();
-            ///date format for message
-            Date date = Calendar.getInstance().getTime();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-            String df = dateFormat.format(date);
-            newMsg.setDate(df);
+            ///Date format for message
+            Locale aLocale = new Locale.Builder().setLanguage("en").setRegion("IL").build();
+            DateFormat timeFormat = new SimpleDateFormat("EEE, d MMM HH:mm ", aLocale);
+            timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
+            String curTime = timeFormat.format(new Date());
+            newMsg.setDate(curTime);
             newMsg.setContent(msg.getContent());
             newMsg.setFrom(msg.getFrom());
             newMsg.setTo(msg.getTo());
@@ -72,7 +75,7 @@ public class MessagesController {
         List<MessagesEntity> messages = MsgRepository.findByTo(user);
         ResponseEntity<List<MessagesEntity>> Entity = new ResponseEntity<List<MessagesEntity>>(messages, HttpStatus.OK);
         if(Entity.getBody().size() == 0){
-            return new ResponseEntity(user+"did not recieve any messages yet ",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(user+" did not recieve any messages yet ",HttpStatus.BAD_REQUEST);
         }
         return Entity;
     }
