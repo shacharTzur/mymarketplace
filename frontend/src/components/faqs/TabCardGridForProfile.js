@@ -127,6 +127,5 @@ export default ({
             <DecoratorBlob1/>
             <DecoratorBlob2/>
         </Container>
-    )
-        ;
+    );
 };

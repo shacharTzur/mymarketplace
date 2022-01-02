@@ -103,6 +103,7 @@ import FiveColumnWithInputFormFooter from "components/footers/FiveColumnWithInpu
 import FiveColumnWithBackgroundFooter from "components/footers/FiveColumnWithBackground.js";
 import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
+import InboxPage from "./pages/InboxPage";
 
 
 export const components = {
@@ -182,6 +183,12 @@ export const components = {
     WhoWantPage: {
       component: WhoWantPage,
       url: `/components/innerPages/WhoWantPage`,
+      imageSrc: SignupPageImageSrc,
+      scrollAnimationDisabled: true,
+    },
+    InboxPage: {
+      component: InboxPage,
+      url: `/components/innerPages/InboxPage`,
       imageSrc: SignupPageImageSrc,
       scrollAnimationDisabled: true,
     },
