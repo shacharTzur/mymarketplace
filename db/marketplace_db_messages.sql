@@ -35,7 +35,7 @@ CREATE TABLE `messages` (
   `to_image` varchar(255) DEFAULT NULL,
   `unread` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,' Hi I want this sewatshirt ?','2022-40-02 02:40:13','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg',''),(2,' Hi I really want this sewatshirt, actually I want you.. but let start with the sweatshirt','2022-28-02 03:28:15','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg','');
+INSERT INTO `messages` VALUES (1,' Hi, yes! I really want this jacket, from where the pickup?','Sun, 2 Jan 16:30 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg',''),(2,' Great, can I pick up it today? at 20:00 maybe?','Sun, 2 Jan 16:31 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg',''),(3,' Sounds good. can I have your phone number? I\'ll call you when Im here','Sun, 2 Jan 16:33 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg','');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 15:29:16
+-- Dump completed on 2022-01-02 16:34:00
