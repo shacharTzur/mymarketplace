@@ -86,6 +86,7 @@ export default ({
                                             transition={{duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98]}}
                                         >
                                             {faq.content}
+                                            <Image imageSrc={faq.productImage} tw='rounded-lg'/>
                                         </Answer>
                                     </FAQ>
                                 ))}

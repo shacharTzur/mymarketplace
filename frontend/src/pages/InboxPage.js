@@ -21,8 +21,8 @@ function InboxPage() {
                 date: item.date,
                 from: item.from,
                 content: item.content,
-                senderImg: item.senderImg,
-                itemImg: item.product_image
+                senderImg: "http://localhost:3000/uploads/" + item.senderImg,
+                productImage: "http://localhost:3000/uploads/" + item.productImage
             })
         });
         return A;
