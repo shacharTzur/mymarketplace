@@ -71,16 +71,8 @@ export default ({
 
     const authCtx = useContext(AuthContext);
     const recCtx = useContext(ReceiverContext);
-<<<<<<< HEAD
-
     const chatButtonHandler = (userName) => {
         recCtx.setUserName(userName)
-=======
-    const prodCtx = useContext(ProductContext);
-
-    const chatButtonHandler = () => {
-
->>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);
