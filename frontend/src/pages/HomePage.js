@@ -2,6 +2,7 @@ import React from "react";
 import tw from "twin.macro";
 import TabGrid from "components/cards/TabCardGrid.js";
 import Header from "components/headers/light.js"
+import SendMessage from "components/forms/SendMessageForm"
 
 import Listing from '../components/cards/CardCreator'
 
@@ -38,6 +39,7 @@ function HomePage() {
             tabs={tabs3}
             heading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
         />
+        <SendMessage/>
     </section>
 
 }
