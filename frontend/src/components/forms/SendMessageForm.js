@@ -9,6 +9,10 @@ import {useEffect, useRef, useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
+<<<<<<< HEAD
+=======
+import ReceiverContext from '../../store/receiver-context';
+>>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
 import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
@@ -45,6 +49,10 @@ export default ({
   friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
+<<<<<<< HEAD
+=======
+    const recCtx = useContext(ReceiverContext);
+>>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
     const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
