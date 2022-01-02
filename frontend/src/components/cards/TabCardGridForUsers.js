@@ -64,16 +64,16 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 
 export default ({
                     heading,
-                    tabs
+                    tabs,
+                    productId
                 }) => {
     const history = useHistory();
 
     const authCtx = useContext(AuthContext);
     const recCtx = useContext(ReceiverContext);
-    const prodCtx = useContext(ProductContext);
 
-    const chatButtonHandler = () => {
-
+    const chatButtonHandler = (userName) => {
+        recCtx.setUserName(userName)
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);
@@ -113,7 +113,7 @@ export default ({
                                     <CardImageContainer imageSrc={card.imageSrc}>
                                         <CardRatingContainer>
                                             <CardRating>
-                                                <button onClick={() => chatButtonHandler()}>
+                                                <button onClick={() => chatButtonHandler(card.userName)}>
                                                     <MessageIcon/>
                                                 </button>
                                             </CardRating>

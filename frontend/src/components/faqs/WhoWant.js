@@ -6,6 +6,7 @@ import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Head
 import {ReactComponent as PlusIcon} from "feather-icons/dist/icons/plus.svg";
 import {ReactComponent as MinusIcon} from "feather-icons/dist/icons/minus.svg";
 import TabCardGridForUsers from "../cards/TabCardGridForUsers";
+
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 
 const Container = tw.div`relative`;
@@ -41,7 +42,6 @@ export default ({
                 }) => {
 
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
-
     const toggleQuestion = questionIndex => {
         if (activeQuestionIndex === questionIndex) setActiveQuestionIndex(null);
         else setActiveQuestionIndex(questionIndex);

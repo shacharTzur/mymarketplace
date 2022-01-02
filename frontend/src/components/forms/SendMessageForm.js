@@ -9,7 +9,6 @@ import {useEffect, useRef, useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
-import ReceiverContext from '../../store/receiver-context';
 import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
@@ -42,10 +41,10 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId = -1,
+  productId,
+  friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
-    const recCtx = useContext(ReceiverContext);
     const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
@@ -59,11 +58,12 @@ export default ({
       setIsLoading(true);
 
       let url = 'http://localhost:8080/messages/send';
+      alert(friendUserName);
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
           from: authCtx.token,
-          to: recCtx.userName,
+          to: friendUserName,
           content: enteredMessage,
           product_id: productId,
         })

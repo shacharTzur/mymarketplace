@@ -109,7 +109,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
-import ReceiverContext from './store/receiver-context';
 import ProductContext from './store/product-context';
 
 export default function App() {
