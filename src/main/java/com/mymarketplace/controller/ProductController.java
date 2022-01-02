@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,12 @@ public class ProductController {
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
             newProduct.setName(product.getName());
-            newProduct.setColor(product.getColor());
+
+            String[] colors = product.getColor().split(" ");
+            Arrays.sort(colors);
+            String color = String.join(" ", colors);
+
+            newProduct.setColor(color);  // was- product.getColor()
             newProduct.setNotification(0);  // added column for Iwant notifications for front
             newProduct.setLocation(product.getLocation());
             Path p = Paths.get(product.getImage());
@@ -72,7 +78,7 @@ public class ProductController {
             newProduct.setImage(fileName);
 
 
-            productRepository.save(product);
+            productRepository.save(newProduct);
         }
         catch (Exception Ex){
             return new ResponseEntity("cannot add this item", HttpStatus.BAD_REQUEST) ;
@@ -95,18 +101,25 @@ public class ProductController {
 
     @DeleteMapping(path="/deleteProduct")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String deleteUserByProductName(@RequestBody Map<String,String> givenProductName){ ////////////////////
-        String productName = givenProductName.get("productName");
-        ProductEntity product_entity = productRepository.findByName(productName).get(0);
+    public String deleteUserByProductName(@RequestParam Long prod_id){ ////////////////////
+        //@RequestBody Map<String,String> givenProductName
+//        String productName = givenProductName.get("productName");
+//        ProductEntity product_entity = productRepository.findByName(productName).get(0);
 
         try{
-            productRepository.deleteById(product_entity.getId());
+            productRepository.deleteById(prod_id);
+
+            List<IwantEntity>  iwants_to_del = IWantRepository.findByProduct_id(prod_id);
+            for (IwantEntity to_del: iwants_to_del){
+                long meaningless_table_id = to_del.getId();
+                IWantRepository.deleteById(meaningless_table_id);
+            }
         }
         catch(Exception ex){
             return "OOPS. something happened.."+ex.getMessage();
         }
-        String Owner = product_entity.getOwner();
-        return "The product: "+ productName +" by the user: "+ Owner+" was deleted successfully";
+        //String Owner = product_entity.getOwner();
+        return "The product was deleted successfully"; //"The product: "+ productName +" by the user: "+ Owner+" was deleted successfully";
 
     }
 
@@ -161,7 +174,13 @@ public class ProductController {
 
         String Color;
         if (givenColor != null){
-            Color = givenColor;
+//            System.out.println(givenColor); /////////
+            String[] colors = givenColor.split("-");
+            Arrays.sort(colors);
+            Color = String.join("%_", colors);
+//            System.out.println(Color);
+            Color = "%" + Color + "%";//
+//            System.out.println(Color);//
             given_param++;
         }
         else{ Color = "%"; }
@@ -187,6 +206,7 @@ public class ProductController {
         ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
             (Category, Brand, Condi, Owner, Size, Color, Price));
 
+        int num_sellers_sent_to = 0;
         for (ProductEntity match : search_res){
             try{
                 Long prod_ID = match.getId();
@@ -199,7 +219,7 @@ public class ProductController {
                 possible_match.setShow_notification(1);
                 if( !searcher.equals(prodOwner) && IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
-
+                    num_sellers_sent_to++;
                     // here I'll update in the products table there's been a match (Noa's request)
                     match.setNotification(1); // need this!
                     productRepository.save(match);
@@ -210,7 +230,7 @@ public class ProductController {
                 return "something went wrong in saving iwant request";
             }
         }
-        String returned_String = "sent Iwant request to " + String.valueOf(search_res.size()+ " sellers");
+        String returned_String = "sent Iwant request to " + String.valueOf(num_sellers_sent_to+ " sellers");
         return returned_String;
         //return Entity;  ////// if i want to see whats returned i need to change the returned value
     }

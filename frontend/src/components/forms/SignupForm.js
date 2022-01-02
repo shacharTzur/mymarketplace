@@ -59,7 +59,7 @@ export default ({
     const userNameInputRef = useRef();
 
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState({name:"DefaultProfilePicture.png"});
 
     const submitHandler = (event) => {
       event.preventDefault();

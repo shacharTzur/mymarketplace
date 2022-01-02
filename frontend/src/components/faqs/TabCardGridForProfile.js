@@ -6,7 +6,9 @@ import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
 import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
+import {DeleteButton as DeleteButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
+import {ReactComponent as DeleteIcon} from "images/delete-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import { useHistory } from 'react-router-dom'
@@ -32,12 +34,19 @@ const CardImageContainer = styled.div`
    ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
+const DeleteButtonCont = tw.div`inline-flex bg-gray-400 hocus:bg-gray-700 top-0 mt-2 ml-2 mb-2 rounded-full px-1 py-1 content-center right-0 focus:shadow-outline focus:outline-none transition duration-300`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center hocus:bg-red-700 focus:shadow-outline focus:outline-none transition duration-300`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
     ${tw`w-5 h-4 fill-current text-orange-400 mr-0`}
   }
+`;
+const DeleteRating = styled.div`
+    ${tw`mr-0 text-sm font-bold flex items-end`}
+    svg {
+        ${tw`fill-current mr-0`}
+    }
 `;
 
 const CardHoverOverlay = styled(motion.div)`
@@ -45,11 +54,13 @@ const CardHoverOverlay = styled(motion.div)`
   ${tw`absolute inset-0 flex justify-center items-center`}
 `;
 const CardButton = tw(PrimaryButtonBase)`text-sm bottom-0 `;
-
+const DeleteButton = tw(DeleteButtonBase)`text-sm bottom-0 `;
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
 const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600 bottom-0`;
 const CardPrice = tw.p`mt-4 text-xl font-bold`;
+
+
 
 const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
   ${tw`pointer-events-none -z-20 absolute right-0 top-0 h-64 w-64 opacity-15 transform translate-x-2/3 -translate-y-12 text-pink-400`}
@@ -66,8 +77,16 @@ export default ({
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
     const history = useHistory();
     let isNotification = false;
+    
     const notificationButtonHandler = (id) => {
         history.push('/components/innerPages/WhoWantPage#'+id, {some: id});
+    }
+    const deleteButtonHandler = (id) => {
+        let url = 'http://localhost:8080/product/deleteProduct?prod_id='+id;
+        fetch(url, {
+            method:'DELETE',
+        }).then(res => res.text())
+        .then(data => history.go(0))
     }
     return (
         <Container>
@@ -114,9 +133,14 @@ export default ({
                                         }
                                     </CardImageContainer>
                                     <CardText>
-                                        <CardTitle>{card.category}</CardTitle>
+                                        <CardTitle>{card.category} </CardTitle>
                                         <CardContent>{card.brand}</CardContent>
-                                        <CardPrice>{card.price}</CardPrice>
+                                        <CardPrice>{card.price}
+                                            <DeleteButtonCont>
+                                                <DeleteButton onClick={() => deleteButtonHandler(card.id)}> <DeleteIcon/> </DeleteButton>                                                
+                                            </DeleteButtonCont>
+                                        </CardPrice>
+                                        
                                     </CardText>
                                 </Card>
                             </CardContainer>
