@@ -11,6 +11,10 @@ import {ReactComponent as MessageIcon} from "images/message-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {useHistory} from "react-router-dom";
+import { useContext } from 'react'
+import AuthContext from '../../store/auth-context';
+import ReceiverContext from '../../store/receiver-context';
+import ProductContext from '../../store/product-context';
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -63,7 +67,13 @@ export default ({
                     tabs
                 }) => {
     const history = useHistory();
+
+    const authCtx = useContext(AuthContext);
+    const recCtx = useContext(ReceiverContext);
+    const prodCtx = useContext(ProductContext);
+
     const chatButtonHandler = () => {
+
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);

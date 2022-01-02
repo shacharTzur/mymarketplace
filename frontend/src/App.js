@@ -109,12 +109,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
+import ReceiverContext from './store/receiver-context';
+import ProductContext from './store/product-context';
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
   // return <AnimationRevealPage disabled>xxxxxxxxxx</AnimationRevealPage>;
 
   const authCtx = useContext(AuthContext);
+  const prodCtx = useContext(ProductContext);
   return (
     <Router>
       <Switch>

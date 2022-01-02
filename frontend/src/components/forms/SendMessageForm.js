@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
 import ReceiverContext from '../../store/receiver-context';
+import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -45,6 +46,7 @@ export default ({
 }) => {
     const authCtx = useContext(AuthContext);
     const recCtx = useContext(ReceiverContext);
+    const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 

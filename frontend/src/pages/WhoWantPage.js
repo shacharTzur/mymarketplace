@@ -38,6 +38,7 @@ function WhoWantPage() {
                 lastName: item.lastName,
                 userName: item.userName,
                 notification: item.notification,
+                productId: item.id
             })
         });
         return B;
