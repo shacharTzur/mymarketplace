@@ -95,6 +95,7 @@ export default ({
                                     >
                                         <TabCardGridForUsers
                                             tabs={users}
+                                            productId={item.id}
                                         />
                                     </Answer>
                                 </FAQ>))}
