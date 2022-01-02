@@ -67,7 +67,7 @@ export default ({
 
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState({name:"DefaultImage.png"});
     // const [showModal, setShowModal] = useState(false);
 
     const submitHandler = (event) => {
@@ -85,10 +85,7 @@ export default ({
 
       const fd = new FormData();
       fd.append('files', selectedFile);
-
       setIsLoading(true);
-      console.log(selectedFile);
-      console.log(fd);
       let url1 = 'http://localhost:8080/product/addNew';
       let url2 = 'http://localhost:8080/upload';
       let promise1 = fetch(url1, {
@@ -131,8 +128,6 @@ export default ({
       let promise2 = fetch(url2, {
         method: 'POST',
         body:fd,
-        // body:selectedFile,
-        // headers:{'Content-Type': 'multipart/form-data'},
       }).then(function (res) {
         if (res.ok) {
           alert("Perfect! ");
