@@ -13,19 +13,30 @@ import Inbox from "../components/faqs/Inbox";
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
-    // let param = window.location.href;
-    // let userId = GetAfterHashTag(param);
-    // let userData = GetUserData(userId);
-    // const userName = userData.userName
-    // let allMessages = GetAllMessages(userName);
+    let userData = GetUserData(authCtx.token);
+    const userName = userData.userName
+    let allMessages = GetAllMessages(userName);
+    const prepareMessagesData = (data) => {
+        const A = data.map((item) => {
+            return ({
+                data: item.date,
+                from: item.from,
+                content: item.content,
+                senderImg: item.senderImg,
+                itemImg: item.itemImg
+            })
+        });
+        return A;
+    }
+
+    const allMessages1 = prepareMessagesData(allMessages)
     return (<section>
             <Header/>
-            <Inbox>
-                {/*user=userData,*/}
-                {/*messages=allMessages*/}
-            </Inbox>
+            <Inbox
+                imageSrc={"http://localhost:3000/uploads/"+userData[0].imageSrc}
+                messages={allMessages1}
+            />
         </section>
 
     )}
-
 export default InboxPage;

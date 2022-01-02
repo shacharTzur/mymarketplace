@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { ReactComponent as PlusIcon } from "feather-icons/dist/icons/plus.svg";
 import { ReactComponent as MinusIcon } from "feather-icons/dist/icons/minus.svg";
+import {PrimaryButton as PrimaryButtonBase} from "../misc/Buttons";
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
@@ -34,40 +35,16 @@ const QuestionToggleIcon = styled.span`
     ${tw`w-4 h-4`}
   }
 `;
+const CardButton = tw(PrimaryButtonBase)`text-sm`;
 const Answer = motion(tw.dd`pointer-events-none text-sm sm:text-base leading-relaxed`);
 
 export default ({
                     heading = "Inbox",
-                    description = "Here are some frequently asked questions about our hotels from our loving customers. Should you have any other questions, feel free to reach out via the contact form below.",
-                    imageSrc = "https://images.unsplash.com/photo-1579427421635-a0015b804b2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-                    imageContain = false,
-                    imageShadow = true,
-                    faqs = null
+                    description = "Here you can contact potential buyers and coordinate purchases.",
+                    imageSrc,
+                    messages,
                 }) => {
-    const defaultFaqs = [
-        {
-            question: "Is lunch provided free of cost ?",
-            answer:
-                "Yes, it is, if you have a membership with us. Otherwise it is charged as per the menu. Some limits do apply as to how much items can be included in your lunch. This limit is enough for any one person and merely exists to discourage abusal of the system."
-        },
-        {
-            question: "Do you have 2 Bedroom suites ?",
-            answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            question: "Are Wi-Fi costs included in the price ?",
-            answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            question: "Where can I reach you for support ?",
-            answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        }
-    ];
-
-    if (!faqs || faqs.length === 0) faqs = defaultFaqs;
+    const faqs = messages;
 
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
 
@@ -80,8 +57,8 @@ export default ({
         <Container>
             <Content>
                 <TwoColumn>
-                    <Column tw="hidden lg:block w-5/12 flex-shrink-0">
-                        <Image imageContain={imageContain} imageShadow={imageShadow} imageSrc={imageSrc} />
+                    <Column tw='hidden lg:block w-2/12 h-1/6'>
+                        <Image imageSrc={imageSrc} tw="rounded-full"/>
                     </Column>
                     <Column>
                         <FAQContent>
@@ -97,7 +74,10 @@ export default ({
                                         className="group"
                                     >
                                         <Question>
-                                            <QuestionText>{faq.question}</QuestionText>
+                                            <QuestionText>{faq.from}
+                                                <Image imageSrc={faq.itemImg} tw="rounded-full"/>
+                                            </QuestionText>
+                                            <Description>{faq.date}</Description>
                                             <QuestionToggleIcon>
                                                 {activeQuestionIndex === index ? <MinusIcon /> : <PlusIcon />}
                                             </QuestionToggleIcon>
@@ -111,7 +91,7 @@ export default ({
                                             animate={activeQuestionIndex === index ? "open" : "collapsed"}
                                             transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
                                         >
-                                            {faq.answer}
+                                            {faq.content}
                                         </Answer>
                                     </FAQ>
                                 ))}

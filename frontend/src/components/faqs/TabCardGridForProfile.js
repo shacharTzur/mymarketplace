@@ -66,8 +66,8 @@ export default ({
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
     const history = useHistory();
     let isNotification = false;
-    const notificationButtonHandler = (id) => {
-        history.push('/components/innerPages/WhoWantPage#'+id, {some: id});
+    const notificationButtonHandler = () => {
+        history.push('/components/innerPages/WhoWantPage');
     }
     return (
         <Container>
@@ -105,7 +105,7 @@ export default ({
                                         {isNotification ?
                                             <CardRatingContainer>
                                                 <CardRating>
-                                                    <button onClick={() => notificationButtonHandler(card.id)}>
+                                                    <button onClick={() => notificationButtonHandler}>
                                                     <NotificationIcon/>
                                                     </button>
                                                 </CardRating>
