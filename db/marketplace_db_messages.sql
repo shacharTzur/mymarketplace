@@ -26,12 +26,12 @@ CREATE TABLE `messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `content` varchar(255) DEFAULT NULL,
   `date` varchar(255) DEFAULT NULL,
-  `from` varchar(255) DEFAULT NULL,
   `from_image` varchar(255) DEFAULT NULL,
   `product_id` bigint DEFAULT NULL,
   `product_image` varchar(255) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
-  `to` varchar(255) DEFAULT NULL,
+  `receiver` varchar(255) DEFAULT NULL,
+  `sender` varchar(255) DEFAULT NULL,
   `to_image` varchar(255) DEFAULT NULL,
   `unread` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -44,7 +44,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,' Hi, yes! I really want this jacket, from where the pickup?','Sun, 2 Jan 16:30 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg',''),(2,' Great, can I pick up it today? at 20:00 maybe?','Sun, 2 Jan 16:31 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg',''),(3,' Sounds good. can I have your phone number? I\'ll call you when Im here','Sun, 2 Jan 16:33 ','shachartzur','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','ravidPlot.jpg','');
+INSERT INTO `messages` VALUES (1,'Hi how r u?','Sun, 2 Jan 18:35 ','ravidPlot.jpg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','shachartzur','RavidPlot','shacharpic.jpeg',''),(2,'Im good, how r u?','Sun, 2 Jan 18:35 ','shacharpic.jpeg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','RavidPlot','shachartzur','ravidPlot.jpg',''),(3,'Do you want to buy this sewatshirt? ','Sun, 2 Jan 18:46 ','ravidPlot.jpg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','shachartzur','RavidPlot','shacharpic.jpeg','');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 16:34:00
+-- Dump completed on 2022-01-02 18:57:24

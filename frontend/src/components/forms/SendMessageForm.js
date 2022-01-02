@@ -9,7 +9,11 @@ import {useEffect, useRef, useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
+<<<<<<< HEAD
+=======
 import ReceiverContext from '../../store/receiver-context';
+>>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
+import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -41,10 +45,15 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId = -1,
+  productId,
+  friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
+<<<<<<< HEAD
+=======
     const recCtx = useContext(ReceiverContext);
+>>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
+    const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
@@ -57,11 +66,12 @@ export default ({
       setIsLoading(true);
 
       let url = 'http://localhost:8080/messages/send';
+      alert(friendUserName);
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
           from: authCtx.token,
-          to: recCtx.userName,
+          to: friendUserName,
           content: enteredMessage,
           product_id: productId,
         })

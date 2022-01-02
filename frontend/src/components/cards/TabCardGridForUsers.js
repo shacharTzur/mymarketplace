@@ -11,6 +11,10 @@ import {ReactComponent as MessageIcon} from "images/message-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {useHistory} from "react-router-dom";
+import { useContext } from 'react'
+import AuthContext from '../../store/auth-context';
+import ReceiverContext from '../../store/receiver-context';
+import ProductContext from '../../store/product-context';
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -60,10 +64,23 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 
 export default ({
                     heading,
-                    tabs
+                    tabs,
+                    productId
                 }) => {
     const history = useHistory();
+
+    const authCtx = useContext(AuthContext);
+    const recCtx = useContext(ReceiverContext);
+<<<<<<< HEAD
+
+    const chatButtonHandler = (userName) => {
+        recCtx.setUserName(userName)
+=======
+    const prodCtx = useContext(ProductContext);
+
     const chatButtonHandler = () => {
+
+>>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);
@@ -103,7 +120,7 @@ export default ({
                                     <CardImageContainer imageSrc={card.imageSrc}>
                                         <CardRatingContainer>
                                             <CardRating>
-                                                <button onClick={() => chatButtonHandler()}>
+                                                <button onClick={() => chatButtonHandler(card.userName)}>
                                                     <MessageIcon/>
                                                 </button>
                                             </CardRating>
