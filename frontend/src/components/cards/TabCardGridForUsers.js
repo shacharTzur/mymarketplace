@@ -63,8 +63,8 @@ export default ({
                     tabs
                 }) => {
     const history = useHistory();
-    const inboxButtonHandler = (id) => {
-        history.push('/components/innerPages/InboxPage#'+id, {some: id});
+    const chatButtonHandler = () => {
+        history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
@@ -103,7 +103,7 @@ export default ({
                                     <CardImageContainer imageSrc={card.imageSrc}>
                                         <CardRatingContainer>
                                             <CardRating>
-                                                <button onClick={() => inboxButtonHandler(card.id)}>
+                                                <button onClick={() => chatButtonHandler()}>
                                                     <MessageIcon/>
                                                 </button>
                                             </CardRating>

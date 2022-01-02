@@ -6,13 +6,13 @@ import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Head
 import {ReactComponent as ClosedIcon} from "images/message-icon.svg";
 import {ReactComponent as OpenIcon} from "images/open-message-icon.svg";
 import {PrimaryButton as PrimaryButtonBase} from "../misc/Buttons";
+
 const ThreeColumnContainer = styled.div`
   ${tw`flex flex-col items-center md:items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-20 md:py-24`}
 `;
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4  inline-block`
-const TwoColumn = tw.div`flex`;
 const Column = tw.div``;
 
 const Image = styled.div(props => [`background-image: url("${props.imageSrc}");`, props.imageContain ? tw`bg-contain bg-no-repeat` : tw`bg-cover`, props.imageShadow ? tw`shadow` : tw`shadow-none`, tw`hidden lg:block rounded h-32 bg-center`, tw`w-32`]);
@@ -35,26 +35,29 @@ const CardButton = tw(PrimaryButtonBase)`text-sm`;
 const Answer = motion(tw.dd` text-sm sm:text-base leading-relaxed`);
 
 export default ({
-                    heading = "Inbox",
-                    description = "Here you can contact potential buyers and coordinate purchases.",
-                    imageSrc,
+                    heading = "Chat",
+                    description = "go ahead! try to sell your products!",
+                    userImageSrc,
+                    friendImageSrc,
                     messages,
+                    friendUserName,
+                    userUserName
                 }) => {
     const faqs = messages;
 
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
-
     const toggleQuestion = questionIndex => {
         if (activeQuestionIndex === questionIndex) setActiveQuestionIndex(null);
         else setActiveQuestionIndex(questionIndex);
     };
 
+    let isMe;
     return (
         <Container>
             <Content>
                 <ThreeColumnContainer>
                     <Column tw='hidden lg:block w-2/12 h-1/6'>
-                        <Image imageSrc={imageSrc} tw="rounded-full"/>
+                        <Image imageSrc={userImageSrc} tw="rounded-full"/>
                     </Column>
                     <Column>
                         <FAQContent>
@@ -71,8 +74,14 @@ export default ({
                                     >
                                         <Question>
                                             <QuestionText>
-                                                <HighlightedText>from: </HighlightedText> {faq.from +'      '}
-                                                <QuestionTextFrom>{faq.date}</QuestionTextFrom>
+                                                {faq.userName === userUserName ? isMe=true: false}
+                                                {isMe ?
+                                                    <HighlightedText>Me</HighlightedText>
+                                                    :
+                                                    <HighlightedText>{friendUserName}</HighlightedText>
+                                                }
+
+                                                <QuestionTextFrom>  {faq.date}</QuestionTextFrom>
                                             </QuestionText>
                                             <QuestionToggleIcon>
                                                 {activeQuestionIndex === index ? <OpenIcon/> : <ClosedIcon/>}
@@ -88,12 +97,14 @@ export default ({
                                             transition={{duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98]}}
                                         >
                                             {faq.content}
-                                            <Image imageSrc={faq.productImage} tw='rounded-lg'/>
                                         </Answer>
                                     </FAQ>
                                 ))}
                             </FAQSContainer>
                         </FAQContent>
+                    </Column>
+                    <Column tw='lg:block w-2/12 h-1/6'>
+                        <Image imageSrc={friendImageSrc} tw="rounded-full"/>
                     </Column>
                 </ThreeColumnContainer>
             </Content>

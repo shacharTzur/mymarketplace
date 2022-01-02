@@ -104,6 +104,7 @@ import FiveColumnWithBackgroundFooter from "components/footers/FiveColumnWithBac
 import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
 import InboxPage from "./pages/InboxPage";
+import ChatPage from "./pages/ChatPage";
 
 
 export const components = {
@@ -189,6 +190,12 @@ export const components = {
     InboxPage: {
       component: InboxPage,
       url: `/components/innerPages/InboxPage`,
+      imageSrc: SignupPageImageSrc,
+      scrollAnimationDisabled: true,
+    },
+    ChatPage: {
+      component: ChatPage,
+      url: `/components/innerPages/ChatPage`,
       imageSrc: SignupPageImageSrc,
       scrollAnimationDisabled: true,
     },
