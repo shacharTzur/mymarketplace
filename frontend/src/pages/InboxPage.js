@@ -14,26 +14,35 @@ import Inbox from "../components/faqs/Inbox";
 function InboxPage() {
     const authCtx = useContext(AuthContext);
     let userData = GetUserData(authCtx.token);
-    const userName = userData.userName
-    let allMessages = GetAllMessages(userName);
+    let allMessages = GetAllMessages(authCtx.token);
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
             return ({
-                data: item.date,
+                date: item.date,
                 from: item.from,
                 content: item.content,
                 senderImg: item.senderImg,
-                itemImg: item.itemImg
+                itemImg: item.product_image
             })
         });
         return A;
     }
 
+    const prepareUserData = (data) => {
+        const B = data.map((item) => {
+            return ({
+                userName: item.userName,
+                img: "http://localhost:3000/uploads/" + item.image,
+            })
+        });
+        return B;
+    }
     const allMessages1 = prepareMessagesData(allMessages)
+    const userData1 = prepareUserData(userData)
     return (<section>
             <Header/>
             <Inbox
-                imageSrc={"http://localhost:3000/uploads/"+userData[0].imageSrc}
+                imageSrc={userData1[0].img}
                 messages={allMessages1}
             />
         </section>

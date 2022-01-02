@@ -9,18 +9,12 @@ import TabCardGridForProfile from "./TabCardGridForProfile";
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
-
 const TwoColumn = tw.div`flex`;
 const Column = tw.div``;
 const TabContent = tw(motion.div)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
-
 const Image = styled.div(props => [`background-image: url("${props.imageSrc}");`, props.imageContain ? tw`bg-contain bg-no-repeat` : tw`bg-cover`, props.imageShadow ? tw`shadow` : tw`shadow-none`, tw`hidden lg:block rounded h-32 bg-center`, tw`w-32`]);
-
 const FAQContent = tw.div`lg:ml-12`;
-const Subheading = tw(SubheadingBase)`mb-4 text-center lg:text-left`;
 const Heading = tw(SectionHeading)`md:text-left`;
-const Description = tw.p`max-w-xl text-center mx-auto lg:mx-0 lg:text-left lg:max-w-none leading-relaxed text-sm sm:text-base lg:text-lg font-medium mt-4 text-secondary-100`;
-
 const FAQSContainer = tw.dl`mt-0`;
 const FAQ = tw.div`mt-8 select-none border lg:border-0 px-8 py-0 lg:p-0 rounded-lg lg:rounded-none`;
 const Question = tw.dt`cursor-pointer flex items-center`;
