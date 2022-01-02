@@ -106,7 +106,7 @@ export default ({
                         <FAQ>
                             <FAQSContainer>
                                 <FAQContent>
-                                    <SendMessageForm></SendMessageForm>
+                                    <SendMessageForm friendUserName={friendUserName}></SendMessageForm>
                                 </FAQContent>
                             </FAQSContainer>
                         </FAQ>
