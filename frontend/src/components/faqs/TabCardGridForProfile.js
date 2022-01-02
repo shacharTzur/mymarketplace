@@ -79,7 +79,7 @@ export default ({
     let isNotification = false;
     
     const notificationButtonHandler = (id) => {
-        history.push('/components/innerPages/WhoWantPage#'+id, {some: id});
+        history.push('/components/innerPages/WhoWantPage' +'#' + id);
     }
     const deleteButtonHandler = (id) => {
         let url = 'http://localhost:8080/product/deleteProduct?prod_id='+id;
