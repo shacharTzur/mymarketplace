@@ -10,11 +10,13 @@ import GetAllMessages from "../helpers/GetAllMessages";
 import Chat from "../components/faqs/Chat";
 
 function ChatPage() {
-    let friendUserName = 'shachartzur'
+    let friendUserName = 'shachartzur';
+    let productId = 1
     const authCtx = useContext(AuthContext);
-    let userData = GetUserData(authCtx.token);
+    let userName = authCtx.token
+    let userData = GetUserData(userName);
     let friendData = GetUserData(friendUserName)
-    let allMessages = GetAllMessages(authCtx.token);
+    let allMessages = GetAllMessages(authCtx.token, friendUserName, productId);
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
             return ({
