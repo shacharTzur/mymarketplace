@@ -12,6 +12,7 @@ import Chat from "../components/faqs/Chat";
 
 function ChatPage() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     let friendUserName = 'shachartzur';
     let productId = 1
     const authCtx = useContext(AuthContext);
@@ -20,6 +21,8 @@ function ChatPage() {
     let friendData = GetUserData(friendUserName)
     let allMessages = GetAllMessages(authCtx.token, friendUserName, productId);
 =======
+=======
+>>>>>>> bf04ae4808318114605b5c69178ae35af1e1915d
     // let friendUserName = 'shachartzur'
     const recCtx = useContext(ReceiverContext);
     const authCtx = useContext(AuthContext);
@@ -29,7 +32,10 @@ function ChatPage() {
     let friendData = GetUserData(friendUserName)
     let allMessages = GetAllMessages(authCtx.token);
 
+<<<<<<< HEAD
 >>>>>>> ido_sunday_sessions
+=======
+>>>>>>> bf04ae4808318114605b5c69178ae35af1e1915d
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
             return ({
