@@ -75,8 +75,8 @@ export default ({
                                     >
                                         <Question>
                                             <QuestionText>
-                                                {faq.userName === userUserName ? isMe = true : false}
-                                                {isMe ?
+                                                {faq.sender === userUserName ? isMe = true : isMe = false}
+                                                {isMe === true?
                                                     <HighlightedText>Me</HighlightedText>
                                                     :
                                                     <HighlightedText>{friendUserName}</HighlightedText>

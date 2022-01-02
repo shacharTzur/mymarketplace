@@ -9,10 +9,7 @@ import {useEffect, useRef, useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
-<<<<<<< HEAD
-=======
 import ReceiverContext from '../../store/receiver-context';
->>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
 import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
@@ -45,14 +42,11 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId,
+  productId=3,
   friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
-<<<<<<< HEAD
-=======
     const recCtx = useContext(ReceiverContext);
->>>>>>> cd4230cb9fd37e400a81c7eea0c945a7657b5f56
     const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
@@ -66,12 +60,11 @@ export default ({
       setIsLoading(true);
 
       let url = 'http://localhost:8080/messages/send';
-      alert(friendUserName);
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
-          from: authCtx.token,
-          to: friendUserName,
+          sender: authCtx.token,
+          receiver: friendUserName,
           content: enteredMessage,
           product_id: productId,
         })
@@ -79,10 +72,12 @@ export default ({
       .then(res => {
         setIsLoading(false);
         if (res.ok) {
+            alert(res.text())
           return res.text()  
         } else {
           return res.json().then(data => {
             let errorMessage = 'message send FAILED!!';
+            alert(errorMessage)
           });
         }
       })
