@@ -23,7 +23,7 @@ public class ProductEntity {
     private Long price;
 
     @Column(name = "CONDI")
-    private String condi;
+    private Integer condi;
 
     @Column(name = "OWNER")
     private String owner;
@@ -81,18 +81,9 @@ public class ProductEntity {
         this.brand = brand;
     }
 
+    public Integer getCondi() { return condi; }
 
-//    public void setCondition(String condition) {
-//        this.condi = condition;
-//    }
-//    public String getCondition() {
-//        return condi;
-//    }
-    public String getCondi() {
-        return condi;
-    }
-
-    public void setCondi(String condi) {
+    public void setCondi(Integer condi) {
         this.condi = condi;
     }
 

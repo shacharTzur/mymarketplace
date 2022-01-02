@@ -19,11 +19,11 @@ public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
 
    List<ProductEntity> findByName(String Name);   // the name given to the product (NOT A PERSON)
 
-   @Query(value = "Select * From PRODUCTS WHERE Category Like :Category and Brand Like :Brand and Condi Like :Condi and Owner Like :Owner and Size Like :Size and Color Like :Color and Price <= :Price" , nativeQuery = true)
-   List<ProductEntity> findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+   @Query(value = "Select * From PRODUCTS WHERE Category Like :Category and Brand Like :Brand and Condi <= :Condi and Owner Like :Owner and Size Like :Size and Color Like :Color and Price <= :Price" , nativeQuery = true)
+   List<ProductEntity> findByCategoryLikeAndBrandLikeAndCondiLessThanEqualAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                         (@Param("Category") String Category,
                          @Param("Brand") String Brand,
-                         @Param("Condi") String Condi,
+                         @Param("Condi") int Condi,
                          @Param("Owner") String Owner,
                          @Param("Size") String Size,
                          @Param("Color") String Color,

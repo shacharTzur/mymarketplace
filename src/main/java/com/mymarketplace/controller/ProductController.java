@@ -52,14 +52,17 @@ public class ProductController {
         try {
             //enum conversion
             ClothingCategory category = ClothingCategory.valueOf(product.getCategory());
-            Condition condition = Condition.valueOf(product.getCondi());
+            Condition condition = Condition.valueOf(product.getCondi().toString());
             ClothingSizes size = ClothingSizes.valueOf(product.getSize());
+
+            int condition_int = condition.ordinal();
+
             // if we passed it, it means the variables
             
             newProduct.setCategory(product.getCategory());
             newProduct.setBrand(product.getBrand());
             newProduct.setPrice(product.getPrice());
-            newProduct.setCondi(product.getCondi());
+            newProduct.setCondi(condition_int);
             newProduct.setOwner(product.getOwner());
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
@@ -150,12 +153,15 @@ public class ProductController {
         }
         else{ Brand = "%"; }
 
-        String Condi;
+        int Condi;
         if (givenCondi != null){
-            Condi = givenCondi;
+            Condition condition = Condition.valueOf(givenCondi);
+            Condi = condition.ordinal();
             given_param++;
+
         }
-        else{ Condi = "%"; }
+        else{ Condi = 5; }
+
 
         String Owner;
         if (givenOwner != null){
@@ -188,10 +194,10 @@ public class ProductController {
         }
         else{ Price = 99999; } // should add a max price constant
 
-        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLessThanEqualAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
 
-        ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+        ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLessThanEqualAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
             (Category, Brand, Condi, Owner, Size, Color, Price));
 
         int num_sellers_sent_to = 0;

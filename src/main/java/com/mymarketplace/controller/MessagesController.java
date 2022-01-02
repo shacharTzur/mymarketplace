@@ -36,10 +36,11 @@ public class MessagesController {
     public String sendMsg(@RequestBody MessagesEntity msg){
         try{
             MessagesEntity newMsg = new MessagesEntity();
-            ///Date format for message
+            ////////////Date format for message///////////////////////////
             Locale aLocale = new Locale.Builder().setLanguage("en").setRegion("IL").build();
             DateFormat timeFormat = new SimpleDateFormat("EEE, d MMM HH:mm ", aLocale);
             timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
+            /////////////////////////////////////////////////////////////
             String curTime = timeFormat.format(new Date());
             newMsg.setDate(curTime);
             newMsg.setContent(msg.getContent());
