@@ -27,6 +27,10 @@ public class IwantEntity {
     private int show_notification; // 1 is show 0 is don't
 
 
+    public Long getId() {
+        return id;
+    }
+
 
     public int getShow_notification() {
         return show_notification;
