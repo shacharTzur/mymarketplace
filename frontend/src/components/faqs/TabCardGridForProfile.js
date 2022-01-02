@@ -82,9 +82,13 @@ export default ({
         history.push('/components/innerPages/WhoWantPage#'+id, {some: id});
     }
     const deleteButtonHandler = (id) => {
-        // fetch()
-        alert("omg it clicked!");
+        let url = 'http://localhost:8080/product/deleteProduct?prod_id='+id;
+        fetch(url, {
+            method:'DELETE',
+        }).then(res => res.text())
+        .then(data => history.go(0))
     }
+
     return (
         <Container>
             <ContentWithPaddingXl>
