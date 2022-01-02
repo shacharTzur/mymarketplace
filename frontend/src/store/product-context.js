@@ -11,9 +11,9 @@ export const ReceiverContextProvider = (props) => {
         id: id,
     };
     return (
-        <AuthContext.Provider value={contextValue}>
+        <ProductContext.Provider value={contextValue}>
             {props.children}
-        </AuthContext.Provider>);
+        </ProductContext.Provider>);
 }
 
 export default ProductContext;
