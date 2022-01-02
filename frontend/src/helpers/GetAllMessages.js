@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-function GetAllMessages(userName) {
+function GetAllMessages(userName, productId, friendId) {
     const [data, setData] = useState([]);
     useEffect(() => {
         fetch('http://localhost:8080/messages/allFor?user='+userName)

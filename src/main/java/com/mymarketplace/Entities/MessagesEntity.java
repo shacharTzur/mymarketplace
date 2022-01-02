@@ -13,11 +13,11 @@ public class MessagesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "FROM")
-    private String from;//username is unique
+    @Column(name = "SENDER")
+    private String sender;//username is unique
 
-    @Column(name = "TO")
-    private String to;//username is unique
+    @Column(name = "RECEIVER")
+    private String receiver;//username is unique
 
     @Column(name = "CONTENT")
     private String content;
@@ -47,21 +47,13 @@ public class MessagesEntity {
         return id;
     }
 
-    public String getFrom() {
-        return from;
-    }
+    public String getSender() { return sender; }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
+    public void setSender(String sender) { this.sender = sender; }
 
-    public String getTo() {
-        return to;
-    }
+    public String getReceiver() { return receiver; }
 
-    public void setTo(String to) {
-        this.to = to;
-    }
+    public void setReceiver(String receiver) { this.receiver = receiver; }
 
     public String getContent() {
         return content;

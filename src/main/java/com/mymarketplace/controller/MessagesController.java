@@ -43,10 +43,10 @@ public class MessagesController {
             String curTime = timeFormat.format(new Date());
             newMsg.setDate(curTime);
             newMsg.setContent(msg.getContent());
-            newMsg.setFrom(msg.getFrom());
-            newMsg.setTo(msg.getTo());
-            List<UserEntity> to_user = userRepository.findByUsername(msg.getTo());
-            List<UserEntity> from_user = userRepository.findByUsername(msg.getFrom());
+            newMsg.setSender(msg.getSender());
+            newMsg.setReceiver(msg.getReceiver());
+            List<UserEntity> to_user = userRepository.findByUsername(msg.getReceiver());
+            List<UserEntity> from_user = userRepository.findByUsername(msg.getSender());
             String to_image = to_user.get(0).getImage();
             String from_image = from_user.get(0).getImage();
             newMsg.setFrom_image(from_image);
@@ -61,7 +61,7 @@ public class MessagesController {
 
 
             MsgRepository.save(newMsg);
-            return "Msg to: "+newMsg.getTo()+" send successfully from: "+newMsg.getFrom();
+            return "Msg to: "+newMsg.getReceiver()+" send successfully from: "+newMsg.getSender();
         }
         catch(Exception ex){
             return "OOPS...something happened, try again or contact our support";
@@ -72,11 +72,20 @@ public class MessagesController {
     @GetMapping(path="/allFor")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getMessageForUser (@RequestParam String user){
-        List<MessagesEntity> messages = MsgRepository.findByTo(user);
+        List<MessagesEntity> messages = MsgRepository.findByReceiver(user);
         ResponseEntity<List<MessagesEntity>> Entity = new ResponseEntity<List<MessagesEntity>>(messages, HttpStatus.OK);
         if(Entity.getBody().size() == 0){
             return new ResponseEntity(user+" did not recieve any messages yet ",HttpStatus.BAD_REQUEST);
         }
         return Entity;
     }
+
+    @GetMapping(path="/allBetween")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity findChatForUsers(@RequestParam String sender , @RequestParam String receiver, @RequestParam Long productId){
+        List<MessagesEntity> chat_to_return = MsgRepository.findChatForUsers(sender,receiver,productId);
+        ResponseEntity<List<MessagesEntity>> Entity_to_return = new ResponseEntity<>(chat_to_return,HttpStatus.OK);
+        return Entity_to_return;
+    }
+
 }
