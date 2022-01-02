@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
-import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
+import { SendButton as SendButtonBase } from "components/misc/Buttons.js";
 import { Hint } from 'react-autocomplete-hint';
 import {useEffect, useRef, useState, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
@@ -37,11 +37,9 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
   ${tw`h-24`}
 `
 
-const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
+const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
-  formAction = "#",
-  formMethod = "get",
   textOnLeft = true,
   productId = -1,
 }) => {
@@ -55,16 +53,15 @@ export default ({
     const submitHandler = (event) => {
       event.preventDefault();
       const enteredMessage = messageInputRef.current.value;
+      document.getElementsByName('sendMessage')[0].reset();
       setIsLoading(true);
 
       let url = 'http://localhost:8080/messages/send';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
-          // from: authCtx.token,
-          // to: recCtx.userName,
-          from: 'idohai',
-          to: 'nbena',
+          from: authCtx.token,
+          to: recCtx.userName,
           content: enteredMessage,
           product_id: productId,
         })
@@ -79,18 +76,18 @@ export default ({
           });
         }
       })
-      .then(data => {
-          alert(data)
-      })
+      .then(data => {})
       .catch((err) => {
         alert(err.message);
       });
     };
 
   return (
-    <Form onSubmit={submitHandler}>
-      <Input type="textbox" name="message" placeholder="Enter your message" ref={messageInputRef} />
-      <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+    <Form name='sendMessage' onSubmit={submitHandler}>
+        <Container>
+          <Input type="textbox" name="message" placeholder="Enter your message" ref={messageInputRef} />
+          <SubmitButton type="submit">{submitButtonText}</SubmitButton>
+        </Container>
     </Form>
   );
 };
