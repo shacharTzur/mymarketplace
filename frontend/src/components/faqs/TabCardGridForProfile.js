@@ -88,7 +88,6 @@ export default ({
         }).then(res => res.text())
         .then(data => history.go(0))
     }
-
     return (
         <Container>
             <ContentWithPaddingXl>
