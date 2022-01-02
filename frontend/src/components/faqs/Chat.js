@@ -6,6 +6,7 @@ import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Head
 import {ReactComponent as ClosedIcon} from "images/message-icon.svg";
 import {ReactComponent as OpenIcon} from "images/open-message-icon.svg";
 import {PrimaryButton as PrimaryButtonBase} from "../misc/Buttons";
+import SendMessageForm from "../forms/SendMessageForm";
 
 const ThreeColumnContainer = styled.div`
   ${tw`flex flex-col items-center md:items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-20 md:py-24`}
@@ -74,7 +75,7 @@ export default ({
                                     >
                                         <Question>
                                             <QuestionText>
-                                                {faq.userName === userUserName ? isMe=true: false}
+                                                {faq.userName === userUserName ? isMe = true : false}
                                                 {isMe ?
                                                     <HighlightedText>Me</HighlightedText>
                                                     :
@@ -102,6 +103,13 @@ export default ({
                                 ))}
                             </FAQSContainer>
                         </FAQContent>
+                        <FAQ>
+                            <FAQSContainer>
+                                <FAQContent>
+                                    <SendMessageForm></SendMessageForm>
+                                </FAQContent>
+                            </FAQSContainer>
+                        </FAQ>
                     </Column>
                     <Column tw='lg:block w-2/12 h-1/6'>
                         <Image imageSrc={friendImageSrc} tw="rounded-full"/>
