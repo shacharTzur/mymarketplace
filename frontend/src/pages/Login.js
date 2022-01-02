@@ -71,7 +71,7 @@ export default ({
 }) => {
   const history = useHistory();
   const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  // const passwordInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
 
@@ -86,8 +86,7 @@ export default ({
     event.preventDefault();
     
     const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
-    // add validation
+    // const enteredPassword = passwordInputRef.current.value;
 
       setIsLoading(true);
       let url;
@@ -126,9 +125,9 @@ export default ({
               <Heading>{headingText}</Heading>
               <FormContainer>        
                 <Form onSubmit={submitHandler}>
-                  <Input type="text" placeholder="Email" ref={emailInputRef} />
-                  <Input type="password" placeholder="Password" ref={passwordInputRef} />
-                  <SubmitButton type="submit">
+                  <Input type="text" placeholder="UserName" ref={emailInputRef} />
+                {/*<Input type="password" placeholder="Password" ref={passwordInputRef} /> */}
+                    <SubmitButton type="submit">
                     <SubmitButtonIcon className="icon" />
                     <span className="text">{submitButtonText}</span>
                   </SubmitButton>
