@@ -69,7 +69,7 @@ public class ProductController {
             Arrays.sort(colors);
             String color = String.join(" ", colors);
 
-            newProduct.setColor(color);  // was- product.getColor()
+            newProduct.setColor(color);
             newProduct.setNotification(0);  // added column for Iwant notifications for front
             newProduct.setLocation(product.getLocation());
             Path p = Paths.get(product.getImage());
@@ -101,11 +101,9 @@ public class ProductController {
 
     @DeleteMapping(path="/deleteProduct")
     @CrossOrigin(origins = "http://localhost:3000")
-    public String deleteUserByProductName(@RequestParam Long prod_id){ ////////////////////
-        //@RequestBody Map<String,String> givenProductName
+    public String deleteUserByProductName(@RequestParam Long prod_id){  //@RequestBody Map<String,String> givenProductName
 //        String productName = givenProductName.get("productName");
 //        ProductEntity product_entity = productRepository.findByName(productName).get(0);
-
         try{
             productRepository.deleteById(prod_id);
 
@@ -122,6 +120,7 @@ public class ProductController {
         return "The product was deleted successfully"; //"The product: "+ productName +" by the user: "+ Owner+" was deleted successfully";
 
     }
+
 
     @GetMapping(path="/Iwant")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -174,31 +173,20 @@ public class ProductController {
 
         String Color;
         if (givenColor != null){
-//            System.out.println(givenColor); /////////
             String[] colors = givenColor.split("-");
             Arrays.sort(colors);
             Color = String.join("%_", colors);
-//            System.out.println(Color);
             Color = "%" + Color + "%";//
-//            System.out.println(Color);//
             given_param++;
         }
         else{ Color = "%"; }
 
-        long Price;
+        double Price;
         if (givenPrice != null){
-            Price = givenPrice;
+            Price = givenPrice * 1.1; // add 10% to the price and show those too
             given_param++;
         }
         else{ Price = 99999; } // should add a max price constant
-
-        //String Category = (givenCategory != null) ? givenCategory : "%";
-        //String Brand = (givenBrand != null) ? givenBrand : "%";
-        //String Condi = (givenCondi != null) ? givenCondi : "%";
-        //String Owner = (givenOwner != null) ? givenOwner : "%";
-        //String Size = (givenSize != null) ? givenSize : "%";
-        //String Color = (givenColor != null) ? givenColor : "%";
-        //Long Price = (givenPrice != null) ? givenPrice : 99999;   // should add a max price constant
 
         ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
@@ -220,8 +208,8 @@ public class ProductController {
                 if( !searcher.equals(prodOwner) && IWantRepository.findByBySearcherAndOwnerAndProduct_id(searcher, prodOwner, prod_ID).size()==0 ){
                     IWantRepository.save(possible_match);
                     num_sellers_sent_to++;
-                    // here I'll update in the products table there's been a match (Noa's request)
-                    match.setNotification(1); // need this!
+
+                    match.setNotification(1);  //updates products table there's been a match (Noa's request)
                     productRepository.save(match);
                 }
             }
