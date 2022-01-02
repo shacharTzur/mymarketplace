@@ -81,8 +81,11 @@ export default ({
       const enteredBrand = brandInputRef.current.value;
       const enteredCondition = conditionInputRef.current.value;
       const enteredSize = sizeInputRef.current.value;
-      const enteredColor = colorInputRef.current.value;
+      const initialColor = colorInputRef.current.value;
       const enteredPrice = priceInputRef.current.value;
+
+      const enteredColor = initialColor.replace(/\s+/g, '-');
+
       setIsLoading(true);
 
       let url = 'http://localhost:8080/product/Iwant?searcher='+userName;
