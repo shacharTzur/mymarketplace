@@ -67,7 +67,8 @@ export default ({
           receiver: friendUserName,
           content: enteredMessage,
           product_id: productId,
-        })
+        }),
+          headers:{'Content-Type': 'application/json'},
       })
       .then(res => {
         setIsLoading(false);
