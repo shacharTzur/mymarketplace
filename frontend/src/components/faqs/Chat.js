@@ -42,10 +42,10 @@ export default ({
                     friendImageSrc,
                     messages,
                     friendUserName,
-                    userUserName
+                    userUserName,
+                    productId,
                 }) => {
     const faqs = messages;
-
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
     const toggleQuestion = questionIndex => {
         if (activeQuestionIndex === questionIndex) setActiveQuestionIndex(null);
@@ -75,8 +75,8 @@ export default ({
                                     >
                                         <Question>
                                             <QuestionText>
-                                                {faq.userName === userUserName ? isMe = true : false}
-                                                {isMe ?
+                                                {faq.sender === userUserName ? isMe = true : isMe = false}
+                                                {isMe === true?
                                                     <HighlightedText>Me</HighlightedText>
                                                     :
                                                     <HighlightedText>{friendUserName}</HighlightedText>
@@ -106,7 +106,11 @@ export default ({
                         <FAQ>
                             <FAQSContainer>
                                 <FAQContent>
-                                    <SendMessageForm></SendMessageForm>
+                                    <SendMessageForm
+                                        friendUserName={friendUserName}
+                                        productId={productId}
+                                    >
+                                    </SendMessageForm>
                                 </FAQContent>
                             </FAQSContainer>
                         </FAQ>

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -7,14 +6,10 @@ import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
 import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
-import {ReactComponent as MessageIcon} from "images/message-icon.svg";
+import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
-import {useHistory} from "react-router-dom";
-import { useContext } from 'react'
-import ReceiverContext from '../../store/receiver-context';
-import ProductContext from '../../store/product-context';
-
+import {Subheading as SubheadingBase } from "components/misc/Headings.js";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -36,19 +31,20 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-white content-center`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
     ${tw`w-5 h-4 fill-current text-orange-400 mr-0`}
   }
 `;
-
+const Subheading = tw(SubheadingBase)`mb-4 text-center lg:text-left`;
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 flex justify-center items-center`}
 `;
 const CardButton = tw(PrimaryButtonBase)`text-sm`;
+
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
 const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600`;
@@ -62,30 +58,19 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 export default ({
-                    heading,
-                    tabs,
-                    productId
+                    subheading,
+                    products
                 }) => {
-    const history = useHistory();
-    const productCtx = useContext(ProductContext);
-    const recCtx = useContext(ReceiverContext);
-    productCtx.setProductId(productId);
-
-    const chatButtonHandler = (userName) => {
-        recCtx.setUserName(userName)
-
-        history.push('/components/innerPages/ChatPage');
-    }
-    const tabsKeys = Object.keys(tabs);
-    const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+    // const productsKeys = Object.keys(products);
+    // const [activeTab, setActiveTab] = useState(productsKeys[0]);
     let isNotification = false
     return (
         <Container>
             <ContentWithPaddingXl>
                 <HeaderRow>
-                    <Header>{heading}</Header>
+                <Subheading>{subheading}</Subheading>
                 </HeaderRow>
-                {tabsKeys.map((tabKey, index) => (
+                {products.map((productKey, index) => (
                     <TabContent
                         key={index}
                         variants={{
@@ -101,26 +86,37 @@ export default ({
                             }
                         }}
                         transition={{duration: 0.4}}
-                        initial={activeTab === tabKey ? "current" : "hidden"}
-                        animate={activeTab === tabKey ? "current" : "hidden"}
+                        // initial={activeTab === productKey ? "current" : "hidden"}
+                        // animate={activeTab === productKey ? "current" : "hidden"}
                     >
-                        {tabs[tabKey].map((card, index) => (
+                        {products[productKey].map((card, index) => (
                             <CardContainer key={index}>
                                 {card.notification === 1 ? isNotification = true : isNotification = false} {
                             }
+
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardRatingContainer>
-                                            <CardRating>
-                                                <button onClick={() => chatButtonHandler(card.userName)}>
-                                                    <MessageIcon/>
-                                                </button>
-                                            </CardRating>
-                                        </CardRatingContainer>
+                                        <CardHoverOverlay
+                                            variants={{
+                                                hover: {
+                                                    opacity: 1,
+                                                    height: "auto"
+                                                },
+                                                rest: {
+                                                    opacity: 0,
+                                                    height: 0
+                                                }
+                                            }}
+                                            transition={{duration: 0.3}}
+                                        >
+                                            <CardButton>Go To Chat</CardButton>
+                                        </CardHoverOverlay>
                                     </CardImageContainer>
                                     <CardText>
-                                        <CardTitle>{card.userName}</CardTitle>
+                                        <CardTitle>{card.category}</CardTitle>
+                                        <CardContent>{card.brand}</CardContent>
+                                        <CardPrice>{card.price}</CardPrice>
                                     </CardText>
                                 </Card>
                             </CardContainer>
@@ -131,5 +127,6 @@ export default ({
             <DecoratorBlob1/>
             <DecoratorBlob2/>
         </Container>
-    );
+    )
+        ;
 };

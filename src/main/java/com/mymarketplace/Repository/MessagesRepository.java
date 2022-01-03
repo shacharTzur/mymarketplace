@@ -19,6 +19,8 @@ public interface MessagesRepository extends JpaRepository<MessagesEntity, Long> 
 
     List<MessagesEntity> findByReceiver(String Receiver);
 
+    List<MessagesEntity> findByProductId (Long ProductId);
+
     @Query(value = "Select * From MESSAGES WHERE (sender Like :sender and receiver Like :receiver) or (sender Like :receiver and receiver Like :sender) and product_id Like :product_id" , nativeQuery = true)
     List<MessagesEntity> findChatForUsers
             (@RequestParam ("sender") String sender,

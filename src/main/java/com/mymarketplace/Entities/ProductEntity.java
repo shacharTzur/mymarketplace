@@ -82,7 +82,7 @@ public class ProductEntity {
     }
 
 
-//    public void setCondition(String condition) {
+    //    public void setCondition(String condition) {
 //        this.condi = condition;
 //    }
 //    public String getCondition() {

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-function GetAllMessages(userName, friendUserName, productId) {
+function GetSellProducts(userName) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/messages/allBetween?sender='+userName + '&receiver=' + friendUserName +'&productId='+ productId)
+        fetch('http://localhost:8080/product/own/active?owner='+userName)
             .then(function (response) {
                 console.log(response)
                 return response.json();
@@ -14,7 +14,8 @@ function GetAllMessages(userName, friendUserName, productId) {
             })
     }, [])
     return (
-        data
+        [data]
     );
 }
-export default GetAllMessages;
+
+export default GetSellProducts;

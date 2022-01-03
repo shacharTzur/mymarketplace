@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
 import ReceiverContext from '../../store/receiver-context';
+import ProductContext from '../../store/product-context';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -41,10 +42,10 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId = -1,
+  productId,
+  friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
-    const recCtx = useContext(ReceiverContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
@@ -60,11 +61,12 @@ export default ({
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
-          from: authCtx.token,
-          to: recCtx.userName,
+          sender: authCtx.token,
+          receiver: friendUserName,
           content: enteredMessage,
           product_id: productId,
-        })
+        }),
+          headers:{'Content-Type': 'application/json'},
       })
       .then(res => {
         setIsLoading(false);
@@ -73,12 +75,12 @@ export default ({
         } else {
           return res.json().then(data => {
             let errorMessage = 'message send FAILED!!';
+            alert(errorMessage)
           });
         }
       })
       .then(data => {})
       .catch((err) => {
-        alert(err.message);
       });
     };
 

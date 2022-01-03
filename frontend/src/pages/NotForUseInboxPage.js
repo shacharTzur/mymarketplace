@@ -3,30 +3,23 @@ import "styles/globalStyles.css";
 import React from "react";
 import Header from "components/headers/light.js"
 
-import {useContext} from 'react';
+import FullForm from "components/forms/TwoColContactUsWithIllustrationFullForm.js"
 import AuthContext from '../store/auth-context';
-import ReceiverContext from '../store/receiver-context';
+import { useContext } from 'react';
+import GetAfterHashTag from "../helpers/GetAfterHashTag";
 import GetUserData from "../helpers/GetUserData";
 import GetAllMessages from "../helpers/GetAllMessages";
-import Chat from "../components/faqs/Chat";
-import ProductContext from "../store/product-context";
+import OldInbox from "../components/faqs/OldInbox";
 
-function ChatPage() {
+function NotForUseInboxPage() {
     const authCtx = useContext(AuthContext);
-    const recCtx = useContext(ReceiverContext);
-    const productCtx = useContext(ProductContext);
-    let productId = productCtx.id;
-    let userName = authCtx.token;
-    let friendUserName = recCtx.userName;
-    let userData = GetUserData(userName);
-    let friendData = GetUserData(friendUserName)
-    let allMessages = GetAllMessages(userName, friendUserName, productId);
+    let userData = GetUserData(authCtx.token);
+    let allMessages = GetAllMessages(authCtx.token);
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
             return ({
                 date: item.date,
-                sender: item.sender,
-                receiver: item.receiver,
+                from: item.from,
                 content: item.content,
                 senderImg: "http://localhost:3000/uploads/" + item.senderImg,
                 productImage: "http://localhost:3000/uploads/" + item.productImage
@@ -44,22 +37,15 @@ function ChatPage() {
         });
         return B;
     }
-    // const allMessages1 = prepareMessagesData(allMessages)
+    const allMessages1 = prepareMessagesData(allMessages)
     const userData1 = prepareUserData(userData)
-    const friendData1 = prepareUserData(friendData)
     return (<section>
             <Header/>
-            <Chat
-                userImageSrc={userData1[0].img}
-                friendImageSrc={friendData1[0].img}
-                messages={allMessages}
-                friendUserName={friendData1[0].userName}
-                userUserName={userData1[0].userName}
-                productId={productId}
+            <OldInbox
+                imageSrc={userData1[0].img}
+                messages={allMessages1}
             />
         </section>
 
-    )
-}
-
-export default ChatPage;
+    )}
+export default NotForUseInboxPage;

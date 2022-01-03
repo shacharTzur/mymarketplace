@@ -23,7 +23,8 @@ function WhoWantPage() {
                 title: item.category,
                 content: item.description,
                 price: item.price + '$',
-                location: item.location
+                location: item.location,
+                id: item.id
             })
         });
         return A;
