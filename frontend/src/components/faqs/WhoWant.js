@@ -61,7 +61,7 @@ export default ({
                                         key={index}
                                         className="group"
                                     >
-                                        {productId=dataKey.id}
+                                        <script>{productId=dataKey.id}</script>
                                         <Heading>
                                             <h4>
                                             {item[0].name}
