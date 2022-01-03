@@ -66,6 +66,7 @@ export default ({
                     tabs,
                     productId
                 }) => {
+
     const history = useHistory();
     const productCtx = useContext(ProductContext);
     const recCtx = useContext(ReceiverContext);

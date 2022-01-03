@@ -11,6 +11,9 @@ import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.s
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {Subheading as SubheadingBase } from "components/misc/Headings.js";
 import ProductContext from "../../store/product-context";
+import {useHistory} from "react-router-dom";
+import {ReactComponent as MessageIcon} from "../../images/message-icon.svg";
+
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -32,7 +35,7 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-white content-center`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
@@ -64,6 +67,12 @@ export default ({
                 }) => {
     const tabsKeys = Object.keys(tabs);
     const prodCtx = useContext(ProductContext);
+    const history = useHistory();
+    const MotherFuckerHandler = (productId) =>{
+        prodCtx.setProductId(productId);
+        history.push('/components/innerPages/WhoWantPage');
+    }
+    console.log(tabs)
     const [activeTab, setActiveTab] = useState(tabsKeys[0])
     return (
         <Container>
@@ -92,31 +101,20 @@ export default ({
                     >
                         {tabs[tabKey].map((card, index) => (
                             <CardContainer key={index}>
-
-                                <Card className="group" href={card.whoWantUrl} initial="rest" whileHover="hover"
-                                      animate="rest">
+                                <Card className="group" initial="rest" animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardHoverOverlay
-                                            variants={{
-                                                hover: {
-                                                    opacity: 1,
-                                                    height: "auto"
-                                                },
-                                                rest: {
-                                                    opacity: 0,
-                                                    height: 0
-                                                }
-                                            }}
-                                            transition={{duration: 0.3}}
-                                        >
-                                            <CardButton>Check Who is Interested</CardButton>
-                                        </CardHoverOverlay>
+                                        <CardRatingContainer>
+                                            <CardRating>
+                                                <button onClick={() =>MotherFuckerHandler(card.id)}>
+                                                <MessageIcon/>
+                                                </button>
+                                            </CardRating>
+                                        </CardRatingContainer>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.category}</CardTitle>
                                         <CardContent>{card.brand}</CardContent>
                                         <CardPrice>{card.price}</CardPrice>
-                                        {prodCtx.setProductId(card.id)}
                                     </CardText>
                                 </Card>
                             </CardContainer>

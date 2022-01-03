@@ -24,10 +24,11 @@ function InboxPage() {
                 brand: item.brand,
                 imageSrc: "http://localhost:3000/uploads/" + item.image,
                 title: item.category,
+                id: item.id,
                 content: item.description,
                 price: item.price + '$',
                 productOwner: item.owner,
-                whoWantUrl: 'http://localhost:3000/components/innerPages/WhoWantPage#3'
+                whoWantUrl: 'http://localhost:3000/components/innerPages/WhoWantPage'
 
             })
         });

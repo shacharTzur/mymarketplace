@@ -9,7 +9,6 @@ import WhoWant from "../components/faqs/WhoWant";
 
 function WhoWantPage() {
     const prodCtx = useContext(ProductContext);
-    let param = window.location.href;
     let itemId = prodCtx.id;
     let data = GetItemData(itemId);
     let whoWantUsers = GetWhoWantUsers(itemId);
