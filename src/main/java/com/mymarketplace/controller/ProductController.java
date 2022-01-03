@@ -258,4 +258,21 @@ public class ProductController {
         return false;
     }
 
+    @GetMapping(path="/NotOwn/active")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<ProductEntity> getAllProductActiveForBuy(String owner){
+        List<ProductEntity> NotMyProducts = productRepository.findByOwnerNotLike(owner);
+        List<ProductEntity> final_list_to_return = new ArrayList();
+        int num_of_products = NotMyProducts.size();
+        for (int i = 0; i < num_of_products; i++) {
+            Long product_id = NotMyProducts.get(i).getId();
+            if(is_active(product_id)){
+                ProductEntity product_to_add = NotMyProducts.get(i);
+                final_list_to_return.add(product_to_add);
+            }
+        }
+        return final_list_to_return; //to change it
+
+    }
+
 }
