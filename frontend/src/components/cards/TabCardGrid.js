@@ -116,8 +116,11 @@ export default ({
                                         </CardHoverOverlay>
                                     </CardImageContainer>
                                     <CardText>
-                                        <CardTitle>{card.category}</CardTitle>
-                                        <CardContent>{card.brand}</CardContent>
+                                        <CardTitle>{card.name}</CardTitle>
+                                        <br/>
+                                        <CardContent>{card.category} from {card.brand}</CardContent>
+                                        <CardContent>size: {card.size}</CardContent>
+                                        <CardContent>{card.condition} condition</CardContent>
                                         <CardPrice>{card.price}</CardPrice>
                                     </CardText>
                                 </Card>
