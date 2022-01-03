@@ -40,7 +40,7 @@ export default ({
                     item,
                     users,
                 }) => {
-
+    let productId;
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(null);
     const toggleQuestion = questionIndex => {
         if (activeQuestionIndex === questionIndex) setActiveQuestionIndex(null);
@@ -69,6 +69,7 @@ export default ({
                                         <h4>{"Category: " + dataKey.category}</h4>
                                         <h4>{"Brand: " + dataKey.brand}</h4>
                                         <h4>{"Price: " + dataKey.price}</h4>
+                                        {productId = dataKey.id}
                                     </FAQ>
                                 ))}
                             </FAQSContainer>
@@ -95,7 +96,7 @@ export default ({
                                     >
                                         <TabCardGridForUsers
                                             tabs={users}
-                                            productId={item.id}
+                                            productId={productId}
                                         />
                                     </Answer>
                                 </FAQ>))}

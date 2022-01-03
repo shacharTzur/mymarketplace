@@ -23,7 +23,8 @@ function WhoWantPage() {
                 title: item.category,
                 content: item.description,
                 price: item.price + '$',
-                location: item.location
+                location: item.location,
+                id: item.id
             })
         });
         return A;
@@ -38,7 +39,6 @@ function WhoWantPage() {
                 lastName: item.lastName,
                 userName: item.userName,
                 notification: item.notification,
-                productId: item.id
             })
         });
         return B;

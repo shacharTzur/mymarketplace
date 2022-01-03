@@ -42,12 +42,10 @@ const SubmitButton = tw(SendButtonBase)`inline-block mt-8`
 export default ({
   submitButtonText = "Send",
   textOnLeft = true,
-  productId=3,
+  productId,
   friendUserName,
 }) => {
     const authCtx = useContext(AuthContext);
-    const recCtx = useContext(ReceiverContext);
-    const prodCtx = useContext(ProductContext);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
@@ -67,12 +65,12 @@ export default ({
           receiver: friendUserName,
           content: enteredMessage,
           product_id: productId,
-        })
+        }),
+          headers:{'Content-Type': 'application/json'},
       })
       .then(res => {
         setIsLoading(false);
         if (res.ok) {
-            alert(res.text())
           return res.text()  
         } else {
           return res.json().then(data => {
@@ -83,7 +81,6 @@ export default ({
       })
       .then(data => {})
       .catch((err) => {
-        alert(err.message);
       });
     };
 

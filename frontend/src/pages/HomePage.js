@@ -39,7 +39,6 @@ function HomePage() {
             tabs={tabs3}
             heading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
         />
-        <SendMessage/>
     </section>
 
 }
