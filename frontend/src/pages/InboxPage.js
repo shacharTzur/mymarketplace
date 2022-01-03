@@ -7,8 +7,8 @@ import { useContext } from 'react';
 import GetUserData from "../helpers/GetUserData";
 import GetSellProducts from "../components/inbox/ProductsSellCreator";
 import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
-import TabCardGridForProducts from "../components/inbox/TabCardGridForBuyProducts";
-import TabCardGridForBuyProducts from "../components/inbox/TabCardGridForSellBuyProducts";
+import TabCardGridForBuyProducts from "../components/inbox/TabCardGridForBuyProducts";
+import TabCardGridForSellProducts from "../components/inbox/TabCardGridForSellProducts";
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
@@ -26,7 +26,9 @@ function InboxPage() {
                 title: item.category,
                 content: item.description,
                 price: item.price + '$',
-                url: '#'
+                productOwner: item.owner,
+                whoWantUrl: 'http://localhost:3000/components/innerPages/WhoWantPage#3'
+
             })
         });
         return A;
@@ -55,7 +57,7 @@ function InboxPage() {
                 heading="Buy Talks"
                 tabs={buyProducts3}
                    />
-            <TabCardGridForProducts
+            <TabCardGridForSellProducts
                 heading="Sell Talks"
                 tabs={sellProducts3}
             />

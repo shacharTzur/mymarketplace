@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {Subheading as SubheadingBase } from "components/misc/Headings.js";
+import ProductContext from "../../store/product-context";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -62,6 +63,7 @@ export default ({
                     tabs
                 }) => {
     const tabsKeys = Object.keys(tabs);
+    const prodCtx = useContext(ProductContext);
     const [activeTab, setActiveTab] = useState(tabsKeys[0])
     return (
         <Container>
@@ -91,7 +93,7 @@ export default ({
                         {tabs[tabKey].map((card, index) => (
                             <CardContainer key={index}>
 
-                                <Card className="group" href={card.url} initial="rest" whileHover="hover"
+                                <Card className="group" href={card.whoWantUrl} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
                                         <CardHoverOverlay
@@ -107,13 +109,14 @@ export default ({
                                             }}
                                             transition={{duration: 0.3}}
                                         >
-                                            <CardButton>Contact Seller</CardButton>
+                                            <CardButton>Check Who is Interested</CardButton>
                                         </CardHoverOverlay>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.category}</CardTitle>
                                         <CardContent>{card.brand}</CardContent>
                                         <CardPrice>{card.price}</CardPrice>
+                                        {prodCtx.setProductId(card.id)}
                                     </CardText>
                                 </Card>
                             </CardContainer>
