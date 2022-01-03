@@ -3,18 +3,18 @@ import React, {useEffect, useState} from "react";
 function GetBuyProducts(userName) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch(''+userName)
+        fetch('http://localhost:8080/product/NotOwn/active?owner='+userName)
             .then(function (response) {
-                console.log(response)
                 return response.json();
             })
             .then(function (myJson) {
+                console.log("ProductBuyCreator: this is buyProduct")
                 console.log(myJson);
                 setData(myJson)
             })
     }, [])
     return (
-        [data]
+        data
     );
 }
 

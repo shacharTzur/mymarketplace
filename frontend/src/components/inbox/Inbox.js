@@ -23,7 +23,7 @@ export default ({
     return (<Container>
         <Content>
             <HeaderRow>
-                <Header>heading</Header>
+                <Header>{heading}</Header>
             </HeaderRow>
             <TwoColumn>
                 <Column tw='hidden lg:block w-2/12 h-1/6'>

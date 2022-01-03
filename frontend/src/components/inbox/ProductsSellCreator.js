@@ -14,7 +14,7 @@ function GetSellProducts(userName) {
             })
     }, [])
     return (
-        [data]
+        data
     );
 }
 

@@ -2,16 +2,13 @@ import "tailwindcss/dist/base.css";
 import "styles/globalStyles.css";
 import React from "react";
 import Header from "components/headers/light.js"
-
-import FullForm from "components/forms/TwoColContactUsWithIllustrationFullForm.js"
 import AuthContext from '../store/auth-context';
 import { useContext } from 'react';
-import GetAfterHashTag from "../helpers/GetAfterHashTag";
 import GetUserData from "../helpers/GetUserData";
-import GetAllMessages from "../helpers/GetAllMessages";
 import Inbox from "../components/inbox/Inbox";
 import GetSellProducts from "../components/inbox/ProductsSellCreator";
 import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
+import TabCardGridForProducts from "../components/inbox/TabCardGridForProducts";
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
@@ -46,12 +43,21 @@ function InboxPage() {
     buyProducts = prepareProductsData(buyProducts)
     sellProducts = prepareProductsData(sellProducts)
     userData = prepareUserData(userData)
+    const buyProducts3 = {
+        Products: buyProducts
+    }
+    const sellProducts3 = {
+        Products: sellProducts
+    }
     return (<section>
             <Header/>
-            <Inbox
-                user={userData}
-                buyProducts={buyProducts}
-                sell={sellProducts}
+            <TabCardGridForProducts
+                heading="Buy Talks"
+                tabs={buyProducts3}
+                   />
+            <TabCardGridForProducts
+                heading="Sell Talks"
+                tabs={sellProducts3}
             />
         </section>
 
