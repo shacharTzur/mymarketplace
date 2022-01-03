@@ -9,8 +9,6 @@ export const ProductContextProvider = (props) => {
     const [id, setProductId] = useState(-1);
 
     const productIdHandler = (id) => {
-        alert("this is id");
-        alert(id);
         setProductId(id);
     }
 

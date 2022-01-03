@@ -71,7 +71,6 @@ export default ({
       .then(res => {
         setIsLoading(false);
         if (res.ok) {
-            alert(res.text())
           return res.text()  
         } else {
           return res.json().then(data => {
@@ -82,7 +81,6 @@ export default ({
       })
       .then(data => {})
       .catch((err) => {
-        alert(err.message);
       });
     };
 

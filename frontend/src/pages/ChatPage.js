@@ -44,7 +44,7 @@ function ChatPage() {
         });
         return B;
     }
-    const allMessages1 = prepareMessagesData(allMessages)
+    // const allMessages1 = prepareMessagesData(allMessages)
     const userData1 = prepareUserData(userData)
     const friendData1 = prepareUserData(friendData)
     return (<section>
@@ -52,7 +52,7 @@ function ChatPage() {
             <Chat
                 userImageSrc={userData1[0].img}
                 friendImageSrc={friendData1[0].img}
-                messages={allMessages1}
+                messages={allMessages}
                 friendUserName={friendData1[0].userName}
                 userUserName={userData1[0].userName}
                 productId={productId}
