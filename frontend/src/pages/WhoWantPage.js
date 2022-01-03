@@ -3,12 +3,14 @@ import Header from "../components/headers/light";
 import GetItemData from "../components/faqs/ItemDataCreator";
 import GetWhoWantUsers from "../components/faqs/WhoWantCreator";
 import AuthContext from '../store/auth-context';
+import ProductContext from '../store/product-context';
 import WhoWant from "../components/faqs/WhoWant";
 
 
 function WhoWantPage() {
+    const prodCtx = useContext(ProductContext);
     let param = window.location.href;
-    let itemId = param.charAt(param.length-1);
+    let itemId = prodCtx.id;
     let data = GetItemData(itemId);
     let whoWantUsers = GetWhoWantUsers(itemId);
 

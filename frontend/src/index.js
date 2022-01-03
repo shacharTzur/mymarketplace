@@ -12,7 +12,7 @@ ReactDOM.render(
   <AuthContextProvider>
     <ReceiverContextProvider>
         <ProductContextProvider>
-  <App />,
+          <App />,
         </ProductContextProvider>
     </ReceiverContextProvider>
   </AuthContextProvider>,
