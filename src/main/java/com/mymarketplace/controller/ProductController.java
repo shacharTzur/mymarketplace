@@ -222,7 +222,13 @@ public class ProductController {
                 return "something went wrong in saving iwant request";
             }
         }
-        String returned_String = "sent Iwant request to " + String.valueOf(num_sellers_sent_to+ " sellers");
+        if(search_res.size() == 0){
+            return "Sorry, we were unable to find items matching your needs";
+        }
+        if (num_sellers_sent_to == 0){
+            return "your request is in process";
+        }
+        String returned_String = "sent Iwant request to " + String.valueOf(num_sellers_sent_to+ " new sellers");
         return returned_String;
         //return Entity;  ////// if i want to see whats returned i need to change the returned value
     }
