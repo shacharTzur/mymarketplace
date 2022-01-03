@@ -81,7 +81,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const defaultLinks = [
     <NavLinks key={1}>
       {isLoggedIn && (
-        <NavLink href="/components/landingPages/Homepage">Marketplace</NavLink>
+        <NavLink href="/components/innerPages/InboxPage">Inbox</NavLink>
         )}
       {isLoggedIn && (
         <NavLink href="/components/innerPages/AddItemPage">Sell Item</NavLink>
