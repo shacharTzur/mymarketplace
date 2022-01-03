@@ -2,6 +2,7 @@ package com.mymarketplace.controller;
 
 import com.mymarketplace.Entities.*;
 import com.mymarketplace.Repository.IWantRepository;
+import com.mymarketplace.Repository.MessagesRepository;
 import com.mymarketplace.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping( path = "/product")
@@ -24,6 +25,9 @@ public class ProductController {
 
     @Autowired
     private IWantRepository IWantRepository;
+
+    @Autowired
+    private MessagesRepository messagesRepository;
 
     @GetMapping(path="/all")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -52,17 +56,14 @@ public class ProductController {
         try {
             //enum conversion
             ClothingCategory category = ClothingCategory.valueOf(product.getCategory());
-            Condition condition = Condition.valueOf(product.getCondi().toString());
+            Condition condition = Condition.valueOf(product.getCondi());
             ClothingSizes size = ClothingSizes.valueOf(product.getSize());
-
-            int condition_int = condition.ordinal();
-
             // if we passed it, it means the variables
-            
+
             newProduct.setCategory(product.getCategory());
             newProduct.setBrand(product.getBrand());
             newProduct.setPrice(product.getPrice());
-            newProduct.setCondi(condition_int);
+            newProduct.setCondi(product.getCondi());
             newProduct.setOwner(product.getOwner());
             newProduct.setDescription(product.getDescription());
             newProduct.setSize(product.getSize());
@@ -128,14 +129,14 @@ public class ProductController {
     @GetMapping(path="/Iwant")
     @CrossOrigin(origins = "http://localhost:3000")
     public String findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
-                                (@RequestParam String searcher,
-                                 @RequestParam(required = false) String givenCategory,
-                                 @RequestParam(required = false) String givenBrand,
-                                 @RequestParam(required = false) Long givenPrice,
-                                 @RequestParam(required = false) String givenCondi,
-                                 @RequestParam(required = false) String givenOwner,
-                                 @RequestParam(required = false) String givenSize,
-                                 @RequestParam(required = false) String givenColor)
+            (@RequestParam String searcher,
+             @RequestParam(required = false) String givenCategory,
+             @RequestParam(required = false) String givenBrand,
+             @RequestParam(required = false) Long givenPrice,
+             @RequestParam(required = false) String givenCondi,
+             @RequestParam(required = false) String givenOwner,
+             @RequestParam(required = false) String givenSize,
+             @RequestParam(required = false) String givenColor)
     {
         int given_param = 0;
 
@@ -153,15 +154,12 @@ public class ProductController {
         }
         else{ Brand = "%"; }
 
-        int Condi;
+        String Condi;
         if (givenCondi != null){
-            Condition condition = Condition.valueOf(givenCondi);
-            Condi = condition.ordinal();
+            Condi = givenCondi;
             given_param++;
-
         }
-        else{ Condi = 5; }
-
+        else{ Condi = "%"; }
 
         String Owner;
         if (givenOwner != null){
@@ -194,11 +192,11 @@ public class ProductController {
         }
         else{ Price = 99999; } // should add a max price constant
 
-        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLessThanEqualAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
                 (Category, Brand, Condi, Owner, Size, Color, Price), HttpStatus.OK);
 
-        ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLessThanEqualAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
-            (Category, Brand, Condi, Owner, Size, Color, Price));
+        ArrayList<ProductEntity> search_res = new ArrayList<ProductEntity>(productRepository.findByCategoryLikeAndBrandLikeAndCondiLikeAndOwnerLikeAndSizeLikeAndColorLikeAndPriceLessThanEqual
+                (Category, Brand, Condi, Owner, Size, Color, Price));
 
         int num_sellers_sent_to = 0;
         for (ProductEntity match : search_res){
@@ -227,6 +225,37 @@ public class ProductController {
         String returned_String = "sent Iwant request to " + String.valueOf(num_sellers_sent_to+ " sellers");
         return returned_String;
         //return Entity;  ////// if i want to see whats returned i need to change the returned value
+    }
+
+    @GetMapping(path="/own/active")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getProductActiveforMe (@RequestParam String owner){
+        ResponseEntity<List<ProductEntity>> Entity = new ResponseEntity<List<ProductEntity>>(getProductActiveIsell(owner), HttpStatus.OK);
+        return Entity;
+
+    }
+
+    public List<ProductEntity> getProductActiveIsell(String owner) {
+        List<ProductEntity> myProducts = productRepository.findByOwner(owner);
+        List<ProductEntity> final_list_to_return = new ArrayList();
+        int num_of_products = myProducts.size();
+
+        for (int i = 0; i < num_of_products; i++) {
+            Long product_id = myProducts.get(i).getId();
+            if(is_active(product_id)){
+                ProductEntity product_to_add = myProducts.get(i);
+                final_list_to_return.add(product_to_add);
+            }
+        }
+        return final_list_to_return; //to change it
+    }
+
+    private boolean is_active(Long productId) {
+        List<MessagesEntity> messagesForProductId = messagesRepository.findByProductId(productId);
+        if(messagesForProductId.size() != 0){
+            return true;
+        }
+        return false;
     }
 
 }
