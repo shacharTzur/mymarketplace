@@ -62,8 +62,7 @@ export default ({
                     tabs
                 }) => {
     const tabsKeys = Object.keys(tabs);
-    const [activeTab, setActiveTab] = useState(tabsKeys[0]);
-    let isNotification = false
+    const [activeTab, setActiveTab] = useState(tabsKeys[0])
     return (
         <Container>
             <ContentWithPaddingXl>
@@ -91,8 +90,6 @@ export default ({
                     >
                         {tabs[tabKey].map((card, index) => (
                             <CardContainer key={index}>
-                                {card.notification === 1 ? isNotification = true : isNotification = false} {
-                            }
 
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">

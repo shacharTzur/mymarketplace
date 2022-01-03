@@ -5,10 +5,10 @@ import Header from "components/headers/light.js"
 import AuthContext from '../store/auth-context';
 import { useContext } from 'react';
 import GetUserData from "../helpers/GetUserData";
-import Inbox from "../components/inbox/Inbox";
 import GetSellProducts from "../components/inbox/ProductsSellCreator";
 import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
-import TabCardGridForProducts from "../components/inbox/TabCardGridForProducts";
+import TabCardGridForProducts from "../components/inbox/TabCardGridForBuyProducts";
+import TabCardGridForBuyProducts from "../components/inbox/TabCardGridForSellBuyProducts";
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
@@ -51,7 +51,7 @@ function InboxPage() {
     }
     return (<section>
             <Header/>
-            <TabCardGridForProducts
+            <TabCardGridForBuyProducts
                 heading="Buy Talks"
                 tabs={buyProducts3}
                    />

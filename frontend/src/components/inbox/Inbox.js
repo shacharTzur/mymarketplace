@@ -1,5 +1,5 @@
 import tw from "twin.macro";
-import TabCardGridForProducts from "./TabCardGridForProducts";
+import TabCardGridForProducts from "./TabCardGridForBuyProducts";
 import {useHistory} from "react-router-dom";
 import React, {useContext, useState} from "react";
 import {Container, ContentWithPaddingXl} from "../misc/Layouts";
