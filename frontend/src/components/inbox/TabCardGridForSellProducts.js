@@ -107,7 +107,7 @@ export default ({
                                             }}
                                             transition={{duration: 0.3}}
                                         >
-                                            <CardButton>Contact Seller</CardButton>
+                                            <CardButton>Check Who is Interested</CardButton>
                                         </CardHoverOverlay>
                                     </CardImageContainer>
                                     <CardText>
