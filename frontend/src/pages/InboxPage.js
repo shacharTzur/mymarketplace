@@ -9,25 +9,31 @@ import { useContext } from 'react';
 import GetAfterHashTag from "../helpers/GetAfterHashTag";
 import GetUserData from "../helpers/GetUserData";
 import GetAllMessages from "../helpers/GetAllMessages";
-import Inbox from "../components/faqs/Inbox";
+import Inbox from "../components/inbox/Inbox";
+import GetSellProducts from "../components/inbox/ProductsSellCreator";
+import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
     let userData = GetUserData(authCtx.token);
-    let allMessages = GetAllMessages(authCtx.token);
-    const prepareMessagesData = (data) => {
+    let buyProducts = GetBuyProducts(authCtx.token);
+    let sellProducts = GetSellProducts(authCtx.token);
+    const prepareProductsData = (data) => {
         const A = data.map((item) => {
             return ({
-                date: item.date,
-                from: item.from,
-                content: item.content,
-                senderImg: "http://localhost:3000/uploads/" + item.senderImg,
-                productImage: "http://localhost:3000/uploads/" + item.productImage
+                name: item.name,
+                category: item.category,
+                description: item.description,
+                brand: item.brand,
+                imageSrc: "http://localhost:3000/uploads/" + item.image,
+                title: item.category,
+                content: item.description,
+                price: item.price + '$',
+                url: '#'
             })
         });
         return A;
     }
-
     const prepareUserData = (data) => {
         const B = data.map((item) => {
             return ({
@@ -37,13 +43,15 @@ function InboxPage() {
         });
         return B;
     }
-    const allMessages1 = prepareMessagesData(allMessages)
-    const userData1 = prepareUserData(userData)
+    buyProducts = prepareProductsData(buyProducts)
+    sellProducts = prepareProductsData(sellProducts)
+    userData = prepareUserData(userData)
     return (<section>
             <Header/>
             <Inbox
-                imageSrc={userData1[0].img}
-                messages={allMessages1}
+                user={userData}
+                buyProducts={buyProducts}
+                sell={sellProducts}
             />
         </section>
 

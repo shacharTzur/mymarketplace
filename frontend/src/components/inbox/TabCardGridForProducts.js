@@ -58,21 +58,19 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 export default ({
-                    heading,
                     subheading,
-                    tabs
+                    products
                 }) => {
-    const tabsKeys = Object.keys(tabs);
-    const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+    // const productsKeys = Object.keys(products);
+    // const [activeTab, setActiveTab] = useState(productsKeys[0]);
     let isNotification = false
     return (
         <Container>
             <ContentWithPaddingXl>
                 <HeaderRow>
-                    <Header>{heading}</Header>
-                </HeaderRow>
                 <Subheading>{subheading}</Subheading>
-                {tabsKeys.map((tabKey, index) => (
+                </HeaderRow>
+                {products.map((productKey, index) => (
                     <TabContent
                         key={index}
                         variants={{
@@ -88,10 +86,10 @@ export default ({
                             }
                         }}
                         transition={{duration: 0.4}}
-                        initial={activeTab === tabKey ? "current" : "hidden"}
-                        animate={activeTab === tabKey ? "current" : "hidden"}
+                        // initial={activeTab === productKey ? "current" : "hidden"}
+                        // animate={activeTab === productKey ? "current" : "hidden"}
                     >
-                        {tabs[tabKey].map((card, index) => (
+                        {products[productKey].map((card, index) => (
                             <CardContainer key={index}>
                                 {card.notification === 1 ? isNotification = true : isNotification = false} {
                             }
@@ -112,7 +110,7 @@ export default ({
                                             }}
                                             transition={{duration: 0.3}}
                                         >
-                                            <CardButton>Contact Seller</CardButton>
+                                            <CardButton>Go To Chat</CardButton>
                                         </CardHoverOverlay>
                                     </CardImageContainer>
                                     <CardText>

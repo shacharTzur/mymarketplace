@@ -1,14 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import tw from "twin.macro";
 import TabGrid from "components/cards/TabCardGrid.js";
 import Header from "components/headers/light.js"
-import SendMessage from "components/forms/SendMessageForm"
-
 import Listing from '../components/cards/CardCreator'
+import AuthContext from "../store/auth-context";
 
 function HomePage() {
     const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`
     let data = Listing();
+    const authCtx = useContext(AuthContext);
+    const userName = authCtx.token;
     const prepareTabsData = (data) => {
         const A = data.map((item) => {
             return ({
@@ -32,12 +33,12 @@ function HomePage() {
     }
     console.log(tabs);
     console.log(tabs3);
-
     return <section>
         <Header/>
         <TabGrid
             tabs={tabs3}
-            heading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
+            heading={'Hello ' + userName + ','}
+            subheading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
         />
     </section>
 
