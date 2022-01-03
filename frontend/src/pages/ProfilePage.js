@@ -8,7 +8,6 @@ import TabCardGrid from "../components/cards/TabCardGrid";
 
 function ProfilePage() {
     const authCtx = useContext(AuthContext)
-    // let data = GetProfileData(authCtx.token);
     let data = GetProfileData(authCtx.token);
     let userProducts = GetUserProducts(authCtx.token);
 

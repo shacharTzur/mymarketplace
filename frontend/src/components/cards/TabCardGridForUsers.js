@@ -73,7 +73,6 @@ export default ({
 
     const chatButtonHandler = (userName) => {
         recCtx.setUserName(userName)
-
         history.push('/components/innerPages/ChatPage');
     }
     const tabsKeys = Object.keys(tabs);

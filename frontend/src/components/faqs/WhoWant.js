@@ -56,10 +56,12 @@ export default ({
                     <Column tw='hidden sm:block w-10/12 flex-shrink h-1/6'>
                         <FAQContent>
                             <FAQSContainer>
-                                {item.map((dataKey, index) => (<FAQ
+                                {item.map((dataKey, index) => (
+                                    <FAQ
                                         key={index}
                                         className="group"
                                     >
+                                        {productId=dataKey.id}
                                         <Heading>
                                             <h4>
                                             {item[0].name}

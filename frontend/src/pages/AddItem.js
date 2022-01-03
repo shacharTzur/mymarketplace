@@ -8,7 +8,7 @@ function AddItem() {
 	const authCtx = useContext(AuthContext);
 	return (<section>
 	<Header />
-		<AddItemForm userName={authCtx.token}/>
+		<AddItemForm userName={authCtx.token} description="Please follow our instruction for best shopping experience"/>
 	</section>
 
 	)}

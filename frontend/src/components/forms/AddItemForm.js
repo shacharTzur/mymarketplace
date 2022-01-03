@@ -43,8 +43,8 @@ const Textarea = styled(Input).attrs({as: "textarea"})`
 const SubmitButton = tw(PrimaryButtonBase)`inline-block mt-8`
 export default ({
   subheading = "Contact Us",
-  heading = <>What do <span tw="text-primary-500">you want to SELL</span><wbr/> today?</>,
-  description = "Tell us what you want to find today! relevant sellers will be notified and contact you ASAP!",
+  heading = <>What do you want to <span tw="text-primary-500">SELL?</span><wbr/></>,
+  description = "",
   submitButtonText = "Send",
   formAction = "#",
   formMethod = "get",
@@ -151,7 +151,7 @@ export default ({
             <Heading>{heading}</Heading>
             {description && <Description>{description}</Description>}
             <Form onSubmit={submitHandler}>
-              <Input type="text" name="title" placeholder="Product name" ref={titleInputRef} />
+              <Input type="text" name="title" placeholder="Product name will be displayed as title" ref={titleInputRef} />
               <Input type="text" name="brand" placeholder="Brand Name" ref={brandInputRef} />
 
               <Select name="category" ref={categoryInputRef}>
