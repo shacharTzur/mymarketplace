@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -12,6 +12,7 @@ import {ReactComponent as DeleteIcon} from "images/delete-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import { useHistory } from 'react-router-dom'
+import ProductContext from '../../store/product-context'
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -76,10 +77,12 @@ export default ({
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
     const history = useHistory();
+    const prodCtx = useContext(ProductContext);
     let isNotification = false;
     
     const notificationButtonHandler = (id) => {
-        history.push('/components/innerPages/WhoWantPage' +'#' + id);
+        prodCtx.setProductId(id);
+        history.push('/components/innerPages/WhoWantPage');
     }
     const deleteButtonHandler = (id) => {
         let url = 'http://localhost:8080/product/deleteProduct?prod_id='+id;

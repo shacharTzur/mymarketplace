@@ -21,7 +21,9 @@ function HomePage() {
                 title: item.category,
                 content: item.description,
                 price: item.price + '$',
-                notification: false
+                notification: false,
+                size: item.size,
+                condition: item.condi,
             })
         });
         return A;
@@ -37,7 +39,7 @@ function HomePage() {
         <Header/>
         <TabGrid
             tabs={tabs3}
-            heading={'Hello ' + userName + ','}
+            heading={'Hi ' + userName + ','}
             subheading={<> Check out today's <HighlightedText>Listings</HighlightedText></>}
         />
     </section>

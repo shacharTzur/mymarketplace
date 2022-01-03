@@ -69,7 +69,6 @@ export default ({
                                         <h4>{"Category: " + dataKey.category}</h4>
                                         <h4>{"Brand: " + dataKey.brand}</h4>
                                         <h4>{"Price: " + dataKey.price}</h4>
-                                        {productId = dataKey.id}
                                     </FAQ>
                                 ))}
                             </FAQSContainer>
