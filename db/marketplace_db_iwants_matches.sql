@@ -30,7 +30,7 @@ CREATE TABLE `iwants_matches` (
   `searcher` varchar(255) DEFAULT NULL,
   `show_notification` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `iwants_matches` (
 
 LOCK TABLES `iwants_matches` WRITE;
 /*!40000 ALTER TABLE `iwants_matches` DISABLE KEYS */;
-INSERT INTO `iwants_matches` VALUES (1,1,'shachartzur',2,'RavidPlot',1),(2,1,'shachartzur',1,'RavidPlot',1);
+INSERT INTO `iwants_matches` VALUES (2,1,'shachartzur',1,'RavidPlot',1),(3,1,'NogaErez',4,'shachartzur',1),(4,1,'RavidPlot',3,'shachartzur',1),(5,1,'NogaErez',6,'shachartzur',1),(6,1,'NogaErez',6,'RavidPlot',1),(7,1,'Jasmin_M',11,'RavidPlot',1),(8,1,'Jasmin_M',12,'RavidPlot',1),(9,2,'Jasmin_M',12,'shachartzur',1),(10,2,'RavidPlot',19,'idohai',1),(11,2,'RavidPlot',20,'idohai',1),(12,2,'NogaErez',21,'shachartzur',1);
 /*!40000 ALTER TABLE `iwants_matches` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 18:57:25
+-- Dump completed on 2022-01-03 22:41:42

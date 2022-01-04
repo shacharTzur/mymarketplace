@@ -1,15 +1,20 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
-import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
+import {DeleteButton, PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
-import {Subheading as SubheadingBase } from "components/misc/Headings.js";
+import {Subheading as SubheadingBase} from "components/misc/Headings.js";
+import {ReactComponent as MessageIcon} from "../../images/message-icon.svg";
+import ReceiverContext from "../../store/receiver-context";
+import ProductContext from "../../store/product-context";
+import {useHistory} from "react-router-dom";
+import {MsgButtonCont} from "components/misc/Buttons.js";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -31,7 +36,7 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-white content-center`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
@@ -56,7 +61,6 @@ const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
 const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
-
 export default ({
                     heading,
                     subheading,
@@ -65,6 +69,14 @@ export default ({
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0]);
     let isNotification = false
+    const recCtx = useContext(ReceiverContext);
+    const prodCtx = useContext(ProductContext);
+    const history = useHistory();
+    const ChatHandler = (productId, ownerUserName) => {
+        prodCtx.setProductId(productId);
+        recCtx.setUserName(ownerUserName)
+        history.push('/components/innerPages/ChatPage');
+    }
     return (
         <Container>
             <ContentWithPaddingXl>
@@ -99,21 +111,13 @@ export default ({
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardHoverOverlay
-                                            variants={{
-                                                hover: {
-                                                    opacity: 1,
-                                                    height: "auto"
-                                                },
-                                                rest: {
-                                                    opacity: 0,
-                                                    height: 0
-                                                }
-                                            }}
-                                            transition={{duration: 0.3}}
-                                        >
-                                            <CardButton>Contact Seller</CardButton>
-                                        </CardHoverOverlay>
+                                            <CardRating>
+                                                <MsgButtonCont>
+                                                    <button onClick={() => ChatHandler(card.productId, card.owner)}>
+                                                        <MessageIcon/>
+                                                    </button>
+                                                    </MsgButtonCont>
+                                            </CardRating>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.name}</CardTitle>
@@ -125,13 +129,13 @@ export default ({
                                     </CardText>
                                 </Card>
                             </CardContainer>
-                        ))}
-                    </TabContent>
-                ))}
-            </ContentWithPaddingXl>
-            <DecoratorBlob1/>
-            <DecoratorBlob2/>
-        </Container>
-    )
-        ;
-};
+                            ))}
+                            </TabContent>
+                            ))}
+                            </ContentWithPaddingXl>
+                            <DecoratorBlob1/>
+                            <DecoratorBlob2/>
+                            </Container>
+                            )
+                            ;
+                        };

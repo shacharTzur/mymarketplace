@@ -24,6 +24,8 @@ function HomePage() {
                 notification: false,
                 size: item.size,
                 condition: item.condi,
+                owner: item.owner,
+                productId: item.id
             })
         });
         return A;

@@ -9,10 +9,11 @@ import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
-import {Subheading as SubheadingBase } from "components/misc/Headings.js";
+import {Subheading as SubheadingBase} from "components/misc/Headings.js";
 import ProductContext from "../../store/product-context";
 import {useHistory} from "react-router-dom";
 import {ReactComponent as MessageIcon} from "../../images/message-icon.svg";
+import {MsgButtonCont} from "components/misc/Buttons.js";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -68,7 +69,7 @@ export default ({
     const tabsKeys = Object.keys(tabs);
     const prodCtx = useContext(ProductContext);
     const history = useHistory();
-    const MotherFuckerHandler = (productId) =>{
+    const ChatHandler = (productId) => {
         prodCtx.setProductId(productId);
         history.push('/components/innerPages/WhoWantPage');
     }
@@ -103,13 +104,13 @@ export default ({
                             <CardContainer key={index}>
                                 <Card className="group" initial="rest" animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardRatingContainer>
+                                        <MsgButtonCont>
                                             <CardRating>
-                                                <button onClick={() =>MotherFuckerHandler(card.id)}>
-                                                <MessageIcon/>
+                                                <button onClick={() => ChatHandler(card.id)}>
+                                                    <MessageIcon/>
                                                 </button>
                                             </CardRating>
-                                        </CardRatingContainer>
+                                        </MsgButtonCont>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.category}</CardTitle>

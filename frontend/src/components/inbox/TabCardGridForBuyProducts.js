@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -10,6 +10,11 @@ import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {Subheading as SubheadingBase } from "components/misc/Headings.js";
+import {ReactComponent as MessageIcon} from "../../images/message-icon.svg";
+import ProductContext from "../../store/product-context";
+import {useHistory} from "react-router-dom";
+import ReceiverContext from "../../store/receiver-context";
+import {MsgButtonCont} from "components/misc/Buttons.js";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -31,20 +36,20 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-red-600 content-center`;
+const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-white content-center`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
     ${tw`w-5 h-4 fill-current text-orange-400 mr-0`}
   }
 `;
+const DeleteButtonCont = tw.div`inline-flex bg-gray-400 hocus:bg-gray-700 top-0 mt-2 ml-2 mb-2 rounded-full px-1 py-1 content-center right-0 focus:shadow-outline focus:outline-none transition duration-300`;
 const Subheading = tw(SubheadingBase)`mb-4 text-center lg:text-left`;
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 flex justify-center items-center`}
 `;
 const CardButton = tw(PrimaryButtonBase)`text-sm`;
-
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
 const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600`;
@@ -63,7 +68,16 @@ export default ({
                 }) => {
     const tabsKeys = Object.keys(tabs);
     const [activeTab, setActiveTab] = useState(tabsKeys[0])
+    const recCtx = useContext(ReceiverContext);
+    const prodCtx = useContext(ProductContext);
+    const history = useHistory();
+    const ChatHandler = (productId, ownerUserName) =>{
+        prodCtx.setProductId(productId);
+        recCtx.setUserName(ownerUserName)
+        history.push('/components/innerPages/ChatPage');
+    }
     return (
+
         <Container>
             <ContentWithPaddingXl>
                 <HeaderRow>
@@ -94,21 +108,13 @@ export default ({
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardHoverOverlay
-                                            variants={{
-                                                hover: {
-                                                    opacity: 1,
-                                                    height: "auto"
-                                                },
-                                                rest: {
-                                                    opacity: 0,
-                                                    height: 0
-                                                }
-                                            }}
-                                            transition={{duration: 0.3}}
-                                        >
-                                            <CardButton>Contact Seller</CardButton>
-                                        </CardHoverOverlay>
+                                        <MsgButtonCont>
+                                            <CardRating>
+                                                <button onClick={() =>ChatHandler(card.id, card.productOwner)}>
+                                                    <MessageIcon/>
+                                                </button>
+                                            </CardRating>
+                                        </MsgButtonCont>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.category}</CardTitle>

@@ -6,12 +6,12 @@ import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
-import {PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
+import {MsgButtonCont, PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
 import {ReactComponent as MessageIcon} from "images/message-icon.svg";
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {useHistory} from "react-router-dom";
-import { useContext } from 'react'
+import {useContext} from 'react'
 import ReceiverContext from '../../store/receiver-context';
 import ProductContext from '../../store/product-context';
 
@@ -111,13 +111,13 @@ export default ({
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>
-                                        <CardRatingContainer>
+                                        <MsgButtonCont>
                                             <CardRating>
                                                 <button onClick={() => chatButtonHandler(card.userName)}>
                                                     <MessageIcon/>
                                                 </button>
                                             </CardRating>
-                                        </CardRatingContainer>
+                                        </MsgButtonCont>
                                     </CardImageContainer>
                                     <CardText>
                                         <CardTitle>{card.userName}</CardTitle>

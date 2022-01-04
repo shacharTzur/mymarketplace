@@ -20,6 +20,9 @@ function ChatPage() {
     let friendUserName = recCtx.userName;
     let userData = GetUserData(userName);
     let friendData = GetUserData(friendUserName)
+    // alert("friend = " + friendUserName)
+    // alert("me = " + userName)
+    // alert("id = " + productId)
     let allMessages = GetAllMessages(userName, friendUserName, productId);
     const prepareMessagesData = (data) => {
         const A = data.map((item) => {
