@@ -181,7 +181,8 @@ export default ({
                 <option value="xxl">XXL</option>
               </Select>
 
-              <Input type="text" name="color" placeholder="Preferred color" ref={colorInputRef}/>
+              <Input type="text" name="color" placeholder="Preferred color (tip: Colorful is an option)" ref={colorInputRef}/>
+              <h4>(Insert preferred colors seperated by space)</h4>
               <Input type="text" name="price" placeholder="Price around" ref={priceInputRef} />
 
 

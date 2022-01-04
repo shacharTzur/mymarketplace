@@ -35,7 +35,7 @@ CREATE TABLE `messages` (
   `to_image` varchar(255) DEFAULT NULL,
   `unread` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,'hi ravid do you want this shirt?','Mon, 3 Jan 13:56 ','shacharpic.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','shachartzur','ravidPlot.jpg',''),(2,'Hi ravid','Mon, 3 Jan 14:25 ','JaminMualem.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','Jasmin_M','ravidPlot.jpg',''),(3,'Hi ravid, bla bla ','Mon, 3 Jan 14:27 ','JaminMualem.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','Jasmin_M','ravidPlot.jpg',''),(4,'Hi shachar, are u intersted in this sweatshirt? ','Mon, 3 Jan 15:54 ','ravidPlot.jpg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','shachartzur','RavidPlot','shacharpic.jpeg',''),(5,'Hi ravidush, how r u?','Mon, 3 Jan 19:35 ','shacharpic.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','shachartzur','ravidPlot.jpg',''),(6,'Hi shachar, I have a perfect skirt to offer you. ','Mon, 3 Jan 22:00 ','nogaErez.jpg',21,'skirt_yange_stzur.jpg','Fabuleous skirt','shachartzur','NogaErez','shacharpic.jpeg','');
+INSERT INTO `messages` VALUES (1,'hi ravid do you want this shirt?','Mon, 3 Jan 13:56 ','shacharpic.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','shachartzur','ravidPlot.jpg',''),(2,'Hi ravid','Mon, 3 Jan 14:25 ','JaminMualem.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','Jasmin_M','ravidPlot.jpg',''),(3,'Hi ravid, bla bla ','Mon, 3 Jan 14:27 ','JaminMualem.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','Jasmin_M','ravidPlot.jpg',''),(4,'Hi shachar, are u intersted in this sweatshirt? ','Mon, 3 Jan 15:54 ','ravidPlot.jpg',3,'swetshirt_zara.jpg','Sweatshirt from zara, second hand but as new','shachartzur','RavidPlot','shacharpic.jpeg',''),(5,'Hi ravidush, how r u?','Mon, 3 Jan 19:35 ','shacharpic.jpeg',1,'blue_shirt.jpg','Lovely shirt from H&M','RavidPlot','shachartzur','ravidPlot.jpg',''),(6,'Hi shachar, I have a perfect skirt to offer you. ','Mon, 3 Jan 22:00 ','nogaErez.jpg',21,'skirt_yange_stzur.jpg','Fabuleous skirt','shachartzur','NogaErez','shacharpic.jpeg',''),(7,'Hi, answer me please!','Mon, 3 Jan 22:46 ','nogaErez.jpg',21,'skirt_yange_stzur.jpg','Fabuleous skirt','shachartzur','NogaErez','shacharpic.jpeg','');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-03 22:41:41
+-- Dump completed on 2022-01-04 20:24:15

@@ -115,9 +115,6 @@ export default ({
         body:fd,
       }).then(function (res) {
         if (res.ok) {
-          alert("Image uploaded! ");
-        } else {
-          alert("Image uploading failed! ");
         }
       });
 

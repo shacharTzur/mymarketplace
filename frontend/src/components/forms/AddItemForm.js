@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import ArabStore from "images/ourImages/arab store.jpg";
+import SellImage from "images/ourImages/SellImage.jpeg";
 import { Hint } from 'react-autocomplete-hint';
 import {useEffect, useRef, useState, useContext} from 'react';
 import AuthContext from '../../store/auth-context';
@@ -143,7 +143,7 @@ export default ({
     <Container>
       <TwoColumn>
         <ImageColumn>
-          <Image imageSrc={ArabStore}/>
+          <Image imageSrc={SellImage}/>
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
@@ -151,7 +151,7 @@ export default ({
             <Heading>{heading}</Heading>
             {description && <Description>{description}</Description>}
             <Form onSubmit={submitHandler}>
-              <Input type="text" name="title" placeholder="Product name will be displayed as title" ref={titleInputRef} />
+              <Input type="text" name="title" placeholder="Title" ref={titleInputRef} />
               <Input type="text" name="brand" placeholder="Brand Name" ref={brandInputRef} />
 
               <Select name="category" ref={categoryInputRef}>
@@ -187,9 +187,10 @@ export default ({
                 <option value="XXL">XXL</option>
               </Select>
 
-              <Input type="text" name="color" placeholder="Color" ref={colorInputRef}/>
+              <Input type="text" name="color" placeholder="Color: Insert colors seperated by space" ref={colorInputRef}/>
+              <h4> (If item contains more then 3 colors, insert "Colorful") </h4>
               <Input type="text" name="price" placeholder="Price in $" ref={priceInputRef} />
-              <Input type="text" name="location" placeholder="City where to pickup from" ref={locationInputRef} />
+              <Input type="text" name="location" placeholder="Pickup Location" ref={locationInputRef} />
               <Textarea placeholder="Short description" ref={descriptionInputRef}/>
               <Input type="file" name="files" onChange={(event) => setSelectedFile(event.target.files[0])} />
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
