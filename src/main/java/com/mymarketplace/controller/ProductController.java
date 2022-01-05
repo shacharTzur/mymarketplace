@@ -281,4 +281,31 @@ public class ProductController {
 
     }
 
+    private boolean is_active_and_unread(Long productId,int Unread) {
+        List<MessagesEntity> messagesForProductId = messagesRepository.findByProductIdAndUnread(productId,Unread);
+        if(messagesForProductId.size() != 0){
+            return true;
+            }
+        return false;
+    }
+
+
+    @GetMapping(path = "/NotOwn/active/newMsg")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Integer> getWhoNotifyFor(String owner){
+        List<ProductEntity> NotMyProductsActive = getAllProductActiveForBuy(owner);
+        List<Integer> notify_list = new ArrayList();
+        int num_of_products = NotMyProductsActive.size();
+        for (int i = 0; i < num_of_products; i++) {
+            Long product_id = NotMyProductsActive.get(i).getId();
+            if(is_active_and_unread(product_id,1)){
+                notify_list.add(1);
+            }
+            else {
+                notify_list.add(0);
+            }
+        }
+        return notify_list;
+
+    }
 }

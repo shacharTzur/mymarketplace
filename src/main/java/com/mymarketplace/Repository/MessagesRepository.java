@@ -1,6 +1,7 @@
 package com.mymarketplace.Repository;
 
 
+import com.mymarketplace.Entities.IwantEntity;
 import com.mymarketplace.Entities.MessagesEntity;
 import com.mymarketplace.Entities.ProductEntity;
 import com.mymarketplace.Entities.UserEntity;
@@ -20,6 +21,12 @@ public interface MessagesRepository extends JpaRepository<MessagesEntity, Long> 
     List<MessagesEntity> findByReceiver(String Receiver);
 
     List<MessagesEntity> findByProductId (Long ProductId);
+
+    @Query(value = "Select * From messages WHERE product_id Like :product_id and unread = :unread" , nativeQuery = true)
+    List<MessagesEntity> findByProductIdAndUnread(Long product_id, int unread);
+
+    @Query(value = "Select * From iwants_matches WHERE searcher Like :searcher and owner like :owner and product_id like :product_id" , nativeQuery = true)
+    List<IwantEntity> findByBySearcherAndOwnerAndProduct_id(String searcher, String owner, Long product_id);
 
     @Query(value = "Select * From MESSAGES WHERE ((sender Like :sender and receiver Like :receiver) or (sender Like :receiver and receiver Like :sender)) and product_id Like :product_id" , nativeQuery = true)
     List<MessagesEntity> findChatForUsers
