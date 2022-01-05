@@ -272,7 +272,7 @@ public class ProductController {
         int num_of_products = NotMyProducts.size();
         for (int i = 0; i < num_of_products; i++) {
             Long product_id = NotMyProducts.get(i).getId();
-            if(is_active(product_id)){
+            if(messagesRepository.findByProductIdAndReceiver(product_id,owner).size()!=0){
                 ProductEntity product_to_add = NotMyProducts.get(i);
                 final_list_to_return.add(product_to_add);
             }
