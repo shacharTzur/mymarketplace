@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import GetUserData from "../helpers/GetUserData";
 import GetSellProducts from "../components/inbox/ProductsSellCreator";
 import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
+import GetNotificationOnItems from '../components/inbox/GetNotifications';
 import TabCardGridForBuyProducts from "../components/inbox/TabCardGridForBuyProducts";
 import TabCardGridForSellProducts from "../components/inbox/TabCardGridForSellProducts";
 
@@ -15,6 +16,7 @@ function InboxPage() {
     let userData = GetUserData(authCtx.token);
     let buyProducts = GetBuyProducts(authCtx.token);
     let sellProducts = GetSellProducts(authCtx.token);
+    const notification = GetNotificationOnItems(authCtx.token);
     const prepareProductsData = (data) => {
         const A = data.map((item) => {
             return ({
@@ -43,7 +45,11 @@ function InboxPage() {
         });
         return B;
     }
+    
     buyProducts = prepareProductsData(buyProducts)
+    for (let i=0; i<buyProducts.length; i++){
+        buyProducts[i].notify = notification[i]
+    }
     sellProducts = prepareProductsData(sellProducts)
     userData = prepareUserData(userData)
     const buyProducts3 = {

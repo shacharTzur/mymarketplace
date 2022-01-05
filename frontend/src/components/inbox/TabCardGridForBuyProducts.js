@@ -11,6 +11,7 @@ import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.s
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {Subheading as SubheadingBase } from "components/misc/Headings.js";
 import {ReactComponent as MessageIcon} from "../../images/message-icon.svg";
+import {ReactComponent as UnreadMessageIcon} from "../../images/message-unread-icon.svg";
 import ProductContext from "../../store/product-context";
 import {useHistory} from "react-router-dom";
 import ReceiverContext from "../../store/receiver-context";
@@ -111,7 +112,7 @@ export default ({
                                         <MsgButtonCont>
                                             <CardRating>
                                                 <button onClick={() =>ChatHandler(card.id, card.productOwner)}>
-                                                    <MessageIcon/>
+                                                    {card.notify == 0 ? <MessageIcon/> : <UnreadMessageIcon/>}
                                                 </button>
                                             </CardRating>
                                         </MsgButtonCont>
