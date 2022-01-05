@@ -85,6 +85,12 @@ public class MessagesController {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity findChatForUsers(@RequestParam String sender , @RequestParam String receiver, @RequestParam Long productId){
         List<MessagesEntity> chat_to_return = MsgRepository.findChatForUsers(sender,receiver,productId);
+        int num_of_msg_to_mark_as_read = chat_to_return.size();
+        for(int i = 0 ; i<num_of_msg_to_mark_as_read ; i++) {
+            MessagesEntity msg = chat_to_return.get(i);
+            msg.setUnread(false);
+            MsgRepository.save(msg);
+        }
         ResponseEntity<List<MessagesEntity>> Entity_to_return = new ResponseEntity<>(chat_to_return,HttpStatus.OK);
         return Entity_to_return;
     }
