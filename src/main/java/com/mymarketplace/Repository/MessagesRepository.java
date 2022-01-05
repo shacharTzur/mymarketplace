@@ -25,7 +25,7 @@ public interface MessagesRepository extends JpaRepository<MessagesEntity, Long> 
     @Query(value = "Select * From messages WHERE product_id Like :product_id and unread = :unread" , nativeQuery = true)
     List<MessagesEntity> findByProductIdAndUnread(Long product_id, int unread);
 
-    @Query(value = "Select * From messages WHERE product_id Like :product_id and receiver = :receiver" , nativeQuery = true)
+    @Query(value = "Select * From messages WHERE product_id Like :product_id and (receiver = :receiver or sender = :receiver)" , nativeQuery = true)
     List<MessagesEntity> findByProductIdAndReceiver(Long product_id, String receiver);
 
     @Query(value = "Select * From iwants_matches WHERE searcher Like :searcher and owner like :owner and product_id like :product_id" , nativeQuery = true)
