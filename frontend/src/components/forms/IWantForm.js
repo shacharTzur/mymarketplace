@@ -130,7 +130,6 @@ export default ({
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
-            {/*subheading && <Subheading>{subheading}</Subheading>*/}
             <Heading>{heading}</Heading>
             {description && <Description>{description}</Description>}
             <Form onSubmit={submitHandler}>
@@ -175,31 +174,11 @@ export default ({
               <h4>(Insert preferred colors seperated by space)</h4>
               <Input type="text" name="price" placeholder="Price around" ref={priceInputRef} />
 
-
-              {/*             {<code>{`[${hintData.toString()}]`}</code>}}
-             <Hint options={hintData} allowTabFill>
-              <input className='input-with-hint'
-                name="brand"
-                placeholder="enter brand"
-                value={text}
-                onChange={e => setText(e.target.value)} 
-              />
-              </Hint}>*/}
               <SubmitButton type="submit">{submitButtonText}</SubmitButton>
             </Form>
           </TextContent>
         </TextColumn>
       </TwoColumn>
-      {/*{showModal ? <ModalWant/> : ''}*/}
-      {/*{showModal ? 'HAHAHAH' : ''}*/}
     </Container>
   );
 };
-
-// category  dropdown
-// brand     text
-// condi     choose
-// owner     displayed optional no do
-// size      dropdown
-// color     text
-// price     int
