@@ -71,8 +71,6 @@ export default ({
       fd.append('files', selectedFile);
 
       setIsLoading(true);
-      console.log(selectedFile);
-      console.log(fd);
       let url1 = 'http://localhost:8080/user/add';
       let url2 = 'http://localhost:8080/upload';
 

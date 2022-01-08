@@ -5,11 +5,9 @@ function GetWhoWantUsers(itemId) {
     useEffect(() => {
         fetch('http://localhost:8080/Iwant/prod_id?prod_id='+itemId)
             .then(function (response) {
-                console.log(response)
                 return response.json();
             })
             .then(function (myJson) {
-                console.log(myJson);
                 setData(myJson)
             })
     }, [])

@@ -5,11 +5,9 @@ function GetAllMessages(userName, friendUserName, productId) {
     useEffect(() => {
         fetch('http://localhost:8080/messages/allBetween?sender='+userName + '&receiver=' + friendUserName +'&productId='+ productId)
             .then(function (response) {
-                console.log(response)
                 return response.json();
             })
             .then(function (myJson) {
-                console.log(myJson);
                 setData(myJson)
             })
     }, [])

@@ -35,8 +35,6 @@ function HomePage() {
     const tabs3 = {
         Clothings: tabs
     }
-    console.log(tabs);
-    console.log(tabs3);
     return <section>
         <Header/>
         <TabGrid

@@ -73,7 +73,6 @@ export default ({
         prodCtx.setProductId(productId);
         history.push('/components/innerPages/WhoWantPage');
     }
-    console.log(tabs)
     const [activeTab, setActiveTab] = useState(tabsKeys[0])
     return (
         <Container>

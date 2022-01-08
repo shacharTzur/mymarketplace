@@ -8,8 +8,6 @@ function GetBuyProducts(userName) {
                 return response.json();
             })
             .then(function (myJson) {
-                console.log("ProductBuyCreator: this is buyProduct")
-                console.log(myJson);
                 setData(myJson)
             })
     }, [])
