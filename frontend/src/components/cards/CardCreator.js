@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from "react";
-import { useContext } from 'react'
-import AuthContext from '../../store/auth-context';
 
-function Listing() {
+function Listing(userName) {
     const [data, setData] = useState([]);
-    const authCtx = useContext(AuthContext);
-    let url = 'http://localhost:8080/product/allForYou?username=' + authCtx.token;
+    let url = 'http://localhost:8080/product/allForYou?username=' + userName;
     useEffect(() => {
         fetch(url)
             .then(function (response) {

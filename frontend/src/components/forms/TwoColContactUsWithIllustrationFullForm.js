@@ -51,17 +51,7 @@ export default ({
   textOnLeft = true,
   userName = "",
 }) => {
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
-  // let brandData = Brands();
-  // let brandData = [{'brand': 'fox'}, {brand: 'renuar'}];
-  // const [hintData, setHintData] = useState([])
-  // const [text, setText] = useState('')
-
-  // const getBrandData = async() => {
-  //   let brandData = ['fox', 'renuar'];
-  //   setHintData(brandData)
-  // }
     const history = useHistory();
     const titleInputRef = useRef();
     const categoryInputRef = useRef();

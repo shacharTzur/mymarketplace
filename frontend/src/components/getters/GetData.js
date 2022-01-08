@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 
-function GetProfileData(userName) {
+function FetchData(url) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/user/name?userName='+userName)
+        fetch(url)
             .then(function (response) {
                 return response.json();
             })
@@ -16,4 +16,4 @@ function GetProfileData(userName) {
     );
 }
 
-export default GetProfileData;
+export default FetchData;

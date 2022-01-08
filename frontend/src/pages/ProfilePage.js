@@ -1,16 +1,17 @@
 import React, {useContext} from "react";
 import Header from "../components/headers/light";
 import SimpleWithSideImage from "../components/faqs/SimpleWithSideImage";
-import GetProfileData from "../components/faqs/ProfileCreator";
 import AuthContext from '../store/auth-context';
-import GetUserProducts from "../components/faqs/ProductsCreator";
 import TabCardGrid from "../components/cards/TabCardGrid";
+import FetchData from '../components/getters/GetData';
 
 function ProfilePage() {
     const authCtx = useContext(AuthContext)
-    let data = GetProfileData(authCtx.token);
-    let userProducts = GetUserProducts(authCtx.token);
-
+    const thisUserName = authCtx.token;
+    const profileDataUrl = 'http://localhost:8080/user/name?userName='
+    const userProcutsUrl = 'http://localhost:8080/product/name?owner='
+    let data = FetchData(profileDataUrl + thisUserName);
+    let userProducts = FetchData(userProcutsUrl + thisUserName);
     const prepareData = (data) => {
         const A = data.map((item) => {
             return ({
@@ -39,7 +40,7 @@ function ProfilePage() {
         });
         return B;
     }
-    const products1 = prepareProducts(userProducts)
+    const products1 = prepareProducts(userProducts[0])
     const products3 = {
         Clothings: products1
     }
