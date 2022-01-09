@@ -6,25 +6,25 @@ The main goal of this web app was to create a full stack app with focus on E-Com
 
 How to get this project running on your machine?
 
-*	Downloads:
+*	**Downloads:**
 	-	[NodeJS](https://nodejs.org/en/download/)
 	-	[Maven](https://maven.apache.org/download.cgi) (recommendation: download binary zip archive)
 	-	Java JDK
-*	Set Maven
+*	**Set Maven:**
 	-	Extract downloaded folder (from 1b.) to desired location
 	-	Add Bin folder to system PATH
-*	Install dependencies. In our project folder (marketplace):
+*	**Install dependencies.** In our project folder (marketplace):
 	-	Open shell in marketplace/frontend folder
 	-	Run command: npm install
-*	Install database:
+*	**Install database:**
 	-	[Download](https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-8.0.27.1.msi) and install MySQL and MySQL Workbench
 	-	In Workbench, create a new connection, username should be root and password Change1! (this can be changed in application properties file inside mymarketplace\src\main\resources)
 	-	Create new schema named “marketplace_db” (can be changed in application properties file)
 	-	(Optional) Import our database from db folder inside the project folder. Alternatively you can fresh start with a clean DB and create your own users and upload products
-*	Run server client:
+*	**Run server client:**
 	-	Open shell in our project folder (marketplace)
 	-	Run command: mvn spring-boot:run (first time will take a bit longer)
-*	Run web app:
+*	**Run web app:**
 	-	Open shell in marketplace/frontend folder inside our project folder
 	-	Run command: npm start
 *	That’s it! Our marketplace site should open on browser automatically. Alternatively, you can find it in http://localhost:3000
