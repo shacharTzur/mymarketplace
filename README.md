@@ -9,23 +9,23 @@ How to get this project running on your machine?
 *	Downloads:
 	-	NodeJS
 	-	Maven (recommendation: download binary zip archive)
-	c.	Java JDK
+	-	Java JDK
 *	Set Maven
-	a.	Extract downloaded folder (from 1b.) to desired location
-	b.	Add Bin folder to system PATH
+	-	Extract downloaded folder (from 1b.) to desired location
+	-	Add Bin folder to system PATH
 *	Install dependencies. In our project folder (marketplace):
-	a.	Open shell in marketplace/frontend folder
-	b.	Run command: npm install
+	-	Open shell in marketplace/frontend folder
+	-	Run command: npm install
 *	Install database:
-	a.	Download and install MySQL and MySQL Workbench
-	b.	In Workbench, create a new connection, username should be root and password Change1! (this can be changed in application properties file inside mymarketplace\src\main\resources)
-	c.	Create new schema named “marketplace_db” (can be changed in application properties file)
-	d.	 Import database from db folder inside the project folder.
+	-	Download and install MySQL and MySQL Workbench
+	-	In Workbench, create a new connection, username should be root and password Change1! (this can be changed in application properties file inside mymarketplace\src\main\resources)
+	-	Create new schema named “marketplace_db” (can be changed in application properties file)
+	-	 Import database from db folder inside the project folder.
 *	Run server client:
-	a.	Open shell in our project folder (marketplace)
-	b.	Run command: mvn spring-boot:run (first time will take a bit longer)
+	-	Open shell in our project folder (marketplace)
+	-	Run command: mvn spring-boot:run (first time will take a bit longer)
 *	Run web app:
-	a.	Open shell in marketplace/frontend folder inside our project folder
-	b.	Run command: npm start
+	-	Open shell in marketplace/frontend folder inside our project folder
+	-	Run command: npm start
 *	That’s it! Our marketplace site should open on browser automatically. Alternatively, you can find it in http://localhost:3000
 *	Server client should be in http://localhost:8080.
