@@ -8,7 +8,7 @@ How to get this project running on your machine?
 
 *	Downloads:
 	-	[NodeJS](https://nodejs.org/en/download/)
-	-	Maven (recommendation: download binary zip archive)
+	-	[Maven](https://maven.apache.org/download.cgi) (recommendation: download binary zip archive)
 	-	Java JDK
 *	Set Maven
 	-	Extract downloaded folder (from 1b.) to desired location
@@ -17,7 +17,7 @@ How to get this project running on your machine?
 	-	Open shell in marketplace/frontend folder
 	-	Run command: npm install
 *	Install database:
-	-	Download and install MySQL and MySQL Workbench
+	-	[Download](https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-8.0.27.1.msi) and install MySQL and MySQL Workbench
 	-	In Workbench, create a new connection, username should be root and password Change1! (this can be changed in application properties file inside mymarketplace\src\main\resources)
 	-	Create new schema named “marketplace_db” (can be changed in application properties file)
 	-	 Import database from db folder inside the project folder.
