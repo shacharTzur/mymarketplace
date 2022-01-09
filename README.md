@@ -7,8 +7,8 @@ The main goal of this web app was to create a full stack app with focus on E-Com
 How to get this project running on your machine?
 
 *	Downloads:
-	a.	NodeJS
-	b.	Maven (recommendation: download binary zip archive)
+	-	NodeJS
+	-	Maven (recommendation: download binary zip archive)
 	c.	Java JDK
 *	Set Maven
 	a.	Extract downloaded folder (from 1b.) to desired location
