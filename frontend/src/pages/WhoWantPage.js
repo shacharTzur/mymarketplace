@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import Header from "../components/headers/light";
-import AuthContext from '../store/auth-context';
 import ProductContext from '../store/product-context';
 import WhoWant from "../components/faqs/WhoWant";
 import FetchData from '../components/getters/GetData';

@@ -8,7 +8,10 @@ import FetchData from '../components/getters/GetData';
 function HomePage() {
     const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`
     const authCtx = useContext(AuthContext);
-    const userName = authCtx.token;
+    let userName = authCtx.token;
+    if (authCtx.token === null){
+        userName = 'Stranger'
+    }
     let data = FetchData('http://localhost:8080/product/allForYou?username=' + userName);
     const prepareTabsData = (data) => {
         const A = data.map((item) => {

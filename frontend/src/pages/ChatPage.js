@@ -23,19 +23,6 @@ function ChatPage() {
     let userData = FetchData(userDataUrl + userName);
     let friendData = FetchData(userDataUrl + friendUserName);
     let allMessages = FetchData(allMessagesUrl)[0];
-    const prepareMessagesData = (data) => {
-        const A = data.map((item) => {
-            return ({
-                date: item.date,
-                sender: item.sender,
-                receiver: item.receiver,
-                content: item.content,
-                senderImg: "http://localhost:3000/uploads/" + item.senderImg,
-                productImage: "http://localhost:3000/uploads/" + item.productImage
-            })
-        });
-        return A;
-    }
 
     const prepareUserData = (data) => {
         const B = data.map((item) => {
@@ -46,7 +33,6 @@ function ChatPage() {
         });
         return B;
     }
-    // const allMessages1 = prepareMessagesData(allMessages)
     const userData1 = prepareUserData(userData)
     const friendData1 = prepareUserData(friendData)
     return (<section>

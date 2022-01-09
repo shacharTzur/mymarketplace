@@ -11,11 +11,9 @@ import FetchData from '../components/getters/GetData';
 function InboxPage() {
     const authCtx = useContext(AuthContext);
     const thisUserName = authCtx.token;
-    const userDataUrl = 'http://localhost:8080/user/name?userName=' + thisUserName;
     const buyProductsUrl = 'http://localhost:8080/product/NotOwn/active?owner=' + thisUserName;
     const sellProductsUrl = 'http://localhost:8080/product/own/active?owner=' + thisUserName;
     const notificationsUrl = 'http://localhost:8080/product/NotOwn/active/newMsg?owner=' + thisUserName;
-    let userData = FetchData(userDataUrl);
     let buyProducts = FetchData(buyProductsUrl)[0];
     let sellProducts = FetchData(sellProductsUrl)[0];
     let notification = FetchData(notificationsUrl)[0];
@@ -38,22 +36,12 @@ function InboxPage() {
         });
         return A;
     }
-    const prepareUserData = (data) => {
-        const B = data.map((item) => {
-            return ({
-                userName: item.userName,
-                img: "http://localhost:3000/uploads/" + item.image,
-            })
-        });
-        return B;
-    }
-    
+
     buyProducts = prepareProductsData(buyProducts)
     for (let i=0; i<buyProducts.length; i++){
         buyProducts[i].notify = notification[i]
     }
     sellProducts = prepareProductsData(sellProducts)
-    userData = prepareUserData(userData)
     const buyProducts3 = {
         Products: buyProducts
     }

@@ -2,7 +2,6 @@ import React, {useContext} from "react";
 import Header from "../components/headers/light";
 import SimpleWithSideImage from "../components/faqs/SimpleWithSideImage";
 import AuthContext from '../store/auth-context';
-import TabCardGrid from "../components/cards/TabCardGrid";
 import FetchData from '../components/getters/GetData';
 
 function ProfilePage() {
