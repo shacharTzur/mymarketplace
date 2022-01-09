@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components"
-import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Headings.js";
+import {SectionHeading} from "components/misc/Headings.js";
 import {ReactComponent as PlusIcon} from "feather-icons/dist/icons/plus.svg";
 import {ReactComponent as MinusIcon} from "feather-icons/dist/icons/minus.svg";
 import TabCardGridForProfile from "./TabCardGridForProfile";
@@ -11,7 +11,6 @@ const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
 const TwoColumn = tw.div`flex`;
 const Column = tw.div``;
-const TabContent = tw(motion.div)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 const Image = styled.div(props => [`background-image: url("${props.imageSrc}");`, props.imageContain ? tw`bg-contain bg-no-repeat` : tw`bg-cover`, props.imageShadow ? tw`shadow` : tw`shadow-none`, tw`hidden lg:block rounded h-32 bg-center`, tw`w-32`]);
 const FAQContent = tw.div`lg:ml-12`;
 const Heading = tw(SectionHeading)`md:text-left`;

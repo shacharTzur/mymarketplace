@@ -2,17 +2,11 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
+import { SectionHeading } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import SellImage from "images/ourImages/SellImage.jpeg";
-import { Hint } from 'react-autocomplete-hint';
-import {useEffect, useRef, useState, useContext} from 'react';
-import AuthContext from '../../store/auth-context';
+import {useRef, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-
-import ModalWant from "../misc/WantModal";
-
-
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
@@ -28,8 +22,6 @@ const Image = styled.div(props => [
   tw`rounded bg-contain bg-no-repeat bg-center h-full`,
 ]);
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
-
-const Subheading = tw(SubheadingBase)`text-center md:text-left`;
 const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`
 
@@ -62,14 +54,10 @@ export default ({
     const priceInputRef = useRef();
     const locationInputRef = useRef();
     const descriptionInputRef = useRef();
-    // const imagePathInputRef = useRef();
-
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [name, setName] = useState("");
+    
+    // const [isLoading, setIsLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState({name:"DefaultImage.png"});
-    // const [showModal, setShowModal] = useState(false);
-
+    
     const submitHandler = (event) => {
       event.preventDefault();
       const enteredTitle = titleInputRef.current.value;
@@ -85,7 +73,7 @@ export default ({
 
       const fd = new FormData();
       fd.append('files', selectedFile);
-      setIsLoading(true);
+      // setIsLoading(true);
       let url1 = 'http://localhost:8080/product/addNew';
       let url2 = 'http://localhost:8080/upload';
       let promise1 = fetch(url1, {
@@ -105,7 +93,7 @@ export default ({
         }),
         headers:{'Content-Type': 'application/json'},
       }).then(res => {
-        setIsLoading(false);
+        // setIsLoading(false);
         if (res.ok) {
           return res.text()  
         } else {
@@ -138,7 +126,7 @@ export default ({
 
       Promise.all([promise2,promise1]);
     };
-// category, brand, price, condition, owner, discription, size, name, color, image
+
   return (
     <Container>
       <TwoColumn>

@@ -1,12 +1,13 @@
-import React, {useContext, useState} from "react";
+import React, { useContext } from "react";
+// import { useState } from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
 import {Container, ContentWithPaddingXl} from "components/misc/Layouts.js";
 import {SectionHeading} from "components/misc/Headings.js";
-import {DeleteButton, PrimaryButton as PrimaryButtonBase} from "components/misc/Buttons.js";
-import {ReactComponent as NotificationIcon} from "images/notification-icon.svg";
+
+
 import {ReactComponent as SvgDecoratorBlob1} from "images/svg-decorator-blob-5.svg";
 import {ReactComponent as SvgDecoratorBlob2} from "images/svg-decorator-blob-7.svg";
 import {Subheading as SubheadingBase} from "components/misc/Headings.js";
@@ -17,17 +18,6 @@ import {useHistory} from "react-router-dom";
 import {MsgButtonCont} from "components/misc/Buttons.js";
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
-const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
-
-const TabControl = styled.div`
-  ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
-  &:hover {
-    ${tw`bg-gray-300 text-gray-700`}
-  }
-
-  ${props => props.active && tw`bg-primary-500! text-gray-100!`}
-}
-`;
 
 const TabContent = tw(motion.div)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 const CardContainer = tw.div`mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
@@ -36,7 +26,6 @@ const CardImageContainer = styled.div`
   ${props => css`background-image: url("${props.imageSrc}");`}
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
-const CardRatingContainer = tw.div`inline-flex bg-gray-100 top-0 mt-2 ml-2 mb-2 rounded-full px-2 py-2 bg-white content-center`;
 const CardRating = styled.div`
   ${tw`mr-0 text-sm font-bold flex items-end`}
   svg {
@@ -44,11 +33,6 @@ const CardRating = styled.div`
   }
 `;
 const Subheading = tw(SubheadingBase)`mb-4 text-center lg:text-left`;
-const CardHoverOverlay = styled(motion.div)`
-  background-color: rgba(255, 255, 255, 0.5);
-  ${tw`absolute inset-0 flex justify-center items-center`}
-`;
-const CardButton = tw(PrimaryButtonBase)`text-sm`;
 
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
@@ -67,8 +51,7 @@ export default ({
                     tabs
                 }) => {
     const tabsKeys = Object.keys(tabs);
-    const [activeTab, setActiveTab] = useState(tabsKeys[0]);
-    let isNotification = false
+    // const [activeTab, setActiveTab] = useState(tabsKeys[0]);
     const recCtx = useContext(ReceiverContext);
     const prodCtx = useContext(ProductContext);
     const history = useHistory();
@@ -100,14 +83,11 @@ export default ({
                             }
                         }}
                         transition={{duration: 0.4}}
-                        initial={activeTab === tabKey ? "current" : "hidden"}
-                        animate={activeTab === tabKey ? "current" : "hidden"}
+                        // initial={activeTab === tabKey ? "current" : "hidden"}
+                        // animate={activeTab === tabKey ? "current" : "hidden"}
                     >
                         {tabs[tabKey].map((card, index) => (
                             <CardContainer key={index}>
-                                {card.notification === 1 ? isNotification = true : isNotification = false} {
-                            }
-
                                 <Card className="group" href={card.url} initial="rest" whileHover="hover"
                                       animate="rest">
                                     <CardImageContainer imageSrc={card.imageSrc}>

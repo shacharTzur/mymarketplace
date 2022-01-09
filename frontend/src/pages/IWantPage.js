@@ -3,7 +3,7 @@ import "styles/globalStyles.css";
 import React from "react";
 import Header from "components/headers/light.js"
 
-import FullForm from "components/forms/TwoColContactUsWithIllustrationFullForm.js"
+import FullForm from "components/forms/IWantForm.js"
 import AuthContext from '../store/auth-context';
 import { useContext } from 'react';
 

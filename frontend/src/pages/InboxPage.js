@@ -4,19 +4,19 @@ import React from "react";
 import Header from "components/headers/light.js"
 import AuthContext from '../store/auth-context';
 import { useContext } from 'react';
-import GetUserData from "../helpers/GetUserData";
-import GetSellProducts from "../components/inbox/ProductsSellCreator";
-import GetBuyProducts from "../components/inbox/ProductsBuyCreator";
-import GetNotificationOnItems from '../components/inbox/GetNotifications';
 import TabCardGridForBuyProducts from "../components/inbox/TabCardGridForBuyProducts";
 import TabCardGridForSellProducts from "../components/inbox/TabCardGridForSellProducts";
+import FetchData from '../components/getters/GetData';
 
 function InboxPage() {
     const authCtx = useContext(AuthContext);
-    let userData = GetUserData(authCtx.token);
-    let buyProducts = GetBuyProducts(authCtx.token);
-    let sellProducts = GetSellProducts(authCtx.token);
-    const notification = GetNotificationOnItems(authCtx.token);
+    const thisUserName = authCtx.token;
+    const buyProductsUrl = 'http://localhost:8080/product/NotOwn/active?owner=' + thisUserName;
+    const sellProductsUrl = 'http://localhost:8080/product/own/active?owner=' + thisUserName;
+    const notificationsUrl = 'http://localhost:8080/product/NotOwn/active/newMsg?owner=' + thisUserName;
+    let buyProducts = FetchData(buyProductsUrl)[0];
+    let sellProducts = FetchData(sellProductsUrl)[0];
+    let notification = FetchData(notificationsUrl)[0];
     const prepareProductsData = (data) => {
         const A = data.map((item) => {
             return ({
@@ -36,22 +36,12 @@ function InboxPage() {
         });
         return A;
     }
-    const prepareUserData = (data) => {
-        const B = data.map((item) => {
-            return ({
-                userName: item.userName,
-                img: "http://localhost:3000/uploads/" + item.image,
-            })
-        });
-        return B;
-    }
-    
+
     buyProducts = prepareProductsData(buyProducts)
     for (let i=0; i<buyProducts.length; i++){
         buyProducts[i].notify = notification[i]
     }
     sellProducts = prepareProductsData(sellProducts)
-    userData = prepareUserData(userData)
     const buyProducts3 = {
         Products: buyProducts
     }

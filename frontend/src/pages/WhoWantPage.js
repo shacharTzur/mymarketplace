@@ -1,17 +1,17 @@
 import React, {useContext} from "react";
 import Header from "../components/headers/light";
-import GetItemData from "../components/faqs/ItemDataCreator";
-import GetWhoWantUsers from "../components/faqs/WhoWantCreator";
-import AuthContext from '../store/auth-context';
 import ProductContext from '../store/product-context';
 import WhoWant from "../components/faqs/WhoWant";
+import FetchData from '../components/getters/GetData';
 
 
 function WhoWantPage() {
     const prodCtx = useContext(ProductContext);
+    const whoWantUrl = 'http://localhost:8080/Iwant/prod_id?prod_id=';
+    const itemDataUrl = 'http://localhost:8080/product/product_id?id=';
     let itemId = prodCtx.id;
-    let data = GetItemData(itemId);
-    let whoWantUsers = GetWhoWantUsers(itemId);
+    let data = FetchData(itemDataUrl + itemId);
+    let whoWantUsers = FetchData(whoWantUrl+itemId)
 
     const itemData = (itemData) => {
         const A = itemData.map((item) => {
@@ -44,7 +44,7 @@ function WhoWantPage() {
         });
         return B;
     }
-    const whoWantUsers1 = WhoWantUsers(whoWantUsers)
+    const whoWantUsers1 = WhoWantUsers(whoWantUsers[0])
     const  whoWantUsers3= {
         Clothings: whoWantUsers1
     }

@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-function GetProfileData(userName) {
+function FetchData(url) {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/user/name?userName='+userName)
+        fetch(url)
             .then(function (response) {
                 return response.json();
             })
             .then(function (myJson) {
                 setData(myJson)
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         [data]
     );
 }
 
-export default GetProfileData;
+export default FetchData;

@@ -2,10 +2,9 @@ import React, {useState} from "react";
 import {motion} from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
-import {SectionHeading, Subheading as SubheadingBase} from "components/misc/Headings.js";
+import {SectionHeading} from "components/misc/Headings.js";
 import {ReactComponent as ClosedIcon} from "images/message-icon.svg";
 import {ReactComponent as OpenIcon} from "images/open-message-icon.svg";
-import {PrimaryButton as PrimaryButtonBase} from "../misc/Buttons";
 import SendMessageForm from "../forms/SendMessageForm";
 
 const ThreeColumnContainer = styled.div`
@@ -32,7 +31,6 @@ const QuestionToggleIcon = styled.span`
     ${tw`w-4 h-3`}
   }
 `;
-const CardButton = tw(PrimaryButtonBase)`text-sm`;
 const Answer = motion(tw.dd` text-sm sm:text-base leading-relaxed`);
 
 export default ({
