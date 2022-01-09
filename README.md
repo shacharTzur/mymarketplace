@@ -1,3 +1,4 @@
+[Header]MyMarketplace App
 MyMarketplace is a E2E E-Commerce project that implements a second hand market where users can list their products (currently focusing on clothes) for sell and buy other users products.
 The app main feature is the "I Want" feature where users can broadcast items they desire. The broadcast will be received by valid sellers that have the item the users desire.
 
